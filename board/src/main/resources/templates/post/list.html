@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+    <th:block layout:fragment="title">
+        <title>리스트 페이지</title>
+    </th:block>
+
+    <th:block layout:fragment="search">
+        <form id="searchForm" class="searchform js__toggle active pull-right" onsubmit="false;" autocomplete="off">
+            <input type="search" class="input-search" placeholder="Search..." />
+            <button type="button" class="mdi mdi-magnify button-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </th:block>
+
+     <th:block layout:fragment="content">
+        <div class="table-responsive clearfix">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>등록일</th>
+                        <th>조회 수</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
+
+                </tbody>
+            </table>
+
+            <div class="btn_wrap text-right">
+                <a th:href="@{/post/write.do}" class="btn btn-primary waves-effect waves-light">등록</a>
+            </div>
+
+            <th:block layout:fragment="paging">
+                <nav aria-label="Page navigation" class="text-center">
+                    <ul class="pagination">
+                        
+                    </ul>
+                </nav>
+            </th:block>
+        </div>
+    </th:block>
+    
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            window.onload = () => {
+                findAllPost();
+            }
+
+
+            // 게시글 리스트 조회
+            function findAllPost() {
+
+                const list = [[ ${response.list} ]];
+                if ( !list.length ) {
+                    document.getElementById('list').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
+                    drawPage();
+                    return false;
+                }
+
+                const pagination = [[ ${response.pagination} ]];
+                const params = [[ ${params} ]];
+                let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
+                drawList(list, num);
+                drawPage(pagination, params);
+            }
+
+
+            // 리스트 HTML draw
+            function drawList(list, num) {
+
+                let html = '';
+                list.forEach(obj => {
+                    html += `
+                        <tr>
+                            <td>${obj.noticeYn === true ? '공지' : num--}</td>
+                            <td class="text-left"><a href="/post/view.do?idx=${obj.idx}">${obj.title}</a></td>
+                            <td>${obj.writer}</td>
+                            <td>${obj.writeDate}</td>
+                            <td>${obj.viewCnt}</td>
+                        </tr>
+                    `;
+                })
+
+                document.getElementById('list').innerHTML = html;
+            }
+
+
+            // 페이지 HTML draw
+            function drawPage(pagination, params) {
+
+                if ( !pagination || !params ) {
+                    document.querySelector('.pagination').innerHTML = '';
+                    return false;
+                }
+
+                let html = '';
+
+                // 첫 페이지, 이전 페이지
+                if (pagination.existPrevPage) {
+                    html += `
+                        <li><a href="javascript:void(0)" onclick="movePage(1);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="movePage(${pagination.startPage - 1});" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a></li>
+                    `;
+                }
+
+                // 페이지 번호
+                for (let i = pagination.startPage; i <= pagination.endPage; i++) {
+                    const active = (i === params.page) ? 'class="active"' : '';
+                    html += `<li ${active}><a href="javascript:void(0)" onclick="movePage(${i})">${i}</a></li>`;
+                }
+
+                // 다음 페이지, 마지막 페이지
+                if (pagination.existNextPage) {
+                    html += `
+                        <li><a href="javascript:void(0)" onclick="movePage(${pagination.endPage + 1});" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="movePage(${pagination.totalPageCount});" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    `;
+                }
+
+                document.querySelector('.pagination').innerHTML = html;
+            }
+
+
+            // 페이지 이동
+            function movePage(page) {
+                const queryParams = {
+                    page: (page) ? page : 1,
+                    recordSize: 10,
+                    pageSize: 10
+                }
+                location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+            }
+
+            /*]]>*/
+        </script>
+    </th:block>
+</html>

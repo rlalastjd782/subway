@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.domain.post.PostMapper">
+
+    <!-- free_board 테이블 전체 컬럼 -->
+    <sql id="postColumns">
+          idx
+        , title
+        , content
+        , writer
+        , view_cnt
+        , notice_yn
+        , del_yn
+        , write_date
+        , modified_date
+    </sql>
+
+
+    <!-- 게시글 저장 -->
+    <insert id="save" parameterType="com.board.domain.post.PostRequest" useGeneratedKeys="true" keyProperty="idx">
+        INSERT INTO free_board (
+            <include refid="postColumns" />
+        ) VALUES (
+              #{idx}
+            , #{title}
+            , #{content}
+            , #{writer}
+            , 0
+            , #{noticeYn}
+            , 0
+            , NOW()
+            , NULL
+        )
+    </insert>
+
+
+    <!-- 게시글 상세정보 조회 -->
+    <select id="findByIdx" parameterType="long" resultType="com.board.domain.post.PostResponse">
+        SELECT
+            <include refid="postColumns" />
+        FROM
+            free_board
+        WHERE
+            idx = #{value}
+    </select>
+
+
+    <!-- 게시글 수정 -->
+    <update id="update" parameterType="com.board.domain.post.PostRequest">
+        UPDATE free_board
+        SET
+              modified_date = NOW()
+            , title = #{title}
+            , content = #{content}
+            , writer = #{writer}
+            , notice_yn = #{noticeYn}
+        WHERE
+            idx = #{idx}
+    </update>
+
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteByIdx" parameterType="long">
+        UPDATE free_board
+        SET
+            del_yn = 1
+        WHERE
+            idx = #{idx}
+    </delete>
+
+
+        
+    <!-- 게시글 리스트 조회 -->
+    <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.post.PostResponse">
+        SELECT
+            <include refid="postColumns" />
+        FROM
+            free_board
+        WHERE
+            del_yn = 0
+        ORDER BY
+            idx DESC
+        LIMIT #{pagination.limitStart}, #{recordSize}
+    </select>
+    
+    
+    <!-- 게시글 수 카운팅 -->
+    <select id="count" parameterType="com.board.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            free_board
+        WHERE
+            del_yn = 0
+    </select>
+    
+    <!-- 조회수 올리기 -->
+	<update id="updatereviewcnt">
+	   update 
+	  	 free_board
+	   set
+	   	view_cnt = view_cnt + 1 
+	   where
+	   	idx= #{idx}
+	</update>
+
+</mapper>
