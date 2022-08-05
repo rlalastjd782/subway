@@ -42,7 +42,7 @@
             </div>
 
             <div class="btn_wrap text-center">
-                <a th:href="@{/post/list.do}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
+                <a href="javascript: void(0);" onclick="goListPage();" class="btn btn-default waves-effect waves-light">뒤로가기</a>
                 <a th:href="@{/post/write.do( id=${post.idx} )}" class="btn btn-primary waves-effect waves-light">수정하기</a>
                 <button type="button" class="btn btn-danger waves-effect waves-light" onclick="deletePost()">삭제하기</button>
             </div>
@@ -84,6 +84,9 @@
         <script th:inline="javascript">
         /*<![CDATA[*/
 
+
+          
+        
             // 게시글 삭제
             function deletePost() {
                 const id = [[ ${post.idx} ]];
@@ -91,18 +94,29 @@
                     return false;
                 }
 
+                let inputHtml = '';
+
+                new URLSearchParams(location.search).forEach((value, key) => {
+                    inputHtml += `<input type="hidden" name="${key}" value="${value}" />`;
+                })
+
                 const formHtml = `
                     <form id="deleteForm" action="/post/delete.do" method="post">
-                        <input type="hidden" id="idx" name="idx" value="${id}" />
+                        ${inputHtml}
                     </form>
                 `;
+
                 const doc = new DOMParser().parseFromString(formHtml, 'text/html');
                 const form = doc.body.firstChild;
-                console.log(doc);
-                console.log(form);
                 document.body.append(form);
-                document.getElementById("deleteForm").submit();
-                
+                document.getElementById('deleteForm').submit();
+            }
+        
+            // 게시글 리스트 페이지로 이동
+            function goListPage() {
+                const queryString = new URLSearchParams(location.search);
+                queryString.delete('idx');
+                location.href = '/post/list.do' + '?' + queryString.toString();
             }
 
         /*]]>*/

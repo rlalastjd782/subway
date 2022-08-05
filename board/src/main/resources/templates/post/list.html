@@ -4,11 +4,37 @@
         <title>리스트 페이지</title>
     </th:block>
 
-    <th:block layout:fragment="search">
-        <form id="searchForm" class="searchform js__toggle active pull-right" onsubmit="false;" autocomplete="off">
-            <input type="search" class="input-search" placeholder="Search..." />
-            <button type="button" class="mdi mdi-magnify button-search"><i class="fa fa-search" aria-hidden="true"></i></button>
-        </form>
+ <th:block layout:fragment="search">
+        <div id="adv-search" class="input-group">
+            <input type="search" id="mainKeyword" class="form-control" onkeyup="document.getElementById('keyword').value = this.value;" placeholder="키워드를 입력해 주세요." />
+            <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                    <div class="dropdown dropdown-lg">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <!--/* 검색 form */-->
+                            <form id="searchForm" class="form-horizontal" onsubmit="return false;" autocomplete="off">
+                                <div class="form-group">
+                                    <label for="searchType">검색 유형</label>
+                                    <select id="searchType" name="searchType" class="form-control">
+                                        <option value="">전체</option>
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                        <option value="writer">작성자</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="keyword">키워드</label>
+                                    <input type="search" id="keyword" name="keyword" class="form-control" onkeyup="document.getElementById('mainKeyword').value = this.value;" placeholder="키워드를 입력해 주세요." />
+                                </div>
+                                <button type="button" onclick="movePage(1);" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                    <button type="button" onclick="movePage(1);" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
     </th:block>
 
      <th:block layout:fragment="content">
@@ -47,8 +73,11 @@
             /*<![CDATA[*/
 
             window.onload = () => {
+            	setQueryStringParams();
                 findAllPost();
             }
+            
+     
 
 
             // 게시글 리스트 조회
@@ -70,24 +99,24 @@
             }
 
 
-            // 리스트 HTML draw
-            function drawList(list, num) {
+	            // 리스트 HTML draw
+	     function drawList(list, num) {
 
-                let html = '';
-                list.forEach(obj => {
-                    html += `
-                        <tr>
-                            <td>${obj.noticeYn === true ? '공지' : num--}</td>
-                            <td class="text-left"><a href="/post/view.do?idx=${obj.idx}">${obj.title}</a></td>
-                            <td>${obj.writer}</td>
-                            <td>${obj.writeDate}</td>
-                            <td>${obj.viewCnt}</td>
-                        </tr>
-                    `;
-                })
+      	  let html = '';
+      	  list.forEach(obj => {
+       	     html += `
+         	       <tr>
+                    <td>${obj.noticeYn === true ? '공지' : num--}</td>
+                    <td class="text-left"><a href="javascript: void(0);" onclick="goViewPage(${obj.idx});">${obj.title}</a></td>
+                    <td>${obj.writer}</td>
+                    <td>${obj.writeDate}</td>
+                    <td>${obj.viewCnt}</td>
+                </tr>
+            `;
+        })
 
-                document.getElementById('list').innerHTML = html;
-            }
+        document.getElementById('list').innerHTML = html;
+    }
 
 
             // 페이지 HTML draw
@@ -127,16 +156,45 @@
 
 
             // 페이지 이동
-            function movePage(page) {
-                const queryParams = {
-                    page: (page) ? page : 1,
-                    recordSize: 10,
-                    pageSize: 10
-                }
-                location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
-            }
+          function movePage(page) {
 
-            /*]]>*/
+        	const form = document.getElementById('searchForm');
+        	const queryParams = {
+            page: (page) ? page : 1,
+            recordSize: 10,
+            pageSize: 10,
+            keyword: form.keyword.value,
+            searchType: form.searchType.value
+        }
+
+        location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+    }
+
+         
+            
+                   // 쿼리 스트링 파라미터 셋팅
+            function setQueryStringParams() {
+
+                if ( !location.search ) {
+                    return false;
+                }
+
+                const form = document.getElementById('searchForm');
+
+                new URLSearchParams(location.search).forEach((value, key) => {
+                    if (form[key]) {
+                        form[key].value = value;
+                    }
+                })
+
+                document.getElementById('mainKeyword').value = form.keyword.value;
+            }
+                            // 게시글 상세 페이지로 이동
+   		function goViewPage(idx) {
+        const queryString = (location.search) ? location.search + `&idx=${idx}` : `?idx=${idx}`;
+        location.href = '/post/view.do' + queryString;
+    } 
+   	   /*]]>*/
         </script>
     </th:block>
 </html>
