@@ -43,7 +43,7 @@
 
             <div class="btn_wrap text-center">
                 <a href="javascript: void(0);" onclick="goListPage();" class="btn btn-default waves-effect waves-light">뒤로가기</a>
-                <a th:href="@{/post/write.do( id=${post.idx} )}" class="btn btn-primary waves-effect waves-light">수정하기</a>
+                <a href="javascript: void(0);" onclick="goWritePage();" class="btn btn-primary waves-effect waves-light">수정하기</a>
                 <button type="button" class="btn btn-danger waves-effect waves-light" onclick="deletePost()">삭제하기</button>
             </div>
         </div>
@@ -117,6 +117,11 @@
                 const queryString = new URLSearchParams(location.search);
                 queryString.delete('idx');
                 location.href = '/post/list.do' + '?' + queryString.toString();
+            }
+            
+            // 게시글 수정 페이지로 이동
+            function goWritePage() {
+                location.href = '/post/write.do' + location.search;
             }
 
         /*]]>*/

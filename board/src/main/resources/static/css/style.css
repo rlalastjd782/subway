@@ -547,12 +547,12 @@ h4 strong {
   margin-left: 8px;
 }
 .btn-primary {
-  background: #1d84df;
+  background: #2ecc71;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  background: #304ffe !important;
+  background: #2ecc71 !important;
 }
 .btn-primary.btn-bordered {
   border-color: #1d84df;
@@ -831,8 +831,8 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 0px 20px 0px 20px;
-  background: #1d84df;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -1064,7 +1064,7 @@ Version 1.0
   font-size: 20px;
   line-height: 75px;
   color: #ffffff;
-  background: #187cd4;
+  background: #2ecc71;
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -1236,6 +1236,7 @@ Version 1.0
   font-size: 18px;
   line-height: 75px;
   font-weight: 500;
+  
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
