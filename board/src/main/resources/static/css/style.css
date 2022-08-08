@@ -73,6 +73,9 @@ a:focus {
   outline: none;
   color: #304ffe;
 }
+
+
+
 input,
 button {
   -webkit-border-radius: 0px;
@@ -1436,3 +1439,5 @@ textarea.form-control {
     min-width: 500px;
   }
 }
+
+
