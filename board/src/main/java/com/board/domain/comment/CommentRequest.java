@@ -8,7 +8,7 @@ import lombok.Setter;
 public class CommentRequest {
 
     private Long cIdx;             // PK
-    private String cTitle;        // 제목
+    private Long bIdx;    
     private String cContent;      // 내용
     private String cWriter;   
 	

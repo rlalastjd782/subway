@@ -43,7 +43,7 @@
 	<update id="updateComment" parameterType="com.board.domain.comment.CommentRequest">
 		UPDATE fb_comment
 		SET
-			  c_modidate = NOW()
+			  c_date = NOW()
 			, c_content = #{cContent}
 			, c_writer = #{cWriter}
 		WHERE

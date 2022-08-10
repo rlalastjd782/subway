@@ -7,7 +7,7 @@ import lombok.Getter;
 public class CommentResponse {
 
   	private Long cIdx;             // PK
-    private String cTitle;        // 제목
+  	private Long bIdx;  
     private String cContent;      // 내용
     private String cWriter;    //작성자
     private Boolean delYn;     // 삭제여부

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.board.domain.comment.CommentRequest;
+import com.board.domain.comment.CommentResponse;
 import com.board.domain.comment.CommentService;
 
 
@@ -25,7 +26,7 @@ class CommentTests {
 
 		for (int i = 1; i <= number; i++) {
 			CommentRequest params = new CommentRequest();
-			params.setCIdx((long) 1); // 댓글을 추가할 게시글 번호
+			params.setBIdx((long) 1); // 댓글을 추가할 게시글 번호
 			params.setCContent(i + "번 댓글을 추가합니다!");
 			params.setCWriter(i + "번 회원");
 			commentService.registerComment(params);
