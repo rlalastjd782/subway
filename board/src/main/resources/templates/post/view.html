@@ -64,7 +64,7 @@
 
 			<form class="form-horizontal form-view">
 				<div class="input-group margin-bottom-20">
-					<input type="text" id="content" class="form-control" />
+					<input type="text" id="content" class="form-control" ></input>
 					<div class="input-group-btn">
 						<button type="button" class="btn waves-effect waves-light"
 							th:onclick="insertComment([[ ${post.idx} ]])">
@@ -78,6 +78,8 @@
 	</div>
 </th:block>
 
+
+
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
         /*<![CDATA[*/
@@ -85,16 +87,17 @@
         	function insertComment(idx) {
 
 					var content = document.getElementById("content");
-					if (isEmpty(content.value) == true) {
+			/* 		if (isEmpty(content.value) == true) {
 						content.setAttribute("placeholder", "댓글을 입력해 주세요.");
 						content.focus();
 						return false;
-					}
-				
+					} */
+					
 					var uri = /*[[ @{/comments} ]]*/;
 					var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-					var params = {"bIdx": bIdx, "cContent": content.value, "cWriter": "관리자"};
-				
+					var params = {"bIdx": idx, "cContent": content.value, "cWriter": "관리자"};
+					console.log(content.value);
+					alert(content.value);
 					$.ajax({
 						url: uri,
 						type: "POST",
@@ -117,7 +120,7 @@
 					});
 				}
 				        	
-        	
+        
         	
         	
         	
