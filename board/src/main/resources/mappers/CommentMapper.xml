@@ -21,7 +21,7 @@
 			  #{cIdx}
 			, #{cContent}
 			, #{cWriter} 
-			, Now()
+			, #{cDate}
 			, 0
 			, #{bIdx}
 			, NULL
@@ -65,7 +65,7 @@
 		FROM
 			fb_comment
 		WHERE
-			delete_yn = 0
+			del_yn = 0
 		AND
 			b_idx = #{bIdx}
 		ORDER BY
@@ -79,7 +79,7 @@
 		FROM
 			fb_comment
 		WHERE
-			delete_yn = 0
+			del_yn = 0
 		AND
 			b_idx = #{bIdx}
 	</select>

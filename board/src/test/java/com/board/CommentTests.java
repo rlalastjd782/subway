@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.board.domain.comment.CommentRequest;
-import com.board.domain.comment.CommentResponse;
 import com.board.domain.comment.CommentService;
 
 
@@ -37,8 +36,17 @@ class CommentTests {
 
 	@Test
 	public void deleteComment() {
-		commentService.((long) 10); // 삭제할 댓글 번호
+		commentService.deleteComment((long) 10); // 삭제할 댓글 번호
 
 		getCommentList();
 	}
+
+	@Test
+	public void getCommentList() {
+		CommentRequest params = new CommentRequest();
+		params.setBIdx((long) 1); // 댓글을 추가할 게시글 번호
+
+		commentService.getCommentList(params);
+	}
+
 }

@@ -9,7 +9,7 @@ public interface CommentMapper {
 
 	public int insertComment(CommentRequest params);
 
-	public CommentRequest selectCommentDetail(Long idx);
+	public CommentResponse selectCommentDetail(Long Idx);
 
 	public int updateComment(CommentRequest params);
 

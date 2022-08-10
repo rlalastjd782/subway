@@ -29,17 +29,17 @@ public class CommentService {
 	}
 
 
-//	public boolean deleteComment(Long cIdx) {
-//		int queryResult = 0;
-//
-//		CommentResponse comment = commentMapper.selectCommentDetail(cIdx);
-//
-//		if (comment != null && .equals(comment.getDelYn())) {
-//			queryResult = commentMapper.deleteComment(cIdx);
-//		}
-//
-//		return (queryResult == 1) ? true : false;
-//	}
+	public boolean deleteComment(Long cIdx) {
+		int queryResult = 0;
+
+		CommentResponse comment = commentMapper.selectCommentDetail(cIdx);
+
+		if (comment != null && equals(comment.getDelYn())) {
+			queryResult = commentMapper.deleteComment(cIdx);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
 
 
 	public List<CommentRequest> getCommentList(CommentRequest params) {
