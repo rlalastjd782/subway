@@ -21,7 +21,7 @@
 			  #{cIdx}
 			, #{cContent}
 			, #{cWriter} 
-			, #{cDate}
+			, Now()
 			, 0
 			, #{bIdx}
 			, NULL
