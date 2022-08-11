@@ -73,6 +73,9 @@ a:focus {
   outline: none;
   color: #304ffe;
 }
+
+
+
 input,
 button {
   -webkit-border-radius: 0px;
@@ -547,12 +550,12 @@ h4 strong {
   margin-left: 8px;
 }
 .btn-primary {
-  background: #1d84df;
+  background: #2ecc71;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  background: #304ffe !important;
+  background: #2ecc71 !important;
 }
 .btn-primary.btn-bordered {
   border-color: #1d84df;
@@ -831,8 +834,8 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 0px 20px 0px 20px;
-  background: #1d84df;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -1064,7 +1067,7 @@ Version 1.0
   font-size: 20px;
   line-height: 75px;
   color: #ffffff;
-  background: #187cd4;
+  background: #2ecc71;
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -1236,6 +1239,7 @@ Version 1.0
   font-size: 18px;
   line-height: 75px;
   font-weight: 500;
+  
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -1391,3 +1395,70 @@ textarea.form-control {
 .form-group .form-control.file_list button {width: 20px; height: 20px; margin-left: 3px; padding: 0; line-height: 20px;}
 
 .notice-list button {position: absolute; right: 15px; bottom: 5px;}
+
+
+
+/* 검색 영역 CSS */
+.dropdown.dropdown-lg .dropdown-menu {
+  margin-top: -1px;
+  padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+  display: flex !important;
+}
+.btn-group .btn {
+  border-radius: 0;
+  margin-left: -1px;
+}
+.btn-group .btn:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+.form-group .form-control:last-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  #adv-search {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .dropdown.dropdown-lg {
+    position: static !important;
+  }
+  .dropdown.dropdown-lg .dropdown-menu {
+    min-width: 500px;
+  }
+}
+
+.nav_menu{
+
+	position : relative;
+	left :  30%;
+
+}
+
+.nav_menu h1{
+	padding : 0px 30px;
+	
+}
+
+.nav_sign{
+	position : relative;
+	float : right;
+	bottom : 75px;
+		
+}
+
+.nav_sign h1 {
+	padding : 0px 8px;
+}

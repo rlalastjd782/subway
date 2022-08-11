@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.domain.qnapost.QnaPostMapper">
 
-<mapper namespace="com.board.domain.post.PostMapper">
-
-    <!-- free_board 테이블 전체 컬럼 -->
     <sql id="postColumns">
           idx
         , title
@@ -17,9 +15,11 @@
     </sql>
 
 
+
+	
     <!-- 게시글 저장 -->
-    <insert id="save" parameterType="com.board.domain.post.PostRequest" useGeneratedKeys="true" keyProperty="idx">
-        INSERT INTO free_board (
+    <insert id="save" parameterType="com.board.domain.qnapost.QnaPostRequest" useGeneratedKeys="true" keyProperty="idx">
+        INSERT INTO pro_sol_board (
             <include refid="postColumns" />
         ) VALUES (
               #{idx}
@@ -33,22 +33,20 @@
             , NULL
         )
     </insert>
-
-
-    <!-- 게시글 상세정보 조회 -->
-    <select id="findByIdx" parameterType="long" resultType="com.board.domain.post.PostResponse">
+    
+        <!-- 게시글 상세정보 조회 -->
+    <select id="findByIdx" parameterType="long" resultType="com.board.domain.qnapost.QnaPostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
-            free_board
+            pro_sol_board
         WHERE
             idx = #{value}
     </select>
-
-
-    <!-- 게시글 수정 -->
-    <update id="update" parameterType="com.board.domain.post.PostRequest">
-        UPDATE free_board
+    
+       <!-- 게시글 수정 -->
+    <update id="update" parameterType="com.board.domain.qnapost.QnaPostRequest">
+        UPDATE pro_sol_board
         SET
               modified_date = NOW()
             , title = #{title}
@@ -58,25 +56,22 @@
         WHERE
             idx = #{idx}
     </update>
-
-
-    <!-- 게시글 삭제 -->
+    
+        <!-- 게시글 삭제 -->
     <delete id="deleteByIdx" parameterType="long">
-        UPDATE free_board
+        UPDATE pro_sol_board
         SET
             del_yn = 1
         WHERE
             idx = #{idx}
     </delete>
 
-
-        
-    <!-- 게시글 리스트 조회 -->
-    <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.post.PostResponse">
+	    <!-- 게시글 리스트 조회 -->
+    <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.qnapost.QnaPostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
-            free_board
+            pro_sol_board
         WHERE
             del_yn = 0
              <include refid="search" />
@@ -85,30 +80,28 @@
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
     
-    
-    <!-- 게시글 수 카운팅 -->
+        <!-- 게시글 수 카운팅 -->
     <select id="count" parameterType="com.board.common.dto.SearchDto" resultType="int">
         SELECT
             COUNT(*)
         FROM
-            free_board
+            pro_sol_board
         WHERE
             del_yn = 0
              <include refid="search" />
     </select>
     
-    <!-- 조회수 올리기 -->
+        <!-- 조회수 올리기 -->
 	<update id="updatereviewcnt">
 	   update 
-	  	 free_board
+	  	 pro_sol_board
 	   set
 	   	view_cnt = view_cnt + 1 
 	   where
 	   	idx= #{idx}
 	</update>
 	
-	    <!-- 게시글 검색 -->
-    <sql id="search">
+	    <sql id="search">
         <!-- 검색 키워드가 있을 때 -->
         <if test="keyword != null and keyword != ''">
             <choose>
@@ -137,5 +130,23 @@
             </choose>
         </if>
     </sql>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>
+
