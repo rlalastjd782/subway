@@ -106,7 +106,7 @@
 	<div class="box-content">
 		<div class="card-content">
 			<div class="clearfix">
-				<h4 class="box-title pull-left">Comment1</h4>
+				<h4 class="box-title pull-left">Comment</h4>
 			</div>
 
 			<form class="form-horizontal form-view">
@@ -143,6 +143,38 @@
 		}
         	
         	
+           	function deleteComment(cIdx) {
+
+        		if (!confirm('댓글을 삭제하시겠어요?')) {
+        			return false;
+        		}
+
+        		var uri = [[ @{/comments/} ]] + cIdx;
+        		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+
+        		$.ajax({
+        			url: uri,
+        			type: "DELETE",
+        			headers: headers,
+        			dataType: "json",
+        			success: function(response) {
+        				console.log(response);
+        				console.log(response.result);
+        				if (response.result == false) {
+        					alert("댓글 삭제에 실패하였습니다.");
+        					return false;
+        				}
+						
+        				printCommentList();
+        				$("#commentModal").modal("hide");
+        			},
+        			error: function(xhr, status, error) {
+        				alert("에러가 발생하였습니다.");
+        				return false;
+        			}
+        		});
+        	}
+        
         	
         	function insertComment(bIdx) {
 
@@ -184,7 +216,7 @@
         		var writer = document.getElementById("modalWriter");
         		var content = document.getElementById("modalContent");
 				console.log(content);
-        		var uri = /*[[ @{/comments/} ]]*/ + cIdx;
+        		var uri = [[ @{/comments/} ]] + cIdx;
         		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
         		var params = {"cIdx": cIdx, "cWriter": writer.value, "cContent": content.value};
 
@@ -210,6 +242,7 @@
         		});
         	}
 				
+     
         	
         
         	

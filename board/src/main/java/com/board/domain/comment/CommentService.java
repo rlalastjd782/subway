@@ -29,15 +29,15 @@ public class CommentService {
 	}
 
 
-	public boolean deleteComment(Long cIdx) {
+	public boolean deleteComment(Long idx) {
 		int queryResult = 0;
 
-		CommentResponse comment = commentMapper.selectCommentDetail(cIdx);
+		CommentResponse comment = commentMapper.selectCommentDetail(idx);
 
-		if (comment != null && equals(comment.getDelYn())) {
-			queryResult = commentMapper.deleteComment(cIdx);
+		if (comment != null) {
+			queryResult = commentMapper.deleteComment(idx);
 		}
-
+		
 		return (queryResult == 1) ? true : false;
 	}
 
