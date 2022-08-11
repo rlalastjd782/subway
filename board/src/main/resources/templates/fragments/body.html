@@ -1,63 +1,76 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body th:fragment="main-body">
-    <div class="fixed-navbar">
-    
-    	<div class="pull-left">
-    	
-    	  		<h1 class ="page-title"><i class="fa-solid fa-road-circle-check">BARTRO</i></h1>
-    	  		
-    	 </div>
-    	 <div class = "nav_menu"> 		
-    	  		<h1 class="page-title">메인페이지</h1>
-        		<h1 class="page-title">분석</h1>
-            	<h1 class="page-title"><a th:href="@{/post/list.do}">자유게시판</a></h1>
-            	<h1 class="page-title"><a th:href="@{/post/qnalist.do}">문제제시 해결방안</a></h1>
-            
-        </div>
-        <div class="nav_sign">
-        	<h1 class="page-title">sign up</h1>
-        	<h1 class="page-title">sign in</h1>
-        </div>
-    </div>
- 
-		 
- 
+	<th:block layout:fragment="modal"></th:block>
+	<div class="fixed-navbar">
 
-    <div id="wrapper">
-        <div class="main-content">
-            <div class="row row-inline-block small-spacing">
-                <div class="col-xs-12">
-                    <div class="box-content">
-                        <div class="clearfix">
-                            <h4 class="box-title pull-left"></h4>
+		<div class="pull-left">
+		
 
-                            <th:block layout:fragment="search"></th:block>
-                        </div>
+			<h1 class="page-title">
+				<i class="fa-solid fa-road-circle-check">BARTRO</i>
+			</h1>
 
-                        <th:block layout:fragment="content"></th:block>
+		</div>
 
-                        <th:block layout:fragment="paging"></th:block>
-                    </div>
+		
 
-                    <th:block layout:fragment="add-content"></th:block>
-                </div>
-            </div>
+		<div class="nav_menu">
+			<h1 class="page-title">메인페이지</h1>
+			<h1 class="page-title">분석</h1>
+			<h1 class="page-title">
+				<a th:href="@{/post/list.do}">자유게시판</a>
+			</h1>
+			<h1 class="page-title">
+				<a th:href="@{/post/qnalist.do}">문제제시 해결방안</a>
+			</h1>
 
-            <footer class="footer">
-                <ul class="list-inline">
-                    <li>@지하철 커뮤니티사이트 BARTRO</li>
-                </ul>
-            </footer>
-        </div>
-    </div>
+		</div>
+		<div class="nav_sign">
+			<h1 class="page-title">sign up</h1>
+			<h1 class="page-title">sign in</h1>
+		</div>
+	</div>
+
+
+
+
+	<div id="wrapper">
+		<div class="main-content">
+			<div class="row row-inline-block small-spacing">
+				<div class="col-xs-12">
+					<div class="box-content">
+						<div class="clearfix">
+							<h4 class="box-title pull-left"></h4>
+
+							<th:block layout:fragment="search"></th:block>
+						</div>
+
+						<th:block layout:fragment="content"></th:block>
+
+						<th:block layout:fragment="paging"></th:block>
+					</div>
+
+					<th:block layout:fragment="add-content"></th:block>
+				</div>
+			</div>
+
+			<footer class="footer">
+				<ul class="list-inline">
+					<li>@지하철 커뮤니티사이트 BARTRO</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
 	<script th:src="@{/scripts/jquery.min.js}"></script>
-    <script th:src="@{/scripts/common.js}"></script>
-    <script th:src="@{/scripts/main.js}"></script>
-    <script th:src="@{/plugin/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
+	<script th:src="@{/scripts/common.js}"></script>
+	<script th:src="@{/scripts/main.js}"></script>
+	<script th:src="@{/plugin/bootstrap/js/bootstrap.min.js}"></script>
+	<script
+		th:src="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
 	<script th:src="@{/plugin/common/moment.js}"></script>
-    <th:block layout:fragment="script"></th:block>
+	<th:block layout:fragment="script"></th:block>
 </body>
 </html>

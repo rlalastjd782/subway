@@ -2,9 +2,56 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="layout/basic">
+
+
 <th:block layout:fragment="title">
-	<title>this is view page</title>
+	<title>자유게시판</title>
 </th:block>
+
+
+
+<th:block layout:fragment="modal">
+	<div id="commentModal" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="commentModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modalWriter" class="col-form-label">작성자</label> <input
+								type="text" id="modalWriter" class="form-control"
+								placeholder="작성자를 입력해 주세요." />
+						</div>
+						<div class="form-group">
+							<label for="modalContent" class="col-form-label">내용</label>
+							<textarea id="modalContent" class="form-control"
+								placeholder="내용을 입력해 주세요."></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="btnModalCancel"
+						class="btn btn-default waves-effect waves-light"
+						data-dismiss="modal">취소하기</button>
+					<button type="button" id="btnCommentUpdate"
+						class="btn btn-primary waves-effect waves-light"
+						onclick="updateComment()">수정하기</button>
+					<button type="button" id="btnCommentDelete"
+						class="btn btn-danger waves-effect waves-light">삭제하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+
+
 
 <th:block layout:fragment="content">
 	<div class="card-content">
@@ -64,7 +111,7 @@
 
 			<form class="form-horizontal form-view">
 				<div class="input-group margin-bottom-20">
-					<input type="text" id="contents" class="form-control" ></input>
+					<input type="text" id="contents" class="form-control"></input>
 					<div class="input-group-btn">
 						<button type="button" class="btn waves-effect waves-light"
 							th:onclick="insertComment([[ ${post.idx} ]])">
@@ -84,6 +131,19 @@
 	<script th:inline="javascript">
         /*<![CDATA[*/
 
+        	
+        	function openModal(cIdx, cWriter, cContent) {
+
+			$("#commentModal").modal("toggle");
+
+			document.getElementById("modalWriter").value = cWriter;
+			document.getElementById("modalContent").value = cContent;
+			document.getElementById("btnCommentUpdate").setAttribute("onclick", "updateComment("+ cIdx +")");
+			document.getElementById("btnCommentDelete").setAttribute("onclick", "deleteComment("+ cIdx +")");
+		}
+        	
+        	
+        	
         	function insertComment(bIdx) {
 
 					var content = document.getElementById("contents");
@@ -118,6 +178,37 @@
 						}
 					});
 				}
+        	
+        	function updateComment(cIdx) {
+
+        		var writer = document.getElementById("modalWriter");
+        		var content = document.getElementById("modalContent");
+				console.log(content);
+        		var uri = [[ @{/comments/} ]] + cIdx;
+        		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+        		var params = {"cIdx": cIdx, "cWriter": writer.value, "cContent": content.value};
+
+        		$.ajax({
+        			url: uri,
+        			type: "PATCH",
+        			headers: headers,
+        			dataType: "json",
+        			data: JSON.stringify(params),
+        			success: function(response) {
+        				if (response.result == false) {
+        					alert("댓글 수정에 실패하였습니다.");
+        					return false;
+        				}
+
+        				printCommentList();
+        				$("#commentModal").modal("hide");
+        			},
+        			error: function(xhr, status, error) {
+        				alert("에러가 발생하였습니다.");
+        				return false;
+        			}
+        		});
+        	}
 				        	
         
         	
@@ -140,7 +231,7 @@
 								<span class="name">${comment.cWriter}</span>
 								<span class="desc">${comment.cContent}</span>
 								<span class="time">${moment(comment.cDate).format('YYYY-MM-DD HH:mm:ss')}</span>
-								<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
+								<button type="button" onclick="openModal(${comment.cIdx}, '${comment.cWriter}', '${comment.cContent}' )" class="btn btn-xs btn-circle"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
 							</li>
 						`;
 							});
