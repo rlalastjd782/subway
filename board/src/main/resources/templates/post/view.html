@@ -64,7 +64,7 @@
 
 			<form class="form-horizontal form-view">
 				<div class="input-group margin-bottom-20">
-					<input type="text" id="content" class="form-control" ></input>
+					<input type="text" id="contents" class="form-control" ></input>
 					<div class="input-group-btn">
 						<button type="button" class="btn waves-effect waves-light"
 							th:onclick="insertComment([[ ${post.idx} ]])">
@@ -84,20 +84,19 @@
 	<script th:inline="javascript">
         /*<![CDATA[*/
 
-        	function insertComment(idx) {
+        	function insertComment(bIdx) {
 
-					var content = document.getElementById("content");
-			/* 		if (isEmpty(content.value) == true) {
+					var content = document.getElementById("contents");
+					console.log(content);
+ 					if (isEmpty(content.value) == true) {
 						content.setAttribute("placeholder", "댓글을 입력해 주세요.");
 						content.focus();
 						return false;
-					} */
+					} 
 					
 					var uri = /*[[ @{/comments} ]]*/;
 					var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-					var params = {"bIdx": idx, "cContent": content.value, "cWriter": "관리자"};
-					console.log(content.value);
-					alert(content.value);
+					var params = {"bIdx": bIdx, "cContent": content.value, "cWriter": "관리자"};
 					$.ajax({
 						url: uri,
 						type: "POST",
@@ -111,7 +110,7 @@
 							}
 				
 							printCommentList();
-							content.value = "";
+						    content.value = "";
 						},
 						error: function(xhr, status, error) {
 							alert("에러가 발생하였습니다.");
