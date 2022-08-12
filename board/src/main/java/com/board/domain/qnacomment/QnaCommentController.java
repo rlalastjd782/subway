@@ -1,4 +1,4 @@
-package com.board.domain.comment;
+package com.board.domain.qnacomment;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,24 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.board.domain.comment.GsonLocalDateTime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+
 @RestController
-public class CommentController {
+public class QnaCommentController {
 
-	
 	@Autowired
-	private CommentService commentService;
+private QnaCommentService qnaCommentService;
 
-	@GetMapping(value = "/comments/{bIdx}")
-	public JsonObject getCommentList(@PathVariable("bIdx") Long bIdx, @ModelAttribute("params") CommentRequest params) {
+	@GetMapping(value = "/qnacomments/{bIdx}")
+	public JsonObject getCommentList(@PathVariable("bIdx") Long bIdx, @ModelAttribute("params") QnaCommentRequest params) {
 
 		JsonObject jsonObj = new JsonObject();
 
-		List<CommentRequest> commentList = commentService.getCommentList(params);
+		List<QnaCommentRequest> commentList = qnaCommentService.getCommentList(params);
 		if (CollectionUtils.isEmpty(commentList) == false) {
 			Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTime()).create();
 			JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
@@ -42,8 +43,8 @@ public class CommentController {
 		return jsonObj;
 	}
 
-	@RequestMapping(value = { "/comments", "/comments/{bIdx}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
-	public JsonObject registerComment(@PathVariable(value = "bIdx", required = false) Long idx,   @RequestBody CommentRequest params) {
+	@RequestMapping(value = { "/qnacomments", "/qnacomments/{bIdx}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+	public JsonObject registerComment(@PathVariable(value = "bIdx", required = false) Long idx,   @RequestBody QnaCommentRequest params) {
 
 		JsonObject jsonObj = new JsonObject();
 
@@ -52,7 +53,7 @@ public class CommentController {
 				params.setCIdx(idx);
 			}
 
-			boolean isRegistered = commentService.registerComment(params);
+			boolean isRegistered = qnaCommentService.registerComment(params);
 			jsonObj.addProperty("result", isRegistered);
 
 		} catch (DataAccessException e) {
@@ -65,13 +66,13 @@ public class CommentController {
 			return jsonObj;
 	}
 	
-	@DeleteMapping(value = "/comments/{cIdx}")
+	@DeleteMapping(value = "/qnacomments/{cIdx}")
 	public JsonObject deleteComment(@PathVariable("cIdx")  Long cIdx) {
 
 		JsonObject jsonObj = new JsonObject();
 
 		try {
-			boolean isDeleted = commentService.deleteComment(cIdx);
+			boolean isDeleted = qnaCommentService.deleteComment(cIdx);
 			
 			jsonObj.addProperty("result", isDeleted);
 			System.out.println(isDeleted);
