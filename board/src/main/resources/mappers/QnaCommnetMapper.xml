@@ -1,3 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mappers.QnaCommnetMapper"></mapper>
+<mapper namespace="com.board.domain.qnacomment.QnaCommentMapper">
+
+	<sql id="commentColumns">
+		  c_idx
+		, c_content
+		, c_writer
+		, c_date
+		, del_yn
+		, b_idx
+		, c_modidate
+		, c_deldate
+	</sql>
+
+	<insert id="insertComment" parameterType="com.board.domain.qnacomment.QnaCommentRequest">
+		INSERT INTO psb_comment (
+			<include refid="commentColumns" />
+		) VALUES (
+			  #{cIdx}
+			, #{cContent}
+			, #{cWriter} 
+			, Now()
+			, 0
+			, #{bIdx}
+			, NULL
+			, NULL
+		)
+	</insert>
+
+	<select id="selectCommentDetail" parameterType="long" resultType="com.board.domain.qnacomment.QnaCommentResponse">
+		SELECT
+			<include refid="commentColumns" />
+		FROM
+			psb_comment
+		WHERE
+			del_yn = 0
+		AND
+			c_idx = #{cIdx}
+	</select>
+
+	<update id="updateComment" parameterType="com.board.domain.qnacomment.QnaCommentRequest">
+		UPDATE psb_comment
+		SET
+			  c_date = NOW()
+			, c_content = #{cContent}
+			, c_writer = #{cWriter}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+
+	<update id="deleteComment" parameterType="long">
+		UPDATE psb_comment
+		SET
+			  del_yn = 1
+			, c_deldate = NOW()
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+
+	<select id="selectCommentList" parameterType="com.board.domain.qnacomment.QnaCommentResponse" resultType="com.board.domain.qnacomment.QnaCommentResponse">
+		SELECT
+			<include refid="commentColumns" />
+		FROM
+			psb_comment
+		WHERE
+			del_yn = 0
+		AND
+			b_idx = #{bIdx}
+		ORDER BY
+			c_idx DESC,
+			c_modidate DESC
+	</select>
+
+	<select id="selectCommentTotalCount" parameterType="com.board.domain.qnacomment.QnaCommentResponse" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			psb_comment
+		WHERE
+			del_yn = 0
+		AND
+			b_idx = #{bIdx}
+	</select>
+
+</mapper>
