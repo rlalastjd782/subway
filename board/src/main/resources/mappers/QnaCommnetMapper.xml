@@ -20,7 +20,7 @@
 			  #{cIdx}
 			, #{cContent}
 			, #{cWriter} 
-			, Now()
+			, NOW()
 			, 0
 			, #{bIdx}
 			, NULL
@@ -42,7 +42,7 @@
 	<update id="updateComment" parameterType="com.board.domain.qnacomment.QnaCommentRequest">
 		UPDATE psb_comment
 		SET
-			  c_date = NOW()
+			  c_modidate = NOW()
 			, c_content = #{cContent}
 			, c_writer = #{cWriter}
 		WHERE
