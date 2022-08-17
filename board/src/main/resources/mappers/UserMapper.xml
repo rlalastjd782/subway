@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.users.mapper.UserMapper">
+	
+	<sql id="usersColumns">
+		  id
+		, admin_yn
+		, pw
+		, name
+		, gender
+		, nickname
+		, email
+	</sql>
+	
+	
+	<!-- 테이블에 유저정보 넣기 -->
+	<insert id="insertUser" parameterType="com.board.users.dto.UserRequestDTO">
+		INSERT INTO users (
+			<include refid="usersColumns" />
+		) VALUES (
+			  #{id}
+			, 0
+			, #{pw}
+			, #{name}
+			, #{gender}
+			, #{nickname}
+			, #{email}
+		)
+	</insert>
+	
+	
+	<!-- 마이페이지에서 유저정보 수정 -->
+	<update id="updateBoard" parameterType="com.board.users.dto.UserRequestDTO">
+		UPDATE users
+		SET
+			  pw = #{pw}
+			, nickname = #{nickname}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- DB에 입력받은 아이디가 있는지 확인 -->
+	<select id="idCompare" parameterType="com.board.users.dto.UserRequestDTO" resultType= "String">
+		select id  
+		from users
+		where id = #{id}
+	</select>
+	
+	<!-- DB에 입력받은 닉네임이 있는지 확인 -->
+	<select id="nicknameCompare" parameterType="com.board.users.dto.UserRequestDTO" resultType= "String">
+		select nickname  
+		from users
+		where nickname = #{nickname}
+	</select>
+	
+	<!-- DB에 입력받은 이메일이 있는지 확인 -->
+	<select id="emailCompare" parameterType="com.board.users.dto.UserRequestDTO" resultType= "String">
+		select email  
+		from users
+		where email = #{email}
+	</select>
+	
+	
+	<!-- 입력받은 이메일로 id 찾기 -->
+	<select id="searchID" parameterType="com.board.users.dto.UserRequestDTO" resultType= "String">
+		select id
+		from users
+		where email = #{email}
+	</select>
+	
+	
+	<!-- DB에 입력받은 이메일과 id가 있는지 확인 -->
+	<select id="eiCompare" parameterType="com.board.users.dto.UserRequestDTO" resultType= "String">
+		select email, id  
+		from users
+		where email = #{email}
+		and id = #{id}
+	</select>
+	
+	
+	<!-- 입력받은 이메일과 id로 pw 찾기 -->
+	<select id="searchPW" parameterType="com.board.users.dto.UserRequestDTO" resultType= "String">
+		select pw 
+		from users
+		where email = #{email}
+		and id = #{id}
+	</select>
+	
+	
+	<!-- 임시 비밀번호로 바꾸기 -->
+	<update id="changePW" parameterType="com.board.users.dto.UserRequestDTO">
+		UPDATE users
+		SET
+			pw = #{pw}
+		WHERE
+			id = #{id}
+	</update>
+	
+</mapper>

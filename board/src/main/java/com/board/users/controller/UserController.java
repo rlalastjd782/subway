@@ -31,7 +31,7 @@ public class UserController {
 	@GetMapping(value = "/user/signup")
     public String Signup(@ModelAttribute("params") UserRequestDTO params, @RequestParam(value = "id", required = false) String id, Model model) {
 		
-        return "signup";
+        return "user/signup";
     }
 	
 	

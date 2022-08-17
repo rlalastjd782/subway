@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<head>
+    <meta charset="UTF-8">
+
+    <title>회원가입</title>
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
+</head>
+<body>
+    <h1>회원 가입</h1>
+    <hr>
+	<th:block layout:fragment="content">
+	    <form id = "signUpForm" th:action="@{/user/signup}" th:object="${user}" method="post">
+	    
+	    	<div>
+	    		<label for="id">아이디</label>
+	            <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요.">
+	            
+	            <!-- 일반적으로 버튼은 submit의 기능을 포함하고 있기 때문에 submit 기능이 포함되지 않고
+	             오직 button 기능만 작동하도록 속성값 추가 -->
+	            <button id = "checkID" type = "button">아이디 중복확인</button>
+	        </div>
+	        <span id = "idmessage">ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다.</span>
+	
+			<div>
+				<label for="pw">비밀번호</label>
+	            <input type="password" id="pw" name="pw" placeholder="비밀번호">
+	        </div>
+	        <span id = "pwmessage">비밀번호 길이 제한은 8~16글자이고, 영문과 숫자, 특수문자가 모두 입력되야합니다.</span>
+	        
+	        <div>
+				<label for="pwCheck">비밀번호 확인</label>
+	            <input type="password" id="pwCheck" name="pwCheck" placeholder="비밀번호 확인">
+	        </div>
+	        <span id = "pwCheckmessage">위의 비밀번호와 동일하게 입력하세요.</span>
+	        
+	        <div>
+	        	<label for="name">이름</label>
+	            <input type="text" id="name" name="name" placeholder="이름" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" maxlength=5 required>
+	        </div>
+	        
+	        <div>
+                <div>
+                    <input type="radio" id="genderM" name="gender" value="M" checked>
+                    <label for="genderM">남자</label>
+
+                    <input type="radio" id="genderF" name="gender" value="F">
+                    <label for="genderF">여자</label>
+                </div>
+            </div>
+	
+	        <div>
+	        	<label for="nickname">닉네임</label>
+	            <input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요.">
+	            <button id = "checkNickname" type = "button">닉네임 중복확인</button>
+	        </div>
+	        <span id = "nicknamemessage">닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만 입력 가능합니다.</span>
+	        
+	        <div>
+	        	<label for="email">이메일</label>
+	            <input type="text" id="email" name="email" placeholder="이메일을 입력해주세요.">
+	            <button id = "checkEmail" type = "button">이메일 중복확인</button>
+	        </div>
+	        <span id = "emailmessage"></span>
+	        
+	        <div>
+	        	<label for="certify">인증번호</label>
+	            <input type="text" name="certify" id="certify" placeholder="인증번호을 입력해주세요.">
+	            <button id="checkCertify" name="checkCertify" type = "button">인증번호 전송</button>
+	        </div>
+	        <span id = "certifymessage">인증번호를 입력해주세요.</span>
+	        
+			<div>
+				<button id = "submit" name = "submit" type="button">확인</button>
+			</div>
+			
+	    </form>
+    </th:block>
+    
+    <th:block layout:fragment="script">
+		<script th:inline="javascript">
+			
+			// id 입력 폼에서 키보드가 눌렸을 때 id 조건을 보여 줌(중복확인 후 변경할 경우를 대비)
+			$("#id").keyup(function(e){
+				$("#idmessage").text("ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다.");
+				$("#idmessage").css("color", "black");
+			})
+			
+		
+			// id 유효성검사 및 중복검사
+			$("#checkID").click(function(){
+				
+				const id = $("#id").val();
+
+				// 영문, 숫자만 사용가능한 정규표현식
+				var regType = /^[A-Za-z0-9]{6,14}$/;
+				// 입력받은 아이디가 조건에 맞는지 확인
+				// 맞다면 true 틀리면 false 반환
+				var checkRegType = regType.test(document.getElementById('id').value)
+				
+				$.ajax({
+				type: "post",
+				async: false,
+				url: "/user/id-check",
+				data: {id: id},
+				success: function (data) {
+					if(data == true && checkRegType == true) {
+						// 입력된 ID가 조건에 부합하고 중복된 ID도 없는 경우
+						$("#idmessage").text("사용 가능한 ID입니다.");
+						$("#idmessage").css("color", "blue");
+					} else if(data == false && checkRegType == true){
+						// 중복된 ID가 있을 경우
+						$("#idmessage").text("이미 사용중인 ID입니다.");
+						$("#idmessage").css("color", "red");
+					} else{
+						// 입력된 ID가 조건에 맞지 않을 경우
+						$("#idmessage").text("ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다.");
+						$("#idmessage").css("color", "black");
+					}
+				}
+				})
+			});
+			
+			
+			// 비밀번호가 조건과 맞는지 확인
+			$("#pw").keyup(function(e){
+
+				// 영문, 숫자, 특수문자가 모두 들어가야하고 8~16글자 제한 정규표현식
+				var regType =  /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+				// 입력받은 pw가 조건에 맞는지 확인
+				// 맞다면 true 틀리면 false 반환
+				var checkRegType = regType.test(document.getElementById('pw').value)
+				var pw = $("pw").val();
+				var pwc = $("pwCheck").val();
+				
+				if(checkRegType == true){
+					// 입력한 비밀번호가 조건에 맞는 경우
+					$("#pwmessage").text("사용 가능한 비밀번호입니다.");
+					$("#pwmessage").css("color", "blue");
+					$("#pwCheckmessage").text("위의 비밀번호와 동일하게 입력하세요.");
+					$("#pwCheckmessage").css("color", "black");
+				} else{
+					// 입력한 비밀번호가 조건에 맞지 않을 경우
+					$("#pwmessage").text("비밀번호 길이 제한은 8~16글자이고, 영문과 숫자, 특수문자가 모두 입력되야합니다.");
+					$("#pwmessage").css("color", "black");
+					$("#pwCheckmessage").text("위의 비밀번호와 동일하게 입력하세요.");
+					$("#pwCheckmessage").css("color", "black");
+				}
+				
+			});
+			
+			
+			// 비밀번호 확인이 비밀번호와 같은지 확인
+			$("#pwCheck").keyup(function(e){
+				
+				const pw = $("#pw").val();
+				const pwCheck = $("#pwCheck").val();
+				const pwm = $("#pwmessage").text();
+				
+				if(pw == pwCheck && pwm == "사용 가능한 비밀번호입니다."){
+					// 비밀번호와 비밀번호 확인이 같고
+					// 비밀번호가 조건에 부합할 경우
+					$("#pwCheckmessage").text("위의 비밀번호와 동일합니다.");
+					$("#pwCheckmessage").css("color", "blue");
+				} else{
+					// 위의 조건이 만족하지 않을 경우
+					$("#pwCheckmessage").text("위의 비밀번호와 동일하게 입력하세요.");
+					$("#pwCheckmessage").css("color", "black");
+				}
+			});
+			
+			
+			
+			// 이름 형식 검사
+			// 이름에 영문과 한글만 쓸 수 있음
+			function characterCheck(obj){
+
+			  // 허용하고 싶은 숫자나 특수문자가 있다면 여기서 삭제하면 됨
+			  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&1234567890\'\"\\\(\=]/gi; 
+			
+			  if(regExp.test(obj.value)){
+			     alert("숫자나 특수문자는 입력하실수 없습니다.");
+			     obj.value = obj.value.substring(0 , obj.value.length - 1 ); // 입력한 특수문자 한자리 지움
+			  }
+			};
+			
+			
+			// 닉네임 입력 폼에서 키보드가 눌렸을 때 닉네임 조건을 보여 줌(중복확인 후 변경할 경우를 대비) 
+			$("#nickname").keyup(function(e){
+				
+				$("#nicknamemessage").text("닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만 입력 가능합니다.");
+				$("#nicknamemessage").css("color", "black");
+			});
+			
+			
+			// 닉네임 유효성검사 및 중복검사
+			$("#checkNickname").click(function(){
+				
+				const nickname = $("#nickname").val();
+				
+				// 한글, 영문, 숫자만 입력 가능하고 3~12글자 제한 정규표현식
+				var regType =  /^[a-zA-Z0-9가-힣]{3,12}$/;
+				// 입력받은 닉네임이 조건에 맞는지 확인
+				// 맞다면 true 틀리면 false 반환
+				var checkRegType = regType.test(document.getElementById('nickname').value)
+				
+				$.ajax({
+				type: "post",
+				async: false,
+				url: "/user/nickname-check",
+				data: {nickname: nickname},
+				success: function (data) {
+				if(data == true && checkRegType == true) {
+					// 입력된 닉네임이 조건에 부합하고 중복된 닉네임도 없는 경우
+					$("#nicknamemessage").text("사용 가능한 닉네임입니다.");
+					$("#nicknamemessage").css("color", "blue");
+				} else if(data == false && checkRegType == true){
+					// 중복된 닉네임이 있는 경우
+					$("#nicknamemessage").text("이미 사용중인 닉네임입니다.");
+					$("#nicknamemessage").css("color", "red");
+				} else{
+					// 입력된 닉네임이 조건에 맞지 않을 경우
+					$("#nicknamemessage").text("닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만 입력 가능합니다.");
+					$("#nicknamemessage").css("color", "black");
+				}
+				}
+				})
+			});
+			
+			
+			// 이메일 입력 폼에서 키보드가 눌렸을 때 밑의 메시지 지우기(중복확인 후 변경할 경우를 대비)
+			$("#email").keyup(function(e){
+				$("#emailmessage").text(" ");
+				$("#emailmessage").css("color", "black");
+			})
+			
+			
+			// 이메일 유효성검사 및 중복검사
+			$("#checkEmail").click(function(){
+				
+				const email = $("#email").val();
+				
+				// 이메일 형식만 가능
+				var regType =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+				// 입력받은 이메일이 조건에 맞는지 확인
+				// 맞다면 true 틀리면 false 반환
+				var checkRegType = regType.test(document.getElementById('email').value)
+				
+				$.ajax({
+				type: "post",
+				async: false,
+				url: "/user/email-check",
+				data: {email: email},
+				success: function (data) {
+				if(data == true && checkRegType == true) {
+						// 입력된 이메일이 조건에 부합하고 중복된 이메일도 없는 경우
+						$("#emailmessage").text("가입 가능한 이메일입니다.");
+						$("#emailmessage").css("color", "blue");
+					} else if(data == false && checkRegType == true) {
+						// 중복된 이메일이 있는 경우
+						$("#emailmessage").text("이미 가입된 이메일입니다.");
+						$("#emailmessage").css("color", "red");
+					} else{
+						// 입력된 이메일이 조건에 맞지 않을 경우
+						$("#emailmessage").text("이메일 형식이 아닙니다.");
+						$("#emailmessage").css("color", "black");
+					}
+					}
+				})
+			});
+			
+			
+			// 인증번호 저장 
+			let code = "";
+			
+			// 인증번호 틀린 횟수 저장
+			let wrongCount = 0;
+			
+			// 인증번호 전송 및 확인버튼
+			$("#checkCertify").click(function(){
+				
+				const buttonVal = $("#checkCertify").text();
+				const CMessage = $("#certifymessage").text();
+				const EMessage = $("#emailmessage").text();
+				const email = $("#email").val();
+				const emailform = document.getElementById('email');
+				const button = document.getElementById('checkCertify');
+				const certify = $("#certify").val();
+				
+				// 이메일이 중복검사를 통과하고 인증번호 버튼이 '인증번호 전송'상태인 경우
+				if(buttonVal == "인증번호 전송" && EMessage == "가입 가능한 이메일입니다."){
+					// 이메일 폼을 읽기 전용으로 바꿈
+					emailform.readOnly = true;
+					alert("해당 이메일로 인증번호를 전송했습니다.");
+					$("#checkCertify").text("인증번호 확인");
+					
+					// 랜덤 코드 생성
+					function generatecode() {
+					    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'
+					    const stringLength = 6
+					    let randomstring = ''
+					    for (let i = 0; i < stringLength; i++) {
+					      const rnum = Math.floor(Math.random() * chars.length)
+					      randomstring += chars.substring(rnum, rnum + 1)
+					    }
+					    return randomstring
+					}
+					
+					// code에 랜덤 코드 값을 부여
+					code = generatecode();
+					
+					
+					// 해당 이메일에 코드 전송
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "/user/sendcode",
+						data: {email: email, code: code},
+						success:  function (data) {
+							
+						}
+					
+					})
+				} else if(buttonVal == "인증번호 확인"){
+					// 인증번호 버튼이 '인증번호 확인'일 경우 인증번호가 맞는지 검사 
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "/user/certify-check",
+						data: {certify: certify, code: code},
+						success:  function (data) {
+							if(data){
+								// 인증번호가 맞는 경우
+								$("#certifymessage").text("인증되었습니다.");
+								$("#certifymessage").css("color", "blue");
+								button.disabled = true;
+							} else{
+								// 인증번호가 틀릴 경우 카운트를 세고 3회 틀리면 메인 페이지로 쫓아 냄
+								if(wrongCount == 0){
+									$("#certifymessage").text("인증번호가 1회 틀렸습니다. 3회 틀리면 메인페이지로 이동합니다.");
+									$("#certifymessage").css("color", "red");
+									wrongCount = 1;
+								} else if(wrongCount == 1){
+									$("#certifymessage").text("인증번호가 2회 틀렸습니다. 3회 틀리면 메인페이지로 이동합니다.");
+									$("#certifymessage").css("color", "red");
+									wrongCount = 2;
+								} else{
+									alert("인증번호가 3회 틀렸습니다. 메인페이지로 이동합니다.");
+									location.replace('/main');
+								}
+							}
+						}
+					})
+				} else{
+					// 이메일 중복검사를 통과하지 않고 인증번호 버튼을 눌렀을 경우
+					$("#certifymessage").text("이메일 중복확인이 필요합니다.");
+					$("#certifymessage").css("color", "black");
+				}
+				
+
+				
+			});
+			
+			
+			// DB에 데이터 넘기기
+			$("#submit").click(function(){
+				
+				const id = $("#id").val();
+				const pw = $("#pw").val();
+				const name = $("#name").val();
+				const gender =  $('input[name="gender"]:checked').val();
+				const nickname = $("#nickname").val();
+				const email = $("#email").val();
+				
+				const idmessage = $("#idmessage").text();
+				const pwcheckmessage = $("#pwCheckmessage").text();
+				const nicknamemessage = $("#nicknamemessage").text();
+				const certifymessage = $("#certifymessage").text();
+				
+				// 유효성 검사를 모두 통과했을 경우
+				if(idmessage == "사용 가능한 ID입니다." && pwcheckmessage == "위의 비밀번호와 동일합니다."
+						&& nicknamemessage == "사용 가능한 닉네임입니다." && certifymessage == "인증되었습니다."){
+				
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "/user/user-insert",
+						data: {id: id
+							, pw: pw
+							, name: name
+							, gender: gender
+							, nickname: nickname
+							, email: email},
+						success:  function (data) {
+							if(data == true){
+								// DB에 값이 잘 넘어갔을 때
+								alert("회원가입이 완료되었습니다.");
+								location.replace('/main');
+							} else{
+								// DB에 값이 잘 넘어가지 않았을 때
+								alert("입력 정보를 다시 확인해주세요.")
+							}
+						}
+					
+					})
+				} else{
+					// 유효성 검사를 통과하지 않았을 경우
+					alert("입력 정보를 다시 확인해주세요.");
+				}
+				
+			});
+		
+			/*<![CDATA[*/
+
+			/*]]>*/
+		</script>
+	</th:block>
+</body>
+</html>
