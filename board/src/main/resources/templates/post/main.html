@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/basic">
 
 <head>
 <meta charset="UTF-8">
@@ -7,65 +9,139 @@
 </head>
 <th:block layout:fragment="content">
 
-<body>
-	
-
-	
-	<div id = "post-table">
-	<table  class="table table-hover"  >
-		
-			<thead>
-			
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-				
-				
-				</tr>
-			
-			</tbody>
-				
-	</table>
-	
-		<table class="table table-hover"  id = "qnapost-table">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-				
-				
-				</tr>
-			
-			</tbody>
-				
-	</table>
-	</div>
-	
-	
-	
-	
-	
-	
+	<body>
 
 
 
+		<div id="post-table">
+		게시판
+			<table class="table table-hover">
+				
+				<thead>
+					
+					<tr>
+					
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+					</tr>
+					
+				</thead>
+				<tbody id="list">
 
-</body>
+				</tbody>
+
+			</table>
+			문제해결
+			<table class="table table-hover" id="qnapost-table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+
+
+					</tr>
+
+				</tbody>
+
+			</table>
+		</div>
+
+		<div>
+
+			뉴스 부분
+			<table class="table table-hover" id="qnapost-table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+
+
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+
+	</body>
 </th:block>
+   
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            window.onload = () => {
+            /* 	setQueryStringParams(); */
+                findAllPost();
+            }
+            
+     
+
+
+            // 게시글 리스트 조회
+            function findAllPost() {
+
+                const list = [[ ${response.list} ]];
+                if ( !list.length ) {
+                    document.getElementById('list').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
+                    drawPage();
+                    return false;
+                }
+
+                const pagination = [[ ${response.pagination} ]];
+                const params = [[ ${params} ]];
+                let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
+                drawList(list, num);
+              
+            }
+
+
+	            // 리스트 HTML draw
+	     function drawList(list, num) {
+
+      	  let html = '';
+      	  list.forEach(obj => {
+       	     html += `
+         	       <tr>
+                    <td>${obj.idx}</td>
+                    <td class="text-left"><a href="javascript: void(0);" onclick="goViewPage(${obj.idx});">${obj.title}</a></td>
+                    <td>${obj.writer}</td>
+                </tr>
+            `;
+        })
+
+        document.getElementById('list').innerHTML = html;
+    }
+	            
+         // 게시글 상세 페이지로 이동
+	   		function goViewPage(idx) {
+	        const queryString = (location.search) ? location.search + `&idx=${idx}` : `?idx=${idx}`;
+	        location.href = '/post/qnaview.do' + queryString;
+	    } 
+	   	   /*]]>*/
+	        </script>
+	    </th:block>
+
 </html>
