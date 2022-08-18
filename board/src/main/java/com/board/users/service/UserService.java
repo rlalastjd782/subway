@@ -1,5 +1,7 @@
 package com.board.users.service;
 
+import java.util.HashMap;
+
 import com.board.users.dto.UserRequestDTO;
 
 public interface UserService {
@@ -26,6 +28,6 @@ public interface UserService {
 
 	public boolean eiCompare(UserRequestDTO params);
 
-	public boolean loginCompare(UserRequestDTO params);
+	public HashMap<String, Object> loginCompare(UserRequestDTO params);
 
 }

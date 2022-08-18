@@ -18,7 +18,7 @@ public class UserRequestDTO {
 	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z]).{6,14}", message = "ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다.")
 	private String id;
 	
-	private int adminYn;
+	private int admin_yn;
 	
 	@NotBlank(message = "비밀번호는 필수 입력 값입니다.")
 	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호 길이 제한은 8~16글자이고, 영문과 숫자, 특수문자가 모두 입력되야합니다.")

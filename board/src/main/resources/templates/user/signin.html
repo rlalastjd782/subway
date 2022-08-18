@@ -29,7 +29,7 @@
 		<div>
 			<button id = signin class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findid'">id찾기</button>
+		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findid'">id 찾기</button>
 		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findpw'">pw 찾기</button>
     </form>
     
@@ -50,9 +50,6 @@
 		data: {id: id, pw: pw},
 		success: function (data) {
 			if(data == true){
-				alert("로그인 성공");
-				sessionStorage.setItem("id", id);
-				sessionStorage.setItem("pw", pw);
 				window.location.href = "../post/main";
 			} else{
 				alert("아이디와 비밀번호를 다시 확인해주세요.");

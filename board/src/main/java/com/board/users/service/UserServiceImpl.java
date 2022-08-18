@@ -2,6 +2,8 @@ package com.board.users.service;
 
 import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -175,18 +177,15 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public boolean loginCompare(UserRequestDTO params) {
+	public HashMap<String, Object> loginCompare(UserRequestDTO params) {
 		// TODO Auto-generated method stub
-		
-		String result = userMapper.loginCompare(params);
-		
-		if(result == null) {
-			// DB에 아이디와 비밀번호가 없으면 false
-			return false;
-		} else {
-			return true;
-		}
-		
+
+		HashMap<String, Object> result = userMapper.loginCompare(params);
+
+		if(result == null)
+			return null;
+		else
+			return result;
 	}
 
 	

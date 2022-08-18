@@ -1,5 +1,7 @@
 package com.board.users.mapper;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.board.users.dto.UserRequestDTO;
@@ -26,5 +28,5 @@ public interface UserMapper {
 
 	public String eiCompare(UserRequestDTO params);
 
-	public String loginCompare(UserRequestDTO params);
+	public HashMap<String, Object> loginCompare(UserRequestDTO params);
 }

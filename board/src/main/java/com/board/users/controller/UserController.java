@@ -1,5 +1,11 @@
 package com.board.users.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -160,11 +166,25 @@ public class UserController {
 	
 	@ResponseBody
 	@PostMapping(value = "/user/login-check")
-	public boolean LoginCheck(UserRequestDTO params) {
+	public boolean LoginCheck(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
 		
-		boolean result = userService.loginCompare(params);
+		HashMap<String, Object> result = userService.loginCompare(params);
 		
-		return result;
+		if(result == null) {
+			return false;
+		} else {
+			session.setAttribute("id", result.get("id"));
+			session.setAttribute("admin_yn", result.get("admin_yn"));
+			session.setAttribute("pw", result.get("pw"));
+			session.setAttribute("name", result.get("name"));
+			session.setAttribute("gender", result.get("gender"));
+			session.setAttribute("nickname", result.get("nickname"));
+			
+			// 세션 유지시간 30분
+			session.setMaxInactiveInterval(30 * 60);
+			
+			return true;
+		}
 	}
 	
 }
