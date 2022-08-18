@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>회원가입</title>
     
     <script src="http://code.jquery.com/jquery-latest.js"></script> 
 </head>
 <body>
-    <h1>회원 가입</h1>
-    <hr>
+
+
 	<th:block layout:fragment="content">
 	    <form id = "signUpForm" th:action="@{/user/signup}" th:object="${user}" method="post">
 	    	<h1>회원가입</h1>
