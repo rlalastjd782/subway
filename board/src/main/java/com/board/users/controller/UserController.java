@@ -160,7 +160,7 @@ public class UserController {
 	
 	@ResponseBody
 	@PostMapping(value = "/user/login-check")
-	public boolean SendPW(UserRequestDTO params) {
+	public boolean LoginCheck(UserRequestDTO params) {
 		
 		boolean result = userService.loginCompare(params);
 		
