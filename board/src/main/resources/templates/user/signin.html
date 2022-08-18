@@ -12,11 +12,12 @@
 
 
 <th:block layout:fragment="content">
-<div id = login>
+	<div id = login>
 	<img src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">
-	<h1 class="h3 mb-3 font-weight-normal">Login</h1>
-</div>
-    <form class="form-signin" th:action="@{/user/signin}" th:object="${user}" method="post" >
+	<h1 id = "login-text" class="h3 mb-3 font-weight-normal">Login</h1>
+	</div>
+	<div>
+	<form class="form-signin" th:action="@{/user/signin}" th:object="${user}" method="post" >
     
 
 
@@ -33,6 +34,8 @@
 		<button class="btn btn-lg btn-primary btn-block" type="submit">id찾기</button>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">pw 찾기</button>
     </form>
+    </div>
+    
  </th:block> 
  
  <th:block layout:fragment="script">
