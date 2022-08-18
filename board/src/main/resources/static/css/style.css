@@ -1554,3 +1554,18 @@ textarea.form-control {
 .dropdown.dropdown-lg {
     float: left;
 }
+
+#login{
+	display : flex;
+	margin-bottom : 10px;
+}
+#login img {
+	height : 38px;
+	width : 40px;
+}
+#login-text{
+	margin : 8px;
+	color : #2ECC71;
+}
+
+
