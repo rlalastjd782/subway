@@ -6,29 +6,36 @@
 	<th:block layout:fragment="modal"></th:block>
 	<div class="fixed-navbar">
 
-			
+		<div class="pull-left">
+		
+
+			<h1 class="page-title">
+				<i class="fa-solid fa-road-circle-check">BARTRO</i>
+			</h1>
+
+		</div>
+
+		
 
 		<div class="nav_menu">
-			<h1 class="mainpage-title"><a th:href="@{/post/list.do}"><img alt="BATRO" src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTJfNTQg/MDAxNjYwMjc1MjY5MzE0.Iy6eieeFrEup1ctBUulCMl_oqNkqf8gs4zM10egCjTog.ftMvRl9BJ52ebqLIsq6cpG_KDxyAgF5Y73VYupJG3-Yg.PNG.sjkor1005/image.png?type=w800"></a></h1>
-			<h2 class="page-title"><a th:href="@{/post/list.do}">분석</a></h2>
-           	<h2 class="page-title"><a th:href="@{/post/list.do}">문제제시 해결방안</a></h2>
-           	<h2 class="page-title"><a th:href="@{/post/qnalist.do}">자유게시판</a></h2>
-        </div>
+			<h1 class="page-title">메인페이지</h1>
+			<h1 class="page-title">분석</h1>
+			<h1 class="page-title">
+				<a th:href="@{/post/list.do}">자유게시판</a>
+			</h1>
+			<h1 class="page-title">
+				<a th:href="@{/post/qnalist.do}">문제제시 해결방안</a>
+			</h1>
 
 		</div>
 		<div class="nav_sign">
 			<h1 class="page-title">
-			<a th:href="@{/user/signup}">로그인</a></h1>
-			<h1 class="page-title">회원가입</h1>
+			<a th:href="@{/user/signup}">sign up</a></h1>
+			<h1 class="page-title">sign in</h1>
 		</div>
-	
+	</div>
 
-	<div th:if = "@{/post/list.do}" >
-	<img id = freeimg src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfNjMg/MDAxNjYwMjA0NTMzMTM1.2WZF0Y3zuiqTzwSmvGdana5fGZhzyp768so1JDUuAtcg.S7BBL_lQhEmRnwbkJa_cXBuW19u8f__5p59YkJY6nekg.JPEG.sjkor1005/2205_w046_n004_124b_p1_124.jpg?type=w800"/>
-	</div>
-	<div th:unless = "@{/post/list.do}">
-	<img id = freeimg src=https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTdfMTQw/MDAxNjYwNzEzNDA4MzI3.XO8bm8t56vJBWDsnX3btyJ0NBbht1WnIjVUGH4Nhax4g.-FjhlWA6BkF_7StBq7m5DJhv82SIy5Fohy_EOuFx6Okg.JPEG.sjkor1005/2203_w046_n004_48b_p1_48.jpg?type=w800/>
-	</div>
+
 
 
 	<div id="wrapper">
