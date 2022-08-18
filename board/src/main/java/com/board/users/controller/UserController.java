@@ -106,7 +106,7 @@ public class UserController {
 	@GetMapping(value = "/user/findid")
 	public String FindID() {
 
-		return "findid";
+		return "user/findid";
 	}
 
 	
@@ -127,7 +127,7 @@ public class UserController {
 	@GetMapping(value = "/user/findpw")
 	public String FindPW() {
 
-		return "findpw";
+		return "user/findpw";
 	}
 	
 	
@@ -150,5 +150,11 @@ public class UserController {
 	}
 	
 	 
+	//	// 비밀번호 찾기 페이지 진입
+	@GetMapping(value = "/user/signin")
+	public String SingIn() {
+
+		return "user/signin";
+	}
 	
 }

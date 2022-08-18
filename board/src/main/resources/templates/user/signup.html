@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+
 <head>
     <meta charset="UTF-8">
 
@@ -12,7 +13,7 @@
     <hr>
 	<th:block layout:fragment="content">
 	    <form id = "signUpForm" th:action="@{/user/signup}" th:object="${user}" method="post">
-	    
+	    	<h1>회원가입</h1>
 	    	<div>
 	    		<label for="id">아이디</label>
 	            <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요.">
