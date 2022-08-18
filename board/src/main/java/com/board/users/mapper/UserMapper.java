@@ -25,4 +25,6 @@ public interface UserMapper {
 	public int changePW(UserRequestDTO params);
 
 	public String eiCompare(UserRequestDTO params);
+
+	public String loginCompare(UserRequestDTO params);
 }

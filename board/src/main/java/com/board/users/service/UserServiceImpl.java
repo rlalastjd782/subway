@@ -173,5 +173,21 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+
+	@Override
+	public boolean loginCompare(UserRequestDTO params) {
+		// TODO Auto-generated method stub
+		
+		String result = userMapper.loginCompare(params);
+		
+		if(result == null) {
+			// DB에 아이디와 비밀번호가 없으면 false
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+
 	
 }

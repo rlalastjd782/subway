@@ -26,4 +26,6 @@ public interface UserService {
 
 	public boolean eiCompare(UserRequestDTO params);
 
+	public boolean loginCompare(UserRequestDTO params);
+
 }

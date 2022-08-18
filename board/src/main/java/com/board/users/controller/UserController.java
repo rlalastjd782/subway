@@ -150,11 +150,21 @@ public class UserController {
 	}
 	
 	 
-	//	// 비밀번호 찾기 페이지 진입
+	// 로그인 페이지
 	@GetMapping(value = "/user/signin")
 	public String SingIn() {
 
 		return "user/signin";
+	}
+	
+	
+	@ResponseBody
+	@PostMapping(value = "/user/login-check")
+	public boolean SendPW(UserRequestDTO params) {
+		
+		boolean result = userService.loginCompare(params);
+		
+		return result;
 	}
 	
 }
