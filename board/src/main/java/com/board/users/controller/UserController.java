@@ -1,5 +1,6 @@
 package com.board.users.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -156,7 +157,7 @@ public class UserController {
 	}
 	
 	 
-	// 로그인 페이지
+	// 로그인 페이지 진입하기
 	@GetMapping(value = "/user/signin")
 	public String SingIn() {
 
@@ -184,6 +185,27 @@ public class UserController {
 			session.setMaxInactiveInterval(30 * 60);
 			
 			return true;
+		}
+	}
+	
+	
+	// 마이페이지 진입하기
+	@GetMapping(value = "/user/mypage")
+	public String MyPage(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+		if((String)session.getAttribute("id") == null || (String)session.getAttribute("pw") == null) {
+			try {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter w = response.getWriter();
+				w.write("<script>alert('잘못된 접근입니다.');</script>");
+				// w.flush();
+				// w.close();
+		    } catch(Exception e) {
+				e.printStackTrace();
+		    }
+			return "post/main";
+		} else {
+			return "user/mypage";
 		}
 	}
 	
