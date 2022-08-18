@@ -1,0 +1,181 @@
+*{
+	-webkit-appearance: none; 
+}
+:root{
+	--main-color: #2ecc71;
+}
+::-webkit-input-placeholder {
+   text-align: center;
+}
+/* #signUpForm{
+	padding: 6px 12px;
+    width: 837px;
+    height: 682px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-sizing: border-box;
+    resize: none;
+    font-size: 14px;
+    margin: 0 auto;
+    writing-mode: horizontal-tb !important;
+    font-family: monospace;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+   
+	
+                
+} */
+
+#signUpForm{
+	padding: 2px 12px;
+    text-align:center;
+    resize: none;
+    white-space: normal;
+    margin: 0 auto;
+}  
+
+
+#signUpForm label{
+	font-size: 15px;
+	font-weight: normal;
+	line-height: normal;
+	
+	
+	/* top: 837px;
+	left: 424px;
+	width: 300px;
+	height: 40px; */
+	
+	
+       	
+}
+/* #id#checkID#pw#pwCheck#name#genderM#genderF#nickname#email#checkEmail#certify#checkCertify#submit */
+
+.idcontainer{
+	
+
+	
+	color: rgb(94, 94, 94);
+	
+	
+}
+.idcontainer>input[type=text],input[type=password]{
+	width:220px;
+	height:31px;
+	margin: 0 auto;
+	border-radius: 5px;
+	outline-style: none;
+	border: 1px solid #ccc;
+	
+}
+.idcontainer>button{
+	font-size: 13px;
+	text-align: center;
+	height: 31px;
+	width: 118px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+.confirm>button{
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 13px;
+	text-align: center;
+}
+
+#id,#pw,#pwCheck,#name,#nickname,#email,#certify{
+	text-align : center;
+	font-weight: normal;
+	
+}
+#idmessage,#pwmessage,#pwCheckmessage,#nicknamemessage,#certifymessage{
+	font-size: 11px;
+	font-weight: normal;
+	text-align : center;
+	
+	
+}
+
+input[type=password][data-text-content], input[type=text][data-text-content]{
+	width:250px;
+	height:35px;
+	text-align: center;
+	color: rgb(94, 94, 94);
+	
+}
+/* .radio>#genderM,#genderF:before{
+	position:absolute;
+	width:15px;
+	height:15px;
+	border: 1px solid #ccc;
+	margin: -1px;
+	cursor: pointer;
+	box-sizing: border-box;
+	appearance: auto;
+	accent-color: #2ecc71;
+	background-clip: content-box;
+	
+} */
+.radio input:checked{
+  border:6px solid #2ecc71;
+  position: absolute;
+ 
+  
+}
+
+.radio input:checked + label{
+  font-size: 20px;
+  color: #545454;
+  
+  
+}
+
+.radio label{
+  transition: 0.2s all linear;
+}
+
+.radio input{
+  appearance: none;
+  border-radius: 50%;
+  width: 16px;
+  height:16px;
+  
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 5px;
+  margin-left: 12px;
+
+  /* position: absolute; */
+  top: 1px;
+}
+.radio>label{
+	font-size:15px;
+	text-align:center;
+	padding-left: 3px;
+	padding-right: 24px;
+}
+.h1, h1 {
+	margin-top: 1px;
+	margin-bottom: 40px;
+    font-size: 24px;
+    color: #2ECC71;
+    text-align:center;
+    font-weight: bold;
+   
+    
+}

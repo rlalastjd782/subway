@@ -10,10 +10,11 @@
 <body>
 
 
-	<th:block layout:fragment="content">
-	    <form id = "signUpForm" th:action="@{/user/signup}" th:object="${user}" method="post">
+ <th:block layout:fragment="content">
+   <link rel="stylesheet" href="/css/signup.css">
+	 <form id = "signUpForm" th:action="@{/user/signup}" th:object="${user}" method="post">
 	    	<h1>회원가입</h1>
-	    	<div>
+	    	<div class="idcontainer">
 	    		<label for="id">아이디</label>
 	            <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요.">
 	            
@@ -23,55 +24,55 @@
 	        </div>
 	        <span id = "idmessage">ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다.</span>
 	
-			<div>
+			<div class="idcontainer">
 				<label for="pw">비밀번호</label>
 	            <input type="password" id="pw" name="pw" placeholder="비밀번호">
 	        </div>
 	        <span id = "pwmessage">비밀번호 길이 제한은 8~16글자이고, 영문과 숫자, 특수문자가 모두 입력되야합니다.</span>
 	        
-	        <div>
+	        <div class="idcontainer">
 				<label for="pwCheck">비밀번호 확인</label>
 	            <input type="password" id="pwCheck" name="pwCheck" placeholder="비밀번호 확인">
 	        </div>
 	        <span id = "pwCheckmessage">위의 비밀번호와 동일하게 입력하세요.</span>
 	        
-	        <div>
+	        <div class="idcontainer">
 	        	<label for="name">이름</label>
 	            <input type="text" id="name" name="name" placeholder="이름" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" maxlength=5 required>
 	        </div>
 	        
-	        <div>
-                <div>
+	        <div class="radio">
+                
                     <input type="radio" id="genderM" name="gender" value="M" checked>
                     <label for="genderM">남자</label>
 
                     <input type="radio" id="genderF" name="gender" value="F">
                     <label for="genderF">여자</label>
-                </div>
+                
             </div>
 	
-	        <div>
+	        <div class="idcontainer">
 	        	<label for="nickname">닉네임</label>
 	            <input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요.">
 	            <button id = "checkNickname" type = "button">닉네임 중복확인</button>
 	        </div>
 	        <span id = "nicknamemessage">닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만 입력 가능합니다.</span>
 	        
-	        <div>
+	        <div class="idcontainer">
 	        	<label for="email">이메일</label>
 	            <input type="text" id="email" name="email" placeholder="이메일을 입력해주세요.">
 	            <button id = "checkEmail" type = "button">이메일 중복확인</button>
 	        </div>
 	        <span id = "emailmessage"></span>
 	        
-	        <div>
+	        <div class="idcontainer">
 	        	<label for="certify">인증번호</label>
 	            <input type="text" name="certify" id="certify" placeholder="인증번호을 입력해주세요.">
 	            <button id="checkCertify" name="checkCertify" type = "button">인증번호 전송</button>
 	        </div>
 	        <span id = "certifymessage">인증번호를 입력해주세요.</span>
 	        
-			<div>
+			<div class="confirm">
 				<button id = "submit" name = "submit" type="button">확인</button>
 			</div>
 			
