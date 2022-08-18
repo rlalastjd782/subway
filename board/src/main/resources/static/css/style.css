@@ -1568,4 +1568,27 @@ textarea.form-control {
 	color : #2ECC71;
 }
 
+#post-table{
+	display : flex;
+}
+
+
+#post-table table{
+	margin : 20px;
+}
+#menu-header{
+	display: flex;
+
+	margin : center;
+	padding : 8px;
+	align-items : center;
+}
+#menu{
+	display: flex;
+	margin-top : 30px;
+}
+#button-menu{
+	margin-top : 30px;
+	margin-left: 30px;
+}
 

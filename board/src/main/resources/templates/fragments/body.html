@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	
-	
-	
-	
+
+
+
+
 
 <body th:fragment="main-body">
 	<th:block layout:fragment="modal"></th:block>
-	<div class="fixed-navbar">
+	
+	
+	<div class="container" id = "header-menu">
+    	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" id="menu-header">
+      	<h1 id = "mainpage-title">
+				<a th:href="@{/post/main}"><img alt="BATRO"
+					src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTJfNTQg/MDAxNjYwMjc1MjY5MzE0.Iy6eieeFrEup1ctBUulCMl_oqNkqf8gs4zM10egCjTog.ftMvRl9BJ52ebqLIsq6cpG_KDxyAgF5Y73VYupJG3-Yg.PNG.sjkor1005/image.png?type=w800"></a>
+		</h1>
 
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" id = "menu">
+        <li><a th:href="@{/post/main}" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">분석</a></li>
+        <li><a th:href="@{/post/list.do}" class="nav-link px-2 link-dark">문제/해결</a></li>
+        <li><a th:href="@{/post/qnalist.do}" class="nav-link px-2 link-dark">자유게시판</a></li>
+   
+      </ul>
 
-		<div class="nav_menu">
-			<h1 class="mainpage-title"><a th:href="@{/post/main}"><img alt="BATRO" src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTJfNTQg/MDAxNjYwMjc1MjY5MzE0.Iy6eieeFrEup1ctBUulCMl_oqNkqf8gs4zM10egCjTog.ftMvRl9BJ52ebqLIsq6cpG_KDxyAgF5Y73VYupJG3-Yg.PNG.sjkor1005/image.png?type=w800"></a></h1>
-			<h2 class="page-title"><a th:href="@{/post/list.do}">분석</a></h2>
-           	<h2 class="page-title"><a th:href="@{/post/list.do}">문제/해결</a></h2>
-           	<h2 class="page-title"><a th:href="@{/post/qnalist.do}">자유게시판</a></h2>
-        </div>
+      <div class="col-md-3 text-end" id="button-menu">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+      </div>
+    </header>
+  </div>
 
-
-		<div class="nav_sign">
-			<h1 class="page-title">
-
-			<a th:href="@{/user/signup}">sign up</a></h1>
-			<h1 class="page-title">
-			<a th:href="@{/user/signin}">sign in</a>
-			</h1>
-		</div>
+	<div id="freeimg">
+		<img
+			src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfNjMg/MDAxNjYwMjA0NTMzMTM1.2WZF0Y3zuiqTzwSmvGdana5fGZhzyp768so1JDUuAtcg.S7BBL_lQhEmRnwbkJa_cXBuW19u8f__5p59YkJY6nekg.JPEG.sjkor1005/2205_w046_n004_124b_p1_124.jpg?type=w800"
+			style="top: 100px; position: relative;">
 	</div>
-
-
-
-
-		<div id="freeimg">
-          <img src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfNjMg/MDAxNjYwMjA0NTMzMTM1.2WZF0Y3zuiqTzwSmvGdana5fGZhzyp768so1JDUuAtcg.S7BBL_lQhEmRnwbkJa_cXBuW19u8f__5p59YkJY6nekg.JPEG.sjkor1005/2205_w046_n004_124b_p1_124.jpg?type=w800" style="
-    top: 100px;
-    position: relative;
-">
-           </div>
 
 
 
