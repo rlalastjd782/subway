@@ -3,7 +3,7 @@
 <mapper namespace="com.board.domain.main.MainMapper">
    
    <!-- qnapost 전체컬럼 -->
-   <sql id="postColumns">
+   <sql id="qnapostColumns">
           idx
         , title
         , content
@@ -14,13 +14,29 @@
         , write_date
         , modified_date
     </sql>
+    
+    
+        <!-- free_board 테이블 전체 컬럼 -->
+    <sql id="postColumns">
+          idx
+        , title
+        , content
+        , writer
+        , view_cnt
+        , notice_yn
+        , del_yn
+        , write_date
+        , modified_date
+    </sql>
+    
+    
 
 
 
-	    <!-- 게시글 리스트 조회 -->
-    <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.qnapost.QnaPostResponse">
+	    <!-- qna게시글 리스트 조회 -->
+    <select id="QnaFindAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.qnapost.QnaPostResponse">
         SELECT
-            <include refid="postColumns" />
+            <include refid="qnapostColumns" />
         FROM
             pro_sol_board
         WHERE
@@ -28,10 +44,24 @@
             
         ORDER BY
             idx DESC
-        LIMIT #{pagination.limitStart}, #{recordSize}
+        LIMIT 5;
     </select>
 
 
+    <!-- 게시글 리스트 조회 -->
+    <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.post.PostResponse">
+        SELECT
+            <include refid="postColumns" />
+        FROM
+            free_board
+        WHERE
+            del_yn = 0
+            
+        ORDER BY
+            idx DESC
+        LIMIT 5;
+    </select>
+    
 
 
 

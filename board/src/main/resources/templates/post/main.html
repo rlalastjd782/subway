@@ -14,25 +14,25 @@
 
 
 		<div id="post-table">
-		게시판
+			문제해결
 			<table class="table table-hover">
-				
+
 				<thead>
-					
+
 					<tr>
-					
+
 						<th>번호</th>
 						<th>제목</th>
 						<th>작성자</th>
 					</tr>
-					
+
 				</thead>
-				<tbody id="list">
+				<tbody id="qnalist">
 
 				</tbody>
 
 			</table>
-			문제해결
+		자유게시판
 			<table class="table table-hover" id="qnapost-table">
 				<thead>
 					<tr>
@@ -41,15 +41,9 @@
 						<th>작성자</th>
 					</tr>
 				</thead>
-				<tbody>
-
-					<tr>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
+				<tbody id="list">
 
 
-					</tr>
 
 				</tbody>
 
@@ -86,25 +80,26 @@
 
 	</body>
 </th:block>
-   
-    <th:block layout:fragment="script">
-        <script th:inline="javascript">
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
             /*<![CDATA[*/
 
             window.onload = () => {
             /* 	setQueryStringParams(); */
+                QnafindAllPost();
                 findAllPost();
             }
             
      
 
 
-            // 게시글 리스트 조회
-            function findAllPost() {
+            // Qna게시글 리스트 조회
+            function QnafindAllPost() {
 
                 const list = [[ ${response.list} ]];
                 if ( !list.length ) {
-                    document.getElementById('list').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
+                    document.getElementById('qnalist').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
                     drawPage();
                     return false;
                 }
@@ -113,35 +108,75 @@
                 const params = [[ ${params} ]];
                 let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
 
+                qnaDrawList(list, num);
+              
+            }
+            //게시글 리스트 받아오기
+            function findAllPost() {
+
+                const list = [[ ${response2.list} ]];
+                if ( !list.length ) {
+                    document.getElementById('list').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
+                    drawPage();
+                    return false;
+                }
+
+                const pagination = [[ ${response2.pagination} ]];
+                const params = [[ ${params} ]];
+                let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
                 drawList(list, num);
               
             }
 
 
+//Qna리스트 페이지 이동
 	            // 리스트 HTML draw
-	     function drawList(list, num) {
+	     function qnaDrawList(list, num) {
 
       	  let html = '';
       	  list.forEach(obj => {
        	     html += `
          	       <tr>
                     <td>${obj.idx}</td>
-                    <td class="text-left"><a href="javascript: void(0);" onclick="goViewPage(${obj.idx});">${obj.title}</a></td>
+                    <td class="text-left"><a href="javascript: void(0);" onclick="goQnaViewPage(${obj.idx});">${obj.title}</a></td>
                     <td>${obj.writer}</td>
                 </tr>
             `;
         })
 
-        document.getElementById('list').innerHTML = html;
+        document.getElementById('qnalist').innerHTML = html;
     }
-	            
-         // 게시글 상세 페이지로 이동
-	   		function goViewPage(idx) {
+	   
+
+	     function drawList(list, num) {
+
+	      	  let html = '';
+	      	  list.forEach(obj => {
+	       	     html += `
+	         	       <tr>
+	                    <td>${obj.idx}</td>
+	                    <td class="text-left"><a href="javascript: void(0);" onclick="goViewPage(${obj.idx});">${obj.title}</a></td>
+	                    <td>${obj.writer}</td>
+	                </tr>
+	            `;
+	        })
+
+	        document.getElementById('list').innerHTML = html;
+	    }
+         // Qna게시글 상세 페이지로 이동
+	   		function goQnaViewPage(idx) {
 	        const queryString = (location.search) ? location.search + `&idx=${idx}` : `?idx=${idx}`;
 	        location.href = '/post/qnaview.do' + queryString;
 	    } 
+         
+         //자유게시판으로이동
+	   		function goViewPage(idx) {
+		        const queryString = (location.search) ? location.search + `&idx=${idx}` : `?idx=${idx}`;
+		        location.href = '/post/view.do' + queryString;
+		    } 
 	   	   /*]]>*/
 	        </script>
-	    </th:block>
+</th:block>
 
 </html>
