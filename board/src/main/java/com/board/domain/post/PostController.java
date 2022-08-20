@@ -47,7 +47,7 @@ public class PostController {
 
     
  // 게시글 리스트 페이지
-    @GetMapping("/post/list.do")
+    @GetMapping("/post/list")
     public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) {
         PagingResponse<PostResponse> response = postService.findAllPost(params);
         model.addAttribute("response", response);
@@ -55,7 +55,7 @@ public class PostController {
     }
     
  // 게시글 상세 페이지
-    @GetMapping("/post/view.do")
+    @GetMapping("/post/view")
     public String openPostView(@RequestParam final Long idx, Model model) throws Exception {
         postService.updatereviewcnt(idx);
     	PostResponse post = postService.findPostByIdx(idx);
@@ -64,7 +64,7 @@ public class PostController {
     }
     
  // 기존 게시글 수정
-    @PostMapping("/post/update.do")
+    @PostMapping("/post/update")
     public String updatePost(final PostRequest params, Model model) {
         postService.updatePost(params);
         MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/post/list.do", RequestMethod.GET, null);
@@ -73,7 +73,7 @@ public class PostController {
     
 
     // 게시글 삭제
-    @PostMapping("/post/delete.do")
+    @PostMapping("/post/delete")
     public String deletePost(@RequestParam final Long idx,
                              @RequestParam final Map<String, Object> queryParams,
                              Model model) {

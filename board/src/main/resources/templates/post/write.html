@@ -43,7 +43,7 @@
             </form>
 
             <div class="btn_wrap text-center">
-                <a th:href="@{/post/list.do}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
+                <a th:href="@{/post/lis}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
                 <button type="button" class="btn btn-primary waves-effect waves-light" onclick="savePost();">저장하기</button>
             </div>
         </div>
@@ -86,7 +86,7 @@
                 }
 
                 form.noticeYn.value = form.isNotice.checked;
-                form.action = [[ ${post == null} ]] ? '/post/save.do' : '/post/update.do';
+                form.action = [[ ${post == null} ]] ? '/post/save' : '/post/update';
                 form.submit();
             }
 

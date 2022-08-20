@@ -19,14 +19,14 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" id = "menu">
         <li><a th:href="@{/post/main}" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">분석</a></li>
-        <li><a th:href="@{/post/list.do}" class="nav-link px-2 link-dark">문제/해결</a></li>
-        <li><a th:href="@{/post/qnalist.do}" class="nav-link px-2 link-dark">자유게시판</a></li>
+        <li><a th:href="@{/analysis/analysis}" class="nav-link px-2 link-dark">분석</a></li>
+        <li><a th:href="@{/post/qnalist}" class="nav-link px-2 link-dark">문제/해결</a></li>
+        <li><a th:href="@{/post/list}" class="nav-link px-2 link-dark">자유게시판</a></li>
    
       </ul>
 
       <div class="col-md-3 text-end" id="button-menu">
-        <button type="button" class="btn btn-outline-primary me-2"><a th:href="@{/user/signin}">Login</a></button>
+        <button type="button" class="btn btn-outline-primary me-2"><a th:href="@{/user/login}">Login</a></button>
         <button type="button" class="btn btn-primary"><a th:href="@{/user/signup}">Sign-up</a></button>
       </div>
     </header>

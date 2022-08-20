@@ -86,7 +86,7 @@
                 }
 
                 form.noticeYn.value = form.isNotice.checked;
-                form.action = [[ ${post == null} ]] ? '/post/qnasave.do' : '/post/qnaupdate.do';
+                form.action = [[ ${post == null} ]] ? '/post/qnasave' : '/post/qnaupdate';
                 form.submit();
             }
 

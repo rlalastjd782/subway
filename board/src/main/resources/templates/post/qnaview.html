@@ -298,12 +298,12 @@
             function goListPage() {
                 const queryString = new URLSearchParams(location.search);
                 queryString.delete('idx');
-                location.href = '/post/qnalist.do' + '?' + queryString.toString();
+                location.href = '/post/qnalist' + '?' + queryString.toString();
             }
             
             // 게시글 수정 페이지로 이동
             function goWritePage() {
-                location.href = '/post/qnawrite.do' + location.search;
+                location.href = '/post/qnawrite' + location.search;
             }
 
         /*]]>*/

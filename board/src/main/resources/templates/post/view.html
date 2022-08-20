@@ -294,7 +294,7 @@
                 })
 
                 const formHtml = `
-                    <form id="deleteForm" action="/post/delete.do" method="post">
+                    <form id="deleteForm" action="/post/delete" method="post">
                         ${inputHtml}
                     </form>
                 `;
@@ -309,12 +309,12 @@
             function goListPage() {
                 const queryString = new URLSearchParams(location.search);
                 queryString.delete('idx');
-                location.href = '/post/list.do' + '?' + queryString.toString();
+                location.href = '/post/list' + '?' + queryString.toString();
             }
             
             // 게시글 수정 페이지로 이동
             function goWritePage() {
-                location.href = '/post/write.do' + location.search;
+                location.href = '/post/write' + location.search;
             }
 
         /*]]>*/

@@ -158,10 +158,10 @@ public class UserController {
 	
 	 
 	// 로그인 페이지 진입하기
-	@GetMapping(value = "/user/signin")
-	public String SingIn() {
+	@GetMapping(value = "/user/login")
+	public String logIn() {
 
-		return "user/signin";
+		return "user/login";
 	}
 	
 	

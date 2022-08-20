@@ -14,7 +14,7 @@
 
 
 		<div id="post-table">
-			문제해결
+			<div>자유게시판</div> 
 			<table class="table table-hover">
 
 				<thead>
@@ -27,12 +27,12 @@
 					</tr>
 
 				</thead>
-				<tbody id="qnalist">
+				<tbody id="list">
 
 				</tbody>
 
 			</table>
-		자유게시판
+		문제/해결
 			<table class="table table-hover" id="qnapost-table">
 				<thead>
 					<tr>
@@ -41,7 +41,7 @@
 						<th>작성자</th>
 					</tr>
 				</thead>
-				<tbody id="list">
+				<tbody id="qnalist">
 
 
 
@@ -87,31 +87,15 @@
 
             window.onload = () => {
             /* 	setQueryStringParams(); */
-                QnafindAllPost();
+              
                 findAllPost();
+                QnafindAllPost();
             }
             
      
 
 
             // Qna게시글 리스트 조회
-            function QnafindAllPost() {
-
-                const list = [[ ${response.list} ]];
-                if ( !list.length ) {
-                    document.getElementById('qnalist').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
-                    drawPage();
-                    return false;
-                }
-
-                const pagination = [[ ${response.pagination} ]];
-                const params = [[ ${params} ]];
-                let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
-
-                qnaDrawList(list, num);
-              
-            }
-            //게시글 리스트 받아오기
             function findAllPost() {
 
                 const list = [[ ${response2.list} ]];
@@ -126,6 +110,23 @@
                 let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
 
                 drawList(list, num);
+              
+            }
+            //게시글 리스트 받아오기
+            function QnafindAllPost() {
+
+                const list = [[ ${response.list} ]];
+                if ( !list.length ) {
+                    document.getElementById('qnalist').innerHTML = '<td colspan="5">검색된 결과가 없습니다.</td>';
+                    drawPage();
+                    return false;
+                }
+
+                const pagination = [[ ${response.pagination} ]];
+                const params = [[ ${params} ]];
+                let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
+                qnaDrawList(list, num);
               
             }
 

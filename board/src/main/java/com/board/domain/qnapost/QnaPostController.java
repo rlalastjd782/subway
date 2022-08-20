@@ -28,7 +28,7 @@ public class QnaPostController {
 	private final QnaPostService qnaPostService;
 
 	// 게시글 작성 페이지
-    @GetMapping("/post/qnawrite.do")
+    @GetMapping("/post/qnawrite")
     public String openPostWrite(@RequestParam(value = "idx", required = false) final Long idx, Model model) {
         if (idx != null) {
             QnaPostResponse post = qnaPostService.findPostByIdx(idx);
@@ -40,7 +40,7 @@ public class QnaPostController {
     
     
  // 신규 게시글 생성
-    @PostMapping("/post/qnasave.do")
+    @PostMapping("/post/qnasave")
     public String savePost(final QnaPostRequest params, Model model) {
         qnaPostService.savePost(params);
         MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/qnalist.do", RequestMethod.GET, null);
@@ -49,7 +49,7 @@ public class QnaPostController {
 
     
  // 게시글 리스트 페이지
-    @GetMapping("/post/qnalist.do")
+    @GetMapping("/post/qnalist")
     public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) {
         PagingResponse<QnaPostResponse> response = qnaPostService.findAllPost(params);
         model.addAttribute("response", response);
@@ -57,7 +57,7 @@ public class QnaPostController {
     }
     
  // 게시글 상세 페이지
-    @GetMapping("/post/qnaview.do")
+    @GetMapping("/post/qnaview")
     public String openPostView(@RequestParam final Long idx, Model model) throws Exception {
         qnaPostService.updatereviewcnt(idx);
     	QnaPostResponse post = qnaPostService.findPostByIdx(idx);
@@ -66,7 +66,7 @@ public class QnaPostController {
     }
     
  // 기존 게시글 수정
-    @PostMapping("/post/qnaupdate.do")
+    @PostMapping("/post/qnaupdate")
     public String updatePost(final QnaPostRequest params, Model model) {
         qnaPostService.updatePost(params);
         MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/post/qnalist.do", RequestMethod.GET, null);
@@ -75,7 +75,7 @@ public class QnaPostController {
     
 
     // 게시글 삭제
-    @PostMapping("/post/qnadelete.do")
+    @PostMapping("/post/qnadelete")
     public String deletePost(@RequestParam final Long idx,
                              @RequestParam final Map<String, Object> queryParams,
                              Model model) {
