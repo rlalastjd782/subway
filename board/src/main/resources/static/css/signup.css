@@ -2,78 +2,88 @@
 	-webkit-appearance: none; 
 }
 :root{
+  /* Color */
 	--main-color: #2ecc71;
+  --side-color: rgb(94, 94, 94);
+  --white-color: #fff;
+  /* Font Size */
+  --font-small:10px;
+  --font-medium:14px;
+  --font-large-h1:13px;
 }
 ::-webkit-input-placeholder {
    text-align: center;
 }
-/* #signUpForm{
-	padding: 6px 12px;
-    width: 837px;
-    height: 682px;
+#webView {
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  width: 1200px;
+  height: 1722px;
+  margin: 0 auto;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0)
+}
+/*
+#id#checkID#pw#pwCheck#name#genderM#genderF#nickname#email#checkEmail#certify#checkCertify#submit */
+
+
+/* 회원가입 */
+.h1{
+  position: absolute;
+  top: 759px;
+  left: 519.445px;
+  width: 108px;
+  height: 36px;
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: var(--font-large-h1);
+}
+.highsignup{
+  position: absolute;
+  top: 630.852px;
+  left: 230px;
+  width: 400px;
+  height: 82px;
+}
+.signup{
+  font-weight: 700;
+  color: var(--main-color);
+  font-size: 55px;
+  font-style: italic;
+}
+
+/* 폼 안에 글자들 기본 셋팅 */
+input[type=password][data-text-content],
+input[type=text][data-text-content],
+textarea[data-text-content] {
+    padding: 6px 12px;
+    width: 100%;
+    height: 100%;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     box-sizing: border-box;
     resize: none;
-    font-size: 14px;
-    margin: 0 auto;
-    writing-mode: horizontal-tb !important;
-    font-family: monospace;
-    text-rendering: auto;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    appearance: auto;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    overflow-wrap: break-word;
-    column-count: initial !important;
-   
-	
-                
-} */
-
-#signUpForm{
-	padding: 2px 12px;
-    text-align:center;
-    resize: none;
-    white-space: normal;
-    margin: 0 auto;
-}  
-
-
-#signUpForm label{
-	font-size: 15px;
-	font-weight: normal;
-	line-height: normal;
-	
-	
-	/* top: 837px;
-	left: 424px;
-	width: 300px;
-	height: 40px; */
-	
-	
-       	
+    font-size: 14px
 }
-/* #id#checkID#pw#pwCheck#name#genderM#genderF#nickname#email#checkEmail#certify#checkCertify#submit */
 
-.idcontainer{
-	
 
-	
-	color: rgb(94, 94, 94);
-	
-	
+[data-text-content] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
-.idcontainer>input[type=text],input[type=password]{
+
+input[type=text],input[type=password]{
 	width:220px;
 	height:31px;
 	margin: 0 auto;
@@ -82,11 +92,12 @@
 	border: 1px solid #ccc;
 	
 }
-.idcontainer>button{
-	font-size: 13px;
+/* 버튼 셋팅 */
+button{
+	font-size: 12px;
 	text-align: center;
 	height: 31px;
-	width: 118px;
+	width: 138px;
 	border-radius: 5px;
 	border: 1px solid #ccc;
 }
@@ -97,17 +108,192 @@
 	text-align: center;
 }
 
-#id,#pw,#pwCheck,#name,#nickname,#email,#certify{
-	text-align : center;
-	font-weight: normal;
-	
+/* 아이디,비밀번호,... 칸 */
+.left1{
+  position: absolute;
+  top: 847.146px;
+  left: 360px;
+  width: 70px;
+  height: 26px;
 }
-#idmessage,#pwmessage,#pwCheckmessage,#nicknamemessage,#certifymessage{
-	font-size: 11px;
-	font-weight: normal;
-	text-align : center;
-	
-	
+.left2{
+  position: absolute;
+  top: 922px;
+  left: 344.042px;
+  width: 70px;
+  height: 26px;
+}
+.left3{
+  position: absolute;
+  top: 982px;
+  left: 300px;
+  width: 120px;
+  height: 26px;
+}
+.left4{
+  position: absolute;
+  top: 1049.98px;
+  left: 358.762px;
+  width: 55px;
+  height: 26px;
+}
+.left5{
+  position: absolute;
+  top: 1135px;
+  left: 359px;
+  width: 55px;
+  height: 26px;
+}
+.left6{
+  position: absolute;
+  top: 1189.59px;
+  left: 359.059px;
+  width: 120px;
+  height: 24px;
+}
+.left7{
+  position: absolute;
+  top: 1234.59px;
+  left: 340px;
+  width: 120px;
+  height: 24px;
+}
+
+/* 중간 input 칸 */
+.center1{
+  position: absolute;
+  top: 837.859px;
+  left: 424.148px;
+  width: 300px;
+  height: 40px;
+}
+.center2{
+  position: absolute;
+  top: 915px;
+  left: 423.708px;
+  width: 300px;
+  height: 40px;
+}
+.center3{
+  position: absolute;
+  top: 975.458px;
+  left: 424.75px;
+  width: 300px;
+  height: 40px;
+}
+.center4{
+  position: absolute;
+  top: 1043px;
+  left: 423.188px;
+  width: 300px;
+  height: 40px;
+}
+.center5{
+  position: absolute;
+  top: 1131.71px;
+  left: 423.312px;
+  width: 300px;
+  height: 40px;
+}
+.center6{
+  position: absolute;
+  top: 1187px;
+  left: 423.542px;
+  width: 300px;
+  height: 40px;
+}
+.center7{
+  position: absolute;
+  top: 1226.6px;
+  left: 423.542px;
+  width: 300px;
+  height: 40px;
+}
+
+
+/* 설명란 */
+#idmessage{
+  position: absolute;
+  top: 918px;   
+  /* 원래 top 877 이었는데 수정. 일단 비율 보고 ㄱ */
+  left: 423px;
+  width: 385px;
+  height: 18px;
+  font-size: var(--font-small);
+}
+#pwmessage{
+  position: absolute;
+  top: 995px;
+  left: 424.087px;
+  width: 450px;
+  height: 18px;
+  font-size: var(--font-small);
+}
+#pwCheckmessage{
+  position: absolute;
+  top: 1056px;
+  left: 424.087px;
+  width: 385px;
+  height: 18px;
+  font-size: var(--font-small);
+}
+#nicknamemessage{
+  position: absolute;
+  top: 1211px;
+  left: 423.312px;
+  width: 380px;
+  height: 40px;
+  font-size: var(--font-small); 
+}
+#certifymessage{
+  position: absolute;
+  top: 1308px;
+  left: 423.542px;
+  width: 300px;
+  height: 40px;
+  font-size: var(--font-small);
+}
+
+/* 오른쪽 버튼 */
+#checkID{
+  position: absolute;
+  top: 883px;
+  left: 681.102px;
+  width: 120px;
+  height: 30px;
+}
+#checkNickname{
+  position: absolute;
+  top: 1175px;
+  left: 681.102px;
+  width: 120px;
+  height: 30px;
+}
+#checkEmail{
+  position: absolute;
+  top: 1230.56px;
+  left: 681.102px;
+  width: 120px;
+  height: 30px;
+}
+#checkCertify{
+  position: absolute;
+  top: 1272.56px;
+  left: 681.102px;
+  width: 120px;
+  height: 30px;
+}
+#submit{
+  position: absolute;
+  top: 1350.56px;
+  left: 500.102px;
+  width: 120px;
+  height: 30px;
+}
+
+label[for=id],label[for=pw],label[for=pwCheck],label[for=name],label[for=nickname],label[for=email],label[for=certify]{
+  color: rgb(94, 94, 94);
+  font-size: 17px;
 }
 
 input[type=password][data-text-content], input[type=text][data-text-content]{
@@ -115,33 +301,24 @@ input[type=password][data-text-content], input[type=text][data-text-content]{
 	height:35px;
 	text-align: center;
 	color: rgb(94, 94, 94);
-	
 }
-/* .radio>#genderM,#genderF:before{
-	position:absolute;
-	width:15px;
-	height:15px;
-	border: 1px solid #ccc;
-	margin: -1px;
-	cursor: pointer;
-	box-sizing: border-box;
-	appearance: auto;
-	accent-color: #2ecc71;
-	background-clip: content-box;
-	
-} */
+
+
+
+/* 라디오 버튼 */
+.radio{
+  position: absolute;
+  top: 1135.04px;
+  left: 440px;
+}
+
 .radio input:checked{
   border:6px solid #2ecc71;
-  position: absolute;
- 
-  
 }
 
 .radio input:checked + label{
   font-size: 20px;
   color: #545454;
-  
-  
 }
 
 .radio label{
@@ -159,23 +336,17 @@ input[type=password][data-text-content], input[type=text][data-text-content]{
   outline: none;
   margin-right: 5px;
   margin-left: 12px;
+  
+  
 
   /* position: absolute; */
-  top: 1px;
+  
 }
 .radio>label{
 	font-size:15px;
 	text-align:center;
 	padding-left: 3px;
 	padding-right: 24px;
+  
 }
-.h1, h1 {
-	margin-top: 1px;
-	margin-bottom: 40px;
-    font-size: 24px;
-    color: #2ECC71;
-    text-align:center;
-    font-weight: bold;
-   
-    
-}
+
