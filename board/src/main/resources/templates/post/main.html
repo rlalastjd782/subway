@@ -68,7 +68,7 @@
 
 				<tr th:each = "news : ${mainResponse}">
 					<td th:text = "${news.newsPress}"></td>
-					<td th:text = "${news.newsTitle}"  th:onclick ="location.href=${news.newsLink}"></td>
+					<td th:text = "${news.newsTitle}" th:onclick="'location.href=\''+ @{${news.newsLink}} + '\''"   style="cursor:pointer;"></td>
 					<td th:text = "${news.newsDetail}"></td>
 
 
@@ -179,6 +179,9 @@
 		        const queryString = (location.search) ? location.search + `&idx=${idx}` : `?idx=${idx}`;
 		        location.href = '/post/view' + queryString;
 		    } 
+         
+	 
+
 	   	   /*]]>*/
 	        </script>
 </th:block>
