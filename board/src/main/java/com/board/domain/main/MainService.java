@@ -1,7 +1,13 @@
 package com.board.domain.main;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +58,41 @@ public class MainService {
        return new PagingResponse<>(list, pagination);
    }
    
+   
+   
+   //뉴스 크롤링하기
+	private static String naverNews = "https://search.naver.com/search.naver?where=news&query=지하철";
+	
+
+	public List<MainResponse> getNaverNews() throws IOException {
+
+	 	
+	List<MainResponse> mainResponseList = new ArrayList<>();	
+    Document doc = Jsoup.connect(naverNews).get();
+    Elements contents = doc.select(".news_area");
+
+    
+    for(Element content : contents) {
+    	MainResponse mainResponse =  MainResponse.builder()
+    			.newsPress(content.select(".press").text())
+    			.newsTitle(content.select(".news_tit").text())
+    			.newsDetail(content.select(".news_dsc").text())
+    			.newsLink(content.select(".news_dsc a").attr("href"))
+    			.build();
+    			
+    	mainResponseList.add(mainResponse);
+    }
+    
+    return mainResponseList;
     
     
+    
+
+   
+   
+	}
+    
+	
     
     
     

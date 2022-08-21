@@ -43,7 +43,7 @@ public class QnaPostController {
     @PostMapping("/post/qnasave")
     public String savePost(final QnaPostRequest params, Model model) {
         qnaPostService.savePost(params);
-        MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/qnalist.do", RequestMethod.GET, null);
+        MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/qnalist", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
 
@@ -69,7 +69,7 @@ public class QnaPostController {
     @PostMapping("/post/qnaupdate")
     public String updatePost(final QnaPostRequest params, Model model) {
         qnaPostService.updatePost(params);
-        MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/post/qnalist.do", RequestMethod.GET, null);
+        MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/post/qnalist", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
     
@@ -81,7 +81,7 @@ public class QnaPostController {
                              Model model) {
 
         qnaPostService.deletePost(idx);
-        MessageDto message = new MessageDto("게시글 삭제가 완료되었습니다.", "/post/qnalist.do", RequestMethod.GET, queryParams);
+        MessageDto message = new MessageDto("게시글 삭제가 완료되었습니다.", "/post/qnalist", RequestMethod.GET, queryParams);
         return showMessageAndRedirect(message, model);
     }
     

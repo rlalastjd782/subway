@@ -41,7 +41,7 @@ public class PostController {
     @PostMapping("/post/save.do")
     public String savePost(final PostRequest params, Model model) {
         postService.savePost(params);
-        MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/list.do", RequestMethod.GET, null);
+        MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/list", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
 
@@ -67,7 +67,7 @@ public class PostController {
     @PostMapping("/post/update")
     public String updatePost(final PostRequest params, Model model) {
         postService.updatePost(params);
-        MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/post/list.do", RequestMethod.GET, null);
+        MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/post/list", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
     
@@ -79,7 +79,7 @@ public class PostController {
                              Model model) {
 
         postService.deletePost(idx);
-        MessageDto message = new MessageDto("게시글 삭제가 완료되었습니다.", "/post/list.do", RequestMethod.GET, queryParams);
+        MessageDto message = new MessageDto("게시글 삭제가 완료되었습니다.", "/post/list", RequestMethod.GET, queryParams);
         return showMessageAndRedirect(message, model);
     }
     

@@ -1,5 +1,8 @@
 package com.board.domain.main;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,8 @@ public class MainController {
 	@Autowired
 	private QnaPostService qnaPostService;
 	
-	
+	@Autowired
+	private MainService mainService;
 //	
 //    @GetMapping("/post/main")
 //    public String home(){
@@ -32,11 +36,13 @@ public class MainController {
     
     // 게시글 리스트 페이지
     @GetMapping("/post/main")
-    public String openPostList(@ModelAttribute("params") final SearchDto params, Model model, Model model2) {
+    public String openPostList(@ModelAttribute("params") final SearchDto params, Model model, Model model2, Model model3) throws IOException {
         PagingResponse<QnaPostResponse> response = qnaPostService.findAllPost(params);
         PagingResponse<PostResponse> response2 = postService.findAllPost(params);
+		List<MainResponse> mainResponse = mainService.getNaverNews();
         model.addAttribute("response", response);
         model2.addAttribute("response2", response2);
+		model3.addAttribute("mainResponse" , mainResponse);
         return "post/main";
     }
     
