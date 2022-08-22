@@ -16,7 +16,7 @@
 	<img src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">
 	<h1 id = "login-text" class="h3 mb-3 font-weight-normal">Login</h1>
 	</div>
-	<form class="form-signin" th:action="@{/user/signin}" th:object="${user}" method="post" >
+	<form class="form-signin" th:action="@{/user/login}" th:object="${user}" method="post" >
     
 
 		<div>
@@ -42,7 +42,7 @@
  <th:block layout:fragment="script">
 	<script th:inline="javascript">
 	
-	$("#signin").click(function(){
+	$("#login1").click(function(){
 		
 		const id = $("#id").val();
 		const pw = $("#pw").val();

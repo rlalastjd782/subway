@@ -172,6 +172,7 @@ public class UserController {
 		
 		HashMap<String, Object> result = userService.loginCompare(params);
 		
+		
 		if(result == null) {
 			return false;
 		} else {
@@ -181,6 +182,7 @@ public class UserController {
 			session.setAttribute("name", result.get("name"));
 			session.setAttribute("gender", result.get("gender"));
 			session.setAttribute("nickname", result.get("nickname"));
+			session.setAttribute("name", result.get("name"));
 			
 			// 세션 유지시간 30분
 			session.setMaxInactiveInterval(30 * 60);
@@ -190,9 +192,36 @@ public class UserController {
 	}
 	
 	
+	// id 세션 값 리턴
+	@ResponseBody
+	@PostMapping(value = "/get/id")
+	public String GetID(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+			
+		String result = (String) session.getAttribute("id");
+		
+		return result;
+		
+	}
+	
+	
+	// name 세션 값 리턴
+	@ResponseBody
+	@PostMapping(value = "/get/name")
+	public String GetName(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+			
+		String result = (String) session.getAttribute("name");
+		
+		return result;
+		
+	}
+	
+	
 	// 마이페이지 진입하기
 	@GetMapping(value = "/user/mypage")
 	public String MyPage(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println(session.getAttribute("id"));
+		System.out.println(session.getAttribute("pw"));
 
 		if((String)session.getAttribute("id") == null || (String)session.getAttribute("pw") == null) {
 			try {

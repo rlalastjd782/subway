@@ -99,7 +99,7 @@
 	
 	<!-- 로그인 정보 확인 -->
 	<select id="loginCompare" parameterType="com.board.users.dto.UserRequestDTO" resultType= "hashmap">
-		select id, pw, admin_yn, gender, nickname
+		select id, pw, admin_yn, gender, nickname, name
 		from users
 		where id = #{id}
 		and pw = #{pw}

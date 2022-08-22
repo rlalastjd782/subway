@@ -31,7 +31,7 @@
           <div class="col-md-8 col-sm-9">
               <div class="input-group" id="idmenu">
               
-              <input type="email" class="form-control" name="id" id="id" placeholder="아이디를 입력해 주세요" >
+              <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력해 주세요" >
               	<button id = "checkID" type = "button" style="width:300px; border-radius:4px; left: 20px">아이디 중복확인</button>
             </div>
             
@@ -351,7 +351,7 @@
 				const email = $("#email").val();
 				const emailform = document.getElementById('email');
 				const button = document.getElementById('checkCertify');
-				const certify = $("#certify").val();
+				const certify = $("#contactnum").val();
 				
 				// 이메일이 중복검사를 통과하고 인증번호 버튼이 '인증번호 전송'상태인 경우
 				if(buttonVal == "인증번호 전송" && EMessage == "가입 가능한 이메일입니다."){
