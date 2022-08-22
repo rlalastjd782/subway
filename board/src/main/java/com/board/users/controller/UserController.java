@@ -38,7 +38,7 @@ public class UserController {
 	// 회원가입 페이지 진입
 	@GetMapping(value = "/user/signup")
     public String Signup(@ModelAttribute("params") UserRequestDTO params, @RequestParam(value = "id", required = false) String id, Model model) {
-		
+		model.addAttribute("signupLink" , "/user/signup");
         return "user/signup";
     }
 	
