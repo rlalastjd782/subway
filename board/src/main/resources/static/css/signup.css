@@ -83,8 +83,8 @@ h1, h2, h3 {
 
 
 /* 인풋 메세지 */
-#nicknamemessage,#pwmessage,#pwCheckmessage,#idmessage{
-	font-size: 11px;
+#nicknamemessage,#pwmessage,#pwCheckmessage,#idmessage,#certifymessage{
+	font-size: 12px;
 	top: 2px;
 }
 
