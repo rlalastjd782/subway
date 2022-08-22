@@ -28,7 +28,7 @@
 				<!-- 일반적으로 버튼은 submit의 기능을 포함하고 있기 때문에 submit 기능이 포함되지 않고
 	             오직 button 기능만 작동하도록 속성값 추가 -->
 	            <button id = "checkEmail" type = "button">확인</button>	   
-	            <button id = "cancelEmail" type = "button"><a th:href="@{../user/login}">취소</a></button>	             
+	           <a th:href="@{../user/login}"> <button id = "cancelEmail" type = "button">취소</button>	</a>             
 	        </div>
 			
 	    </form>
