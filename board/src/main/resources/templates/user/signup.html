@@ -7,14 +7,123 @@
 <meta charset="UTF-8">
 
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 </head>
 
 <body>
 <th:block layout:fragment="content">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="../css/signup.css">
 
-	<div id="webView">
+<div class="container">
+	<div class="row">
+    <div class="col-md-8">
+      <section>      
+        <h1 class="entry-title"><span>Sign Up</span> </h1>
+        <hr>
+            <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" >        
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="id">아이디<span class="text-danger">*</span></label>
+          
+          <div class="col-md-8 col-sm-9">
+              <div class="input-group" id="idmenu">
+              <span class="input-group-addon" id="idimg"><i class="glyphicon glyphicon-user"></i></span>
+              <input type="email" class="form-control" name="id" id="id" placeholder="아이디를 입력해 주세요" >
+              	<button id = "checkID" type = "button">아이디 중복확인</button>
+            </div>
+            
+           	
+           
+            <span id="idmessage">ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다. </span>
+          		
+        </div>
+        </div>
+       
+     
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="pw">비밀번호 <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호 입력" value="">
+           		</div>   
+          <small>패스워드 길이 제한은 8~16글자, 영문과 숫자, 특수만자가 입력되어야합니다 </small></div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="pwCheck">비밀번호 확인 <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input type="password" class="form-control" id="pwCheck" name="pwCheck" placeholder="비밀번호 확인" value="">
+            </div>  
+          <small>위의 비밀번호와 동일하게 입력하세요 </small></div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="name">이름 <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+            <input type="text" class="form-control" id="name" name="name" placeholder="이름" value="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="nickname">닉네임 <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+            <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="닉네임을 입력해 주세요" value="">
+          <small >닉네임길이 제한은 4~12글자이고, 한글과 영문, 숫자만 입력가능합니다. </small></div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-3">성별 <span class="text-danger">*</span></label>
+          <div class="col-md-8 col-sm-9">
+            <div class="radio">
+                
+                    <input type="radio" id="genderM" name="gender" value="M" checked>
+                    <label for="genderM">남자</label>
+
+                    <input type="radio" id="genderF" name="gender" value="F">
+                    <label for="genderF">여자</label>
+                
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="email">이메일<span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+          	<div class="input-group">
+             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요." value="">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="certify">이메일 인증번호<span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+          	<div class="input-group">
+          	 <span class="input-group-addon"><i class="	glyphicon glyphicon-ok"></i></span>
+            <input type="text" class="form-control" name="contactnum" id="contactnum" placeholder="인증번호를 입력해주세요." value="">
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        <div class="form-group">
+          <span class="col-xs-offset-3 col-xs-10">
+            <button id = "submit" name = "submit" type="button" class="btn btn-primary">회원가입</button>
+            
+          </span>
+          </div>
+          
+      </form>
+      </section>
+    </div>
+</div>
+</div>
+
+
+
+
+
+	<!-- <div id="webView">
 		<div class="highsignup">
 			<span class="signup">Sign Up</span>
 		</div>
@@ -25,14 +134,14 @@
 				method="post">
 				<div data-obj-id="82RmJ" data-obj-type="element"
 					data-text-editable="true" class=""
-					style="position: absolute; top: 717px; left: 180.984px; width: 838px; height: 683px;">
-					<textarea data-text-content="true" data-min-width="100"
+					style="position: absolute; top: 217px; left: 180.984px; width: 838px; height: 683px;">
+					<textarea  data-min-width="100"
 						data-min-height="60" style="color: rgb(94, 94, 94);" class=""></textarea>
 				</div>
 				<div class="h1">
 					<h1>회원가입</h1>
 				</div>
-				<div data-text-content="true">
+				<div >
 					<div class="left1" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="id">아이디</label>
@@ -41,13 +150,13 @@
 						<input type="text" id="id" name="id" placeholder="아이디를 입력해주세요.">
 					</div>
 
-					<!-- 일반적으로 버튼은 submit의 기능을 포함하고 있기 때문에 submit 기능이 포함되지 않고
-	             오직 button 기능만 작동하도록 속성값 추가 -->
+					일반적으로 버튼은 submit의 기능을 포함하고 있기 때문에 submit 기능이 포함되지 않고
+	             오직 button 기능만 작동하도록 속성값 추가
 					<button id="checkID" type="button">아이디 중복확인</button>
 				</div>
 				<span id="idmessage">ID 길이 제한은 6~14글자이고, 영문과 숫자만 입력 가능합니다.</span>
 
-				<div data-text-content="true">
+				<div >
 					<div class="left2" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="pw">비밀번호</label>
@@ -59,7 +168,7 @@
 				<span id="pwmessage">비밀번호 길이 제한은 8~16글자이고, 영문과 숫자, 특수문자가 모두
 					입력되야합니다.</span>
 
-				<div data-text-content="true">
+				<div >
 					<div class="left3" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="pwCheck">비밀번호 확인</label>
@@ -71,7 +180,7 @@
 				</div>
 				<span id="pwCheckmessage">위의 비밀번호와 동일하게 입력하세요.</span>
 
-				<div data-text-content="true">
+				<div >
 					<div class="left4" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="name">이름</label>
@@ -91,7 +200,7 @@
 
 				</div>
 
-				<div data-text-content="true">
+				<div >
 					<div class="left5" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="nickname">닉네임</label>
@@ -105,7 +214,7 @@
 				<span id="nicknamemessage">닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만
 					입력 가능합니다.</span>
 
-				<div data-text-content="true">
+				<div >
 					<div class="left6" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="email">이메일</label>
@@ -118,7 +227,7 @@
 				</div>
 				<span id="emailmessage"></span>
 
-				<div data-text-content="true">
+				
 					<div class="left7" data-obj-id="leftname" data-obj-type="element"
 						data-text-editable="true">
 						<label for="certify">인증번호</label>
@@ -129,7 +238,7 @@
 					</div>
 					<button id="checkCertify" name="checkCertify" type="button">인증번호
 						전송</button>
-				</div>
+				
 				<span id="certifymessage">인증번호를 입력해주세요.</span>
 
 				<div class="confirm">
@@ -138,8 +247,8 @@
 
 	
 
-	</form>
-		</div>
+			</form>
+		</div> -->
 	</th:block>
 
 	<th:block layout:fragment="script">
