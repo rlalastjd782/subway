@@ -11,6 +11,7 @@
 
 
 <th:block layout:fragment="content">
+	<link rel="stylesheet" href="../css/login.css">
 	<div id = login>
 	<img src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">
 	<h1 id = "login-text" class="h3 mb-3 font-weight-normal">Login</h1>
@@ -21,17 +22,20 @@
 		<div>
 			<label for="inputID" class="sr-only">ID</label>
 			<input type="text" id="id" class="form-control" placeholder="ID" >
-			
+		</div>
+		<br>
+		<div>	
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input type="password" id="pw" class="form-control" placeholder="Password" >
 		</div>
 		
-		<div>
-			<button id = signin class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
+		<div id = signbutton>
+			<button id = "login1" class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
+			<button id = "findid" class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findid'">id 찾기</button>
+			<button id = "findpw" class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findpw'">pw 찾기</button>
+			
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findid'">id 찾기</button>
-		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findpw'">pw 찾기</button>
-    </form>
+		    </form>
     
  </th:block> 
  

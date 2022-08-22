@@ -43,7 +43,9 @@
                 <thead>
                     <tr>
                         <th>번호</th>
+                        <th>말머리</th>
                         <th>제목</th>
+                        
                         <th>작성자</th>
                         <th>등록일</th>
                         <th>조회 수</th>
@@ -107,7 +109,9 @@
        	     html += `
          	       <tr>
                     <td>${obj.noticeYn === true ? '공지' : num--}</td>
+                    <td>${obj.headTitle}</td>
                     <td class="text-left"><a href="javascript: void(0);" onclick="goViewPage(${obj.idx});">${obj.title}</a></td>
+                    
                     <td>${obj.writer}</td>
                     <td>${obj.writeDate}</td>
                     <td>${obj.viewCnt}</td>
@@ -192,7 +196,7 @@
                             // 게시글 상세 페이지로 이동
    		function goViewPage(idx) {
         const queryString = (location.search) ? location.search + `&idx=${idx}` : `?idx=${idx}`;
-        location.href = '/post/qnaview.do' + queryString;
+        location.href = '/post/qnaview' + queryString;
     } 
    	   /*]]>*/
         </script>

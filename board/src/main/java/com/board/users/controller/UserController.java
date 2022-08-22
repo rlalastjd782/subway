@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.board.common.dto.SearchDto;
 import com.board.users.dto.MailDTO;
 import com.board.users.dto.UserRequestDTO;
 import com.board.users.service.MailService;
@@ -159,8 +160,8 @@ public class UserController {
 	 
 	// 로그인 페이지 진입하기
 	@GetMapping(value = "/user/login")
-	public String logIn() {
-
+	public String logIn(@ModelAttribute("params") final SearchDto params, Model model) {
+		model.addAttribute("userUrl", "/user/login");
 		return "user/login";
 	}
 	

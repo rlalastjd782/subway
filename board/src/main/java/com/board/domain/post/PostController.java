@@ -26,7 +26,7 @@ public class PostController {
 	
 	
 	// 게시글 작성 페이지
-    @GetMapping("/post/write.do")
+    @GetMapping("/post/write")
     public String openPostWrite(@RequestParam(value = "idx", required = false) final Long idx, Model model) {
         if (idx != null) {
             PostResponse post = postService.findPostByIdx(idx);
@@ -38,7 +38,7 @@ public class PostController {
     
     
  // 신규 게시글 생성
-    @PostMapping("/post/save.do")
+    @PostMapping("/post/save")
     public String savePost(final PostRequest params, Model model) {
         postService.savePost(params);
         MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/post/list", RequestMethod.GET, null);

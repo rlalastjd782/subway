@@ -11,7 +11,8 @@ import lombok.Getter;
 public class PostResponse {
 
     private Long idx;                       // PK
-    private String title;                  // 제목
+    private String title;  					// 제목
+
     private String content;                // 내용
     private String writer;                 // 작성자
     private int viewCnt;                   // 조회 수

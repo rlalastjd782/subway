@@ -10,6 +10,7 @@ public class QnaPostResponse {
 
     private Long idx;                       // PK
     private String title;                  // 제목
+    private String headTitle;			//말머리
     private String content;                // 내용
     private String writer;                 // 작성자
     private int viewCnt;                   // 조회 수

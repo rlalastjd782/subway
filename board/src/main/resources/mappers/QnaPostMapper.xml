@@ -5,6 +5,7 @@
     <sql id="postColumns">
           idx
         , title
+        , head_title
         , content
         , writer
         , view_cnt
@@ -24,6 +25,7 @@
         ) VALUES (
               #{idx}
             , #{title}
+            , #{headTitle}
             , #{content}
             , #{writer}
             , 0
@@ -50,6 +52,7 @@
         SET
               modified_date = NOW()
             , title = #{title}
+            , head_title = #{headTitle}
             , content = #{content}
             , writer = #{writer}
             , notice_yn = #{noticeYn}

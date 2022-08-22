@@ -11,6 +11,7 @@ public class QnaPostRequest {
 
     private Long idx;             // PK
     private String title;        // 제목
+    private String headTitle;			//말머리
     private String content;      // 내용
     private String writer;       // 작성자
     private Boolean noticeYn;    // 공지글 여부
