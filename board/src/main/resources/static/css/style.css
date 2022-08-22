@@ -1578,14 +1578,15 @@ textarea.form-control {
 }
 #menu-header{
 	display: flex;
-
+	justify-content: space-between;
 	margin : center;
-	padding : 8px;
+	padding : 2px;
 	align-items : center;
 }
 #menu{
 	display: flex;
 	margin-top : 30px;
+	font-size: 18px;
 }
 #button-menu{
 	margin-top : 30px;
