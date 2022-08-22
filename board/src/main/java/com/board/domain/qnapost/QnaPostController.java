@@ -53,6 +53,7 @@ public class QnaPostController {
     public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) {
         PagingResponse<QnaPostResponse> response = qnaPostService.findAllPost(params);
         model.addAttribute("response", response);
+        model.addAttribute("qnaUrl","/post/qnalist");
         return "post/qnalist";
     }
     

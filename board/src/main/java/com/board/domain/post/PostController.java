@@ -51,6 +51,7 @@ public class PostController {
     public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) {
         PagingResponse<PostResponse> response = postService.findAllPost(params);
         model.addAttribute("response", response);
+        model.addAttribute("listUrl", "/post/list");
         return "post/list";
     }
     
