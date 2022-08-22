@@ -8,12 +8,13 @@
 <title>메인페이지</title>
 </head>
 <th:block layout:fragment="content">
+<link rel="stylesheet" href="../css/style.css">
 
 	<body>
-
-			<div >자유게시판</div>
-			<div>문제/해결</div>
-		
+		<div id="maincategori">
+			<div id = "freeboardtext" ><a th:href="@{../post/list}">자유게시판</a></div>
+			<div id = "qnaboardtext"><a th:href="@{../post/qnalist}">문제/해결</a></div>
+		</div>
 		<div id="post-table">
 
 			<table class="table table-hover">
@@ -40,6 +41,7 @@
 				<thead>
 					<tr>
 						<th>번호</th>
+						<th>말머리</th>
 						<th>제목</th>
 						<th>작성자</th>
 					</tr>
@@ -143,6 +145,7 @@
        	     html += `
          	       <tr>
                     <td>${obj.idx}</td>
+                    <td>${obj.headTitle}</td>
                     <td class="text-left"><a href="javascript: void(0);" onclick="goQnaViewPage(${obj.idx});">${obj.title}</a></td>
                     <td>${obj.writer}</td>
                 </tr>

@@ -1608,3 +1608,18 @@ textarea.form-control {
 	
 	
 }
+#maincategori{
+	display : flex;
+	
+
+}
+#freeboardtext{
+	margin: auto;
+	font-size : 18px;
+	font-weight: bold;
+}
+#qnaboardtext{
+	font-size : 18px;
+	font-weight: bold;
+}
+
