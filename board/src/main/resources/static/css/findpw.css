@@ -17,7 +17,7 @@ body {
 	
 }
 
-.findIDForm{
+.findPWForm{
 	text-align:center;
 }
 
@@ -43,11 +43,12 @@ body {
 	
 }
 
-#emailin {
+#emailin, #idin {
 	font-size: var(--font-medium);
+	margin-top: 30px;
 }
 
-#email{
+#email,#id{
 	position: relative;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 	border: 1px solid #ccc;
@@ -71,6 +72,8 @@ body {
 	margin-top: 40px;
 	
 }
+
+
 #checkEmail:hover,
 #checkEmail:focus,
 #checkEmail:active{

@@ -3,30 +3,37 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>아이디 찾기</title>
+    <title>비밀번호 찾기</title>
     
     <script src="http://code.jquery.com/jquery-latest.js"></script> 
 </head>
 <body>
-    <h1>아이디 찾기</h1>
-    <hr>
+    
 	<th:block layout:fragment="content">
-	    <form id = "signUpForm" th:action="@{/user/findid}" th:object="${user}" method="post">
+	<link rel="stylesheet" href="../css/findpw.css">
+	
+	<div id="signuplogo" >
+      <img id="brandlogo" src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">      
+       <h1 class="entry-title"><span>FIND PASSWORD</span></h1>
+    </div>
+    <hr>
+	    <form class="findPWForm" id = "signUpForm" th:action="@{/user/findid}" th:object="${user}" method="post">
 	    
 	    	<div>
-	    		<label for="email">이메일</label>
+	    		<label for="email" id="emailin">이메일</label>
 	            <input type="text" id="email" placeholder="이메일을 입력해주세요.">
 	        </div>
 	        
 	        <div>
-	    		<label for="id">아이디</label>
+	    		<label for="id" id="idin">아이디</label>
 	            <input type="text" id="id" placeholder="아이디를 입력해주세요.">
 	        </div>
 	        
 	        <div>
 				<!-- 일반적으로 버튼은 submit의 기능을 포함하고 있기 때문에 submit 기능이 포함되지 않고
 	             오직 button 기능만 작동하도록 속성값 추가 -->
-	            <button id = "checkEmail" type = "button">확인</button>	        
+	            <button id = "checkEmail" type = "button">확인</button>
+	             <a th:href="@{../user/login}"> <button id = "cancelEmail" type = "button">취소</button>	</a>	        
 	        </div>
 			
 	    </form>
