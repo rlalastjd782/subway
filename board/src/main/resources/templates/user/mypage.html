@@ -17,39 +17,235 @@
 	<form class="form-mypage" th:action="@{/user/mypage}" th:object="${user}" method="post" >
     
 
-		 <label class="control-label col-sm-3" for="id">이름<span class="text-danger">*</span></label>
-          
-          <div class="col-md-8 col-sm-9">
-              <div class="input-group" id="namemenu">
-              
-              <input type="text" class="form-control" name="name" id="name" value="${session.userRequestDTO.name}" readonly>
+		<label class="control-label col-sm-3" for="id">이름</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+           		<input type="text" class="form-control" name="name" id="name" value="" readonly>
+        	</div>
+        </div>
+         
+        <label class="control-label col-sm-3" for="id">성별</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+        	   	<input type="text" class="form-control" name="gender" id="gender" value="" readonly>
             </div>
-          </div>
+        </div>
+        
+        <!-- 닉네임 변경 -->
+        <label class="control-label col-sm-3" for="id">닉네임</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+        	   	<input type="text" class="form-control" name="nickname" id="nickname" value="" placeholder="닉네임 입력" disabled>
+        	   	<button id = "changeNickname" type = "button" style="width:300px; border-radius:4px; left: 20px">닉네임 변경</button>
+            </div>
+            <span id="nicknamemessage" >닉네임길이 제한은 4~12글자이고, 한글과 영문, 숫자만 입력가능합니다. </span>
+        </div>
+        
+        
+        <!-- 비밀번호 변경 -->
+        <label class="control-label col-sm-3" for="id">현재 비밀번호</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+        	   	<input type="password" class="form-control" name="pw" id="pw" value="" placeholder="현재 비밀번호 입력" disabled>
+        	   	<button id = "changePw" type = "button" style="width:300px; border-radius:4px; left: 20px">비밀번호 변경</button>
+            </div>
+        </div>
+        
+        <label class="control-label col-sm-3" for="id">새 비밀번호</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+        	   	<input type="password" class="form-control" name="newPw" id="newPw" value="" placeholder="새 비밀번호 입력" disabled>
+            </div>
+            <span id="pwmessage">패스워드 길이 제한은 8~16글자, 영문과 숫자, 특수만자가 입력되어야합니다 </span>
+        </div>
+        
+        <label class="control-label col-sm-3" for="id">새 비밀번호 확인</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+        	   	<input type="password" class="form-control" name="newPwCheck" id="newPwCheck" value="" placeholder="새 비밀번호 확인" disabled>
+            </div>
+            <span id="pwCheckmessage">위의 비밀번호와 동일하게 입력하세요 </span>
+        </div>
+		
+		
 		
 		<div>
-			<button id = signin class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
+			<button id = "submit" class="btn btn-lg btn-primary btn-block" type="button">확인</button>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findid'">id 찾기</button>
-		<button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = 'findpw'">pw 찾기</button>
+		
+		<div>
+			<button id = "cancle" class="btn btn-lg btn-primary btn-block" type="button">취소</button>
+		</div>
+		
     </form>
     
  </th:block> 
  
  <th:block layout:fragment="script">
 	<script th:inline="javascript">
-	
-		let name = "";
-	
+
 		$.ajax({
 			type: "post",
 			async: false,
 			url: "/get/name",
 			success:  function (data) {
-				name = data;
+				// name = data;
+				$('#name').val(data);
 			}
 		})
 		
-		$('#name').val(name);
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/gender",
+			success:  function (data) {
+				// name = data;
+				$('#gender').val(data);
+			}
+		})
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/nickname",
+			success:  function (data) {
+				// name = data;
+				$('#nickname').val(data);
+			}
+		})
+		
+		
+		// 닉네임 변경
+		$("#changeNickname").click(function(){
+			
+			const button = document.getElementById('changeNickname');
+			const nicknameDisabled = document.getElementById('nickname');
+			
+			const nickname = $("#nickname").val();
+			
+			// 한글, 영문, 숫자만 입력 가능하고 3~12글자 제한 정규표현식
+			var regType =  /^[a-zA-Z0-9가-힣]{3,12}$/;
+			// 입력받은 닉네임이 조건에 맞는지 확인
+			// 맞다면 true 틀리면 false 반환
+			var checkRegType = regType.test(document.getElementById('nickname').value)
+			
+			if($("#changeNickname").text() == "닉네임 변경"){
+				$("#changeNickname").text("닉네임 중복확인");
+				nicknameDisabled.disabled = false;
+			} else if($("#changeNickname").text() == "닉네임 중복확인"){
+				$.ajax({
+					type: "post",
+					async: false,
+					url: "/user/nickname-check",
+					data: {nickname: nickname},
+					success: function (data) {
+					if(data == true && checkRegType == true) {
+						// 입력된 닉네임이 조건에 부합하고 중복된 닉네임도 없는 경우
+						$("#nicknamemessage").text("사용 가능한 닉네임입니다.");
+						$("#nicknamemessage").css("color", "blue");
+					} else if(data == false && checkRegType == true){
+						// 중복된 닉네임이 있는 경우
+						$("#nicknamemessage").text("이미 사용중인 닉네임입니다.");
+						$("#nicknamemessage").css("color", "red");
+					} else{
+						// 입력된 닉네임이 조건에 맞지 않을 경우
+						$("#nicknamemessage").text("닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만 입력 가능합니다.");
+						$("#nicknamemessage").css("color", "black");
+					}
+					}
+					});
+			}
+
+		});
+		
+		// 닉네임 입력 폼에서 키보드가 눌렸을 때 닉네임 조건을 보여 줌(중복확인 후 변경할 경우를 대비) 
+		$("#nickname").keyup(function(e){
+			
+			$("#nicknamemessage").text("닉네임 길이 제한은 3~12글자이고, 한글과 영문, 숫자만 입력 가능합니다.");
+			$("#nicknamemessage").css("color", "black");
+		});
+		
+		
+		// 비밀번호 변경
+		$("#changePw").click(function(){
+			
+			const button = document.getElementById('changePw');
+			const pw = document.getElementById('pw');
+			const newPw = document.getElementById('newPw');
+			const newPwCheck = document.getElementById('newPwCheck');
+			
+			button.style.visibility = 'hidden';
+			
+			pw.disabled = false;
+			newPw.disabled = false;
+			newPwCheck.disabled = false;
+		});
+		
+		// 비밀번호가 조건과 맞는지 확인
+		$("#newPw").keyup(function(e){
+
+			// 영문, 숫자, 특수문자가 모두 들어가야하고 8~16글자 제한 정규표현식
+			var regType =  /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+			// 입력받은 pw가 조건에 맞는지 확인
+			// 맞다면 true 틀리면 false 반환
+			var checkRegType = regType.test(document.getElementById('newPw').value)
+			var pw = $("newPw").val();
+			var pwc = $("newPwCheck").val();
+			
+			if(checkRegType == true){
+				// 입력한 비밀번호가 조건에 맞는 경우
+				$("#pwmessage").text("사용 가능한 비밀번호입니다.");
+				$("#pwmessage").css("color", "blue");
+				$("#pwCheckmessage").text("위의 비밀번호와 동일하게 입력하세요.");
+				$("#pwCheckmessage").css("color", "black");
+			} else{
+				// 입력한 비밀번호가 조건에 맞지 않을 경우
+				$("#pwmessage").text("비밀번호 길이 제한은 8~16글자이고, 영문과 숫자, 특수문자가 모두 입력되야합니다.");
+				$("#pwmessage").css("color", "black");
+				$("#pwCheckmessage").text("위의 비밀번호와 동일하게 입력하세요.");
+				$("#pwCheckmessage").css("color", "black");
+			}
+			
+		});
+		
+		
+		// 비밀번호 확인이 비밀번호와 같은지 확인
+		$("#newPwCheck").keyup(function(e){
+			
+			const pw = $("#newPw").val();
+			const pwCheck = $("#newPwCheck").val();
+			const pwm = $("#pwmessage").text();
+			
+			if(pw == pwCheck && pwm == "사용 가능한 비밀번호입니다."){
+				// 비밀번호와 비밀번호 확인이 같고
+				// 비밀번호가 조건에 부합할 경우
+				$("#pwCheckmessage").text("위의 비밀번호와 동일합니다.");
+				$("#pwCheckmessage").css("color", "blue");
+			} else{
+				// 위의 조건이 만족하지 않을 경우
+				$("#pwCheckmessage").text("위의 비밀번호와 동일하게 입력하세요.");
+				$("#pwCheckmessage").css("color", "black");
+			}
+		});
+		
+		
+		// DB에 데이터 넘기기
+		$("#submit").click(function(){
+			
+			const nickname = $("#nickname").val();
+			const pw = $("#pw").val();
+			const newPw = $("#newPw").val();
+			const newPwCheck = $("#newPwCheck").val();
+			
+			const pwbutton = document.getElementById('changePw');
+			const nmbutton = document.getElementById('changeNickname');
+			
+			const pwcheckmessage = $("#pwCheckmessage").text();
+			const nicknamemessage = $("#nicknamemessage").text();
+			
+			// console.log(pwbutton.style.visibility);
+			
+		});
 
 		/*<![CDATA[*/
 

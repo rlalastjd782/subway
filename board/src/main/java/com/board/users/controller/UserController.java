@@ -216,6 +216,32 @@ public class UserController {
 	}
 	
 	
+	// gender 세션 값 리턴
+	@ResponseBody
+	@PostMapping(value = "/get/gender")
+	public String GetGender(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+			
+		String result = (String) session.getAttribute("gender");
+		
+		if(result.equals("M"))
+			return "남자";
+		else
+			return "여자";
+		
+	}
+	
+	
+	// gender 세션 값 리턴
+	@ResponseBody
+	@PostMapping(value = "/get/nickname")
+	public String GetNickname(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+			
+		String result = (String) session.getAttribute("nickname");
+		
+		return result;
+	}
+	
+	
 	// 마이페이지 진입하기
 	@GetMapping(value = "/user/mypage")
 	public String MyPage(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
