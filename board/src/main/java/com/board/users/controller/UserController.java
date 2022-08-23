@@ -330,4 +330,16 @@ public class UserController {
 		}
 	}
 	
+	
+	
+	// 로그아웃
+	@ResponseBody
+	@PostMapping(value = "/user/logout")
+	public boolean Logout(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+		session.invalidate(); // 세션 전체 제거, 무효화
+		
+		return true;
+	}
+		
 }

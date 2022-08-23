@@ -25,8 +25,11 @@
       </ul>
 
       <div class="col-md-3 text-end" id="button-menu">
-        <button type="button" class="loginbtn"><a th:href="@{/user/login}">Login</a></button>
-        <button type="button" class="signupbtn"><a th:href="@{/user/signup}">Sign-up</a></button>
+        <a th:href="@{/user/login}"><button type="button" id = "loginbtn" class="loginbtn">Login</button></a>
+        <a th:href="@{/user/signup}"><button type="button" id = "signupbtn" class="signupbtn">Sign-up</button></a>
+        
+        <!-- <button type="button" id = "mypagebtn" class="mypagebtn"><a th:href="@{/user/mypage}">마이페이지</a></button>
+        <button type="button" id = "logoutbtn" class="logoutbtn"><a>Logout</a></button> -->
       </div>
     </header>
   </div>
@@ -122,6 +125,7 @@
 	<script
 		th:src="@{/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
 	<script th:src="@{/plugin/common/moment.js}"></script>
+	
 	<th:block layout:fragment="script"></th:block>
 </body>
 </html>
