@@ -71,8 +71,9 @@ h1, h2, h3 {
 /* 박스 세개 플렉스 묶기 위함 */
 #idmenu,#nicknamemenu,#emailmenu,#emailcheck {
 	display: flex;
+	
+	
 }
-
 
 /* 오른쪽 버튼 */
 #checkID,#checkNickname,#checkEmail,#checkCertify {
@@ -86,6 +87,7 @@ h1, h2, h3 {
 #nicknamemessage,#pwmessage,#pwCheckmessage,#idmessage,#certifymessage{
 	font-size: 12px;
 	top: 2px;
+	
 }
 
 

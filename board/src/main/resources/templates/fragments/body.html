@@ -5,7 +5,6 @@
 
 
 
-
 <body th:fragment="main-body">
 	<th:block layout:fragment="modal"></th:block>
 	
@@ -18,16 +17,16 @@
 		</h1>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" id = "menu">
-        <li><a th:href="@{/post/main}" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a th:href="@{/analysis/analysis}" class="nav-link px-2 link-dark">분석</a></li>
-        <li><a th:href="@{/post/qnalist}" class="nav-link px-2 link-dark">문제/해결</a></li>
-        <li><a th:href="@{/post/list}" class="nav-link px-2 link-dark">자유게시판</a></li>
+        <li><a th:href="@{/post/main}" class="nav-link px-2 link-secondary" style="background:none;">Home</a></li>
+        <li><a th:href="@{/analysis/analysis}" class="nav-link px-2 link-dark" style="background:none;">분석</a></li>
+        <li><a th:href="@{/post/qnalist}" class="nav-link px-2 link-dark" style="background:none;">문제/해결</a></li>
+        <li><a th:href="@{/post/list}" class="nav-link px-2 link-dark" style="background:none;">자유게시판</a></li>
    
       </ul>
 
       <div class="col-md-3 text-end" id="button-menu">
-        <button type="button" class="btn btn-outline-primary me-2"><a th:href="@{/user/login}">Login</a></button>
-        <button type="button" class="btn btn-primary"><a th:href="@{/user/signup}">Sign-up</a></button>
+        <button type="button" class="loginbtn"><a th:href="@{/user/login}">Login</a></button>
+        <button type="button" class="signupbtn"><a th:href="@{/user/signup}">Sign-up</a></button>
       </div>
     </header>
   </div>
