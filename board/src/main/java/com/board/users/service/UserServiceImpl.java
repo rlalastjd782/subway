@@ -224,5 +224,19 @@ public class UserServiceImpl implements UserService {
 		return params.getPw();
 	}
 
+
+	@Override
+	public boolean deleteAccount(UserRequestDTO params, String email) {
+		// TODO Auto-generated method stub
+		
+		params.setEmail(email);
+		
+		params.setId(userMapper.searchID(params));
+		
+		userMapper.deleteAccount(params);
+		
+		return true;
+	}
+
 	
 }

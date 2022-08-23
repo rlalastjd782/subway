@@ -125,4 +125,12 @@
 			id = #{id}
 	</update>
 	
+	
+	<!-- 계정탈퇴 -->
+	<delete id="deleteAccount" parameterType="com.board.users.dto.UserRequestDTO">
+		DELETE FROM users
+		WHERE
+			id = #{id}
+	</delete>
+	
 </mapper>

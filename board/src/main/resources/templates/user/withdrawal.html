@@ -66,9 +66,18 @@
 			
 			if(pw == currentpw){
 				if(confirm("정말 회원탈퇴를 하시겠습니까?") == true){
-					console.log("a");
+					
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "/user/delete-account",
+						success:  function (data) {
+							alert("회원 탈퇴가 완료되었습니다.");
+							location.replace('/post/main');
+						}
+					})
+					
 				} else{
-					console.log("b");
 					return false;
 				}
 			} else{

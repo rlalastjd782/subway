@@ -33,4 +33,6 @@ public interface UserMapper {
 	public int changeNickname(UserRequestDTO params);
 	
 	public int changePw(UserRequestDTO params);
+
+	public int deleteAccount(UserRequestDTO params);
 }

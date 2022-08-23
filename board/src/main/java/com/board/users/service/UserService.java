@@ -40,4 +40,6 @@ public interface UserService {
 
 	public String updatePw(UserRequestDTO params, String email);
 
+	public boolean deleteAccount(UserRequestDTO params, String email);
+
 }

@@ -289,11 +289,32 @@ public class UserController {
 	}
 	
 	
-	// 회원탈퇴 진입하기
+	// 회원탈퇴 페이지 진입하기
 	@GetMapping(value = "/user/withdrawal")
 	public String Withdrawal() {
 		
 		return "user/withdrawal";
+	}
+	
+	
+	// 회원탈퇴
+	@ResponseBody
+	@PostMapping(value = "/user/delete-account")
+	public boolean DeleteAccount(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+
+		boolean result = userService.deleteAccount(params, (String) session.getAttribute("email"));
+		
+		if(result == true) {
+			
+			// 세션 값 업데이트
+			session.invalidate(); // 세션 전체 제거, 무효화
+			
+			return true;
+		} else {
+			
+			return false;
+			
+		}			
 	}
 	
 	
