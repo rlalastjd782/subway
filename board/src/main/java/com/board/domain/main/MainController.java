@@ -37,8 +37,8 @@ public class MainController {
     // 게시글 리스트 페이지
     @GetMapping("/post/main")
     public String openPostList(@ModelAttribute("params") final SearchDto params, Model model) throws IOException {
-        PagingResponse<QnaPostResponse> response = qnaPostService.findAllPost(params);
-        PagingResponse<PostResponse> response2 = postService.findAllPost(params);
+        PagingResponse<QnaPostResponse> response = mainService.QnaFindAllPost(params);
+        PagingResponse<PostResponse> response2 = mainService.findAllPost(params);
 		List<MainResponse> mainResponse = mainService.getNaverNews();
 		//@ModelAttribute("params") final SearchDto params에는  model.addAttribute("params", params); 문장이 포함된것
         model.addAttribute("response", response);

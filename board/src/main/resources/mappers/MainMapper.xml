@@ -6,6 +6,7 @@
    <sql id="qnapostColumns">
           idx
         , title
+        , head_Title
         , content
         , writer
         , view_cnt
@@ -34,37 +35,52 @@
 
 
 	    <!-- qna게시글 리스트 조회 -->
-    <select id="QnaFindAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.qnapost.QnaPostResponse">
+    <select id="QnaFindFive" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.qnapost.QnaPostResponse">
         SELECT
             <include refid="qnapostColumns" />
         FROM
             pro_sol_board
         WHERE
             del_yn = 0
-            
         ORDER BY
             idx DESC
-        LIMIT 5;
+        LIMIT 0,5;
     </select>
+    
 
 
     <!-- 게시글 리스트 조회 -->
-    <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.post.PostResponse">
+    <select id="findFive" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.post.PostResponse">
         SELECT
             <include refid="postColumns" />
         FROM
             free_board
         WHERE
             del_yn = 0
-            
         ORDER BY
             idx DESC
-        LIMIT 5;
+        LIMIT 0,5;
     </select>
     
+    <select id="qnaCount" parameterType="com.board.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            pro_sol_board
+        WHERE
+            del_yn = 0
 
+    </select>
 
-
+    <select id="count" parameterType="com.board.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            free_board
+        WHERE
+            del_yn = 0
+           
+    </select>
 
 
 

@@ -13,11 +13,13 @@ public interface MainMapper {
 
 	
 	// 큐엔에이 게시판 가져ㅛ오기
-	List<QnaPostResponse> QnaFindAll(SearchDto params);
+	List<QnaPostResponse> QnaFindFive(SearchDto params);
 	
 	
 	// 자유게시판 글 목록 가져오기
-	List<PostResponse> findAll(SearchDto params);
+	List<PostResponse> findFive(SearchDto params);
 	
+	int count(SearchDto params);
 	
+	int qnaCount(SearchDto params);
 }

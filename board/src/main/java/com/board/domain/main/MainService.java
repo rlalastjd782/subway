@@ -30,17 +30,20 @@ public class MainService {
 	@Autowired
 	private PostMapper postMapper;
 	
+	@Autowired
+	private MainMapper mainMapper;
+	
     /**
      * 게시글 리스트 조회
      * @param params - search conditions
      * @return list & pagination information
      */
     public PagingResponse<QnaPostResponse> QnaFindAllPost(final SearchDto params) {
-        int count = qnaPostMapper.count(params);
+        int count = mainMapper.count(params);
         Pagination pagination = new Pagination(count, params);
         params.setPagination(pagination);
 
-        List<QnaPostResponse> list = qnaPostMapper.findAll(params);
+        List<QnaPostResponse> list = mainMapper.QnaFindFive(params);
         return new PagingResponse<>(list, pagination);
     }
     
@@ -50,11 +53,11 @@ public class MainService {
     */
     
    public PagingResponse<PostResponse> findAllPost(final SearchDto params) {
-       int count = postMapper.count(params);
+       int count = mainMapper.count(params);
        Pagination pagination = new Pagination(count, params);
        params.setPagination(pagination);
 
-       List<PostResponse> list = postMapper.findAll(params);
+       List<PostResponse> list = mainMapper.findFive(params);
        return new PagingResponse<>(list, pagination);
    }
    
