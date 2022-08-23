@@ -2,6 +2,12 @@ package com.board.users.service;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
+
 import com.board.users.dto.UserRequestDTO;
 
 public interface UserService {
@@ -29,5 +35,9 @@ public interface UserService {
 	public boolean eiCompare(UserRequestDTO params);
 
 	public HashMap<String, Object> loginCompare(UserRequestDTO params);
+
+	public String updateNickname(UserRequestDTO params, String email);
+
+	public String updatePw(UserRequestDTO params, String email);
 
 }

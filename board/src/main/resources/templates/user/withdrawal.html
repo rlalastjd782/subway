@@ -9,26 +9,25 @@
 </head>
 <body>
 	<th:block layout:fragment="content">
-	<link rel="stylesheet" href="../css/findid.css">
 	
 	<div id="signuplogo" >
       <img id="brandlogo" src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">      
-       <h1 class="entry-title"><span>FIND ID</span></h1>
+       <h1 class="entry-title"><span>회원탈퇴</span></h1>
     </div>
     <hr>
 		
-	    <form class="findIDForm" id = "signUpForm" th:action="@{/user/findid}" th:object="${user}" method="post">
+	    <form class="withdrawalForm" id = "withdrawalForm" th:action="@{/user/withdrawal}" th:object="${user}" method="post">
 	    
 	    	<div>
-	    		<label for="email" id="emailin">이메일</label>
-	            <input type="text" id="email" placeholder="이메일을 입력해주세요.">
+	    		<label for="pw" id="pwin">비밀번호</label>
+	            <input type="password" id="pw" placeholder="비밀번호를 입력해주세요.">
 	        </div>
 	        
 	        <div id= "endbox">
 				<!-- 일반적으로 버튼은 submit의 기능을 포함하고 있기 때문에 submit 기능이 포함되지 않고
 	             오직 button 기능만 작동하도록 속성값 추가 -->
-	            <button id = "checkEmail" type = "button">확인</button>	   
-	           <a th:href="@{../user/login}"> <button id = "cancelEmail" type = "button">취소</button>	</a>             
+	            <button id = "checkPw" type = "button">확인</button>	   
+	           <a th:href="@{../post/main}"> <button id = "cancel" type = "button">취소</button>	</a>             
 	        </div>
 			
 	    </form>
@@ -37,44 +36,44 @@
     <th:block layout:fragment="script">
 		<script th:inline="javascript">
 		
-		// 로그인 되어있을 때 접근하지 못하게
+		// 로그인 되어있지 않을 때 접근하지 못하게
 		$.ajax({
 			type: "post",
 			async: false,
 			url: "/login-check",
 			success:  function (data) {
-				if(data == true){
+				if(data == false){
 					alert("잘못된 접근입니다.");
 					location.replace('/post/main');
 				}
 			}
 		})
 		
-		$("#checkEmail").click(function(){
+		let currentpw = "";
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/pw",
+			success:  function (data) {
+				currentpw = data;
+			}
+		})
+		
+		$("#checkPw").click(function(){
 			
-			const email = $("#email").val();
+			const pw = $("#pw").val();
 			
-			$.ajax({
-				type: "post",
-				async: false,
-				url: "/user/email-check",
-				data: {email: email},
-				success:  function (data) {
-					if(data == false){
-						$.ajax({
-							type: "post",
-							async: true,
-							url: "/user/sendid",
-							data: {email: email},
-						})
-						alert("해당 이메일로 아이디를 전송했습니다.");
-						location.replace('/main');
-					} else{
-						alert("이메일을 확인해주세요.")
-					}
+			if(pw == currentpw){
+				if(confirm("정말 회원탈퇴를 하시겠습니까?") == true){
+					console.log("a");
+				} else{
+					console.log("b");
+					return false;
 				}
-			
-			})
+			} else{
+				alert("입력 정보를 확인해주세요.");
+			}
 
 			
 		});

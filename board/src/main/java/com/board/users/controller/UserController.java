@@ -182,7 +182,7 @@ public class UserController {
 			session.setAttribute("name", result.get("name"));
 			session.setAttribute("gender", result.get("gender"));
 			session.setAttribute("nickname", result.get("nickname"));
-			session.setAttribute("name", result.get("name"));
+			session.setAttribute("email", result.get("email"));
 			
 			// 세션 유지시간 30분
 			session.setMaxInactiveInterval(30 * 60);
@@ -242,26 +242,70 @@ public class UserController {
 	}
 	
 	
+	// pw 세션 값 리턴
+	@ResponseBody
+	@PostMapping(value = "/get/pw")
+	public String GetPw(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+			
+		String result = (String) session.getAttribute("pw");
+		
+		return result;
+	}
+	
+	
+	// 닉네임 업데이트
+	@ResponseBody
+	@PostMapping(value = "/user/update-nickname")
+	public boolean NicknameUpdate(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+
+		String result = userService.updateNickname(params, (String) session.getAttribute("email"));
+		
+		// 세션 값 업데이트
+		session.setAttribute("nickname", result);
+		
+		return true;
+	}
+	
+	
+	// 비밀번호 업데이트
+	@ResponseBody
+	@PostMapping(value = "/user/update-pw")
+	public boolean PWUpdate(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+
+		String result = userService.updatePw(params, (String) session.getAttribute("email"));
+		
+		// 세션 값 업데이트
+		session.setAttribute("pw", result);
+		
+		return true;
+	}
+	
+	
 	// 마이페이지 진입하기
 	@GetMapping(value = "/user/mypage")
 	public String MyPage(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println(session.getAttribute("id"));
-		System.out.println(session.getAttribute("pw"));
+		return "user/mypage";
+	}
+	
+	
+	// 회원탈퇴 진입하기
+	@GetMapping(value = "/user/withdrawal")
+	public String Withdrawal() {
+		
+		return "user/withdrawal";
+	}
+	
+	
+	// 로그인 체크
+	@ResponseBody
+	@PostMapping(value = "/login-check")
+	public boolean LoginCheck(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
 		if((String)session.getAttribute("id") == null || (String)session.getAttribute("pw") == null) {
-			try {
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter w = response.getWriter();
-				w.write("<script>alert('잘못된 접근입니다.');</script>");
-				// w.flush();
-				// w.close();
-		    } catch(Exception e) {
-				e.printStackTrace();
-		    }
-			return "post/main";
+			return false;
 		} else {
-			return "user/mypage";
+			return true;
 		}
 	}
 	

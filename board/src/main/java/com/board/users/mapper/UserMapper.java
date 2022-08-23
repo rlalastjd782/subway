@@ -29,4 +29,8 @@ public interface UserMapper {
 	public String eiCompare(UserRequestDTO params);
 
 	public HashMap<String, Object> loginCompare(UserRequestDTO params);
+	
+	public int changeNickname(UserRequestDTO params);
+	
+	public int changePw(UserRequestDTO params);
 }

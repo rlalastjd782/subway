@@ -99,10 +99,30 @@
 	
 	<!-- 로그인 정보 확인 -->
 	<select id="loginCompare" parameterType="com.board.users.dto.UserRequestDTO" resultType= "hashmap">
-		select id, pw, admin_yn, gender, nickname, name
+		select id, pw, admin_yn, gender, nickname, name, email
 		from users
 		where id = #{id}
 		and pw = #{pw}
 	</select>
+	
+	
+	<!-- 닉네임 바꾸기 -->
+	<update id="changeNickname" parameterType="com.board.users.dto.UserRequestDTO">
+		UPDATE users
+		SET
+			nickname = #{nickname}
+		WHERE
+			id = #{id}
+	</update>
+	
+	
+	<!-- 닉네임 바꾸기 -->
+	<update id="changePw" parameterType="com.board.users.dto.UserRequestDTO">
+		UPDATE users
+		SET
+			pw = #{pw}
+		WHERE
+			id = #{id}
+	</update>
 	
 </mapper>

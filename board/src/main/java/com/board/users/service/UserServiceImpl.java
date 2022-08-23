@@ -5,8 +5,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.board.users.dto.UserRequestDTO;
 import com.board.users.mapper.UserMapper;
@@ -160,6 +165,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	// 입력받은 이메일과 아이디가 DB에 있는지 확인
 	@Override
 	public boolean eiCompare(UserRequestDTO params) {
 		// TODO Auto-generated method stub
@@ -176,6 +182,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	// 입력받은 아이디와 비밀번호가 DB에 있는지 확인
 	@Override
 	public HashMap<String, Object> loginCompare(UserRequestDTO params) {
 		// TODO Auto-generated method stub
@@ -186,6 +193,35 @@ public class UserServiceImpl implements UserService {
 			return null;
 		else
 			return result;
+	}
+
+
+	// 닉네임 변경
+	@Override
+	public String updateNickname(UserRequestDTO params, String email) {
+		// TODO Auto-generated method stub
+		
+		params.setEmail(email);
+		
+		params.setId(userMapper.searchID(params));
+		
+		userMapper.changeNickname(params);
+		
+		return params.getNickname();
+	}
+
+
+	@Override
+	public String updatePw(UserRequestDTO params, String email) {
+		// TODO Auto-generated method stub
+
+		params.setEmail(email);
+		
+		params.setId(userMapper.searchID(params));
+		
+		userMapper.changePw(params);
+		
+		return params.getPw();
 	}
 
 	

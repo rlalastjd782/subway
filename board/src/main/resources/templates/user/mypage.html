@@ -66,6 +66,15 @@
             </div>
             <span id="pwCheckmessage">위의 비밀번호와 동일하게 입력하세요 </span>
         </div>
+        
+        
+        <!-- 회원탈퇴 -->
+        <label class="control-label col-sm-3" for="id">회원탈퇴</label>
+        <div class="col-md-8 col-sm-9">
+        	<div class="input-group">
+        	   	<button id = "withdrawal" type = "button" style="width:300px; border-radius:4px; left: 20px" onclick="location.href = 'withdrawal'">회원탈퇴</button>
+            </div>
+        </div>
 		
 		
 		
@@ -74,7 +83,7 @@
 		</div>
 		
 		<div>
-			<button id = "cancle" class="btn btn-lg btn-primary btn-block" type="button">취소</button>
+			<button id = "cancle" class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = '../post/main'">취소</button>
 		</div>
 		
     </form>
@@ -87,9 +96,20 @@
 		$.ajax({
 			type: "post",
 			async: false,
+			url: "/login-check",
+			success:  function (data) {
+				if(data == false){
+					alert("잘못된 접근입니다.");
+					location.replace('/user/login');
+				}
+			}
+		})
+	
+		$.ajax({
+			type: "post",
+			async: false,
 			url: "/get/name",
 			success:  function (data) {
-				// name = data;
 				$('#name').val(data);
 			}
 		})
@@ -99,7 +119,6 @@
 			async: false,
 			url: "/get/gender",
 			success:  function (data) {
-				// name = data;
 				$('#gender').val(data);
 			}
 		})
@@ -109,8 +128,18 @@
 			async: false,
 			url: "/get/nickname",
 			success:  function (data) {
-				// name = data;
 				$('#nickname').val(data);
+			}
+		})
+		
+		let currentpw = "";
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/pw",
+			success:  function (data) {
+				currentpw = data;
 			}
 		})
 		
@@ -175,6 +204,7 @@
 			const newPwCheck = document.getElementById('newPwCheck');
 			
 			button.style.visibility = 'hidden';
+			$("#changePw").text("비밀번호 변경 중");
 			
 			pw.disabled = false;
 			newPw.disabled = false;
@@ -233,17 +263,64 @@
 		$("#submit").click(function(){
 			
 			const nickname = $("#nickname").val();
-			const pw = $("#pw").val();
-			const newPw = $("#newPw").val();
+			const cpw = $("#pw").val();
+			const pw = $("#newPw").val();
 			const newPwCheck = $("#newPwCheck").val();
 			
-			const pwbutton = document.getElementById('changePw');
-			const nmbutton = document.getElementById('changeNickname');
+			let check1 = "true";
+			let check2 = "true";
 			
-			const pwcheckmessage = $("#pwCheckmessage").text();
+			const nmbutton = $("#changeNickname").text()
+			const pwbutton = $("#changePw").text()
+			
 			const nicknamemessage = $("#nicknamemessage").text();
+			const pwcheckmessage = $("#pwCheckmessage").text();
 			
-			// console.log(pwbutton.style.visibility);
+			// 닉네임 변경 버튼을 눌렀을 경우 동작
+			if(nmbutton == "닉네임 중복확인"){
+				
+				if(nicknamemessage == "사용 가능한 닉네임입니다."){
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "/user/update-nickname",
+						data: {nickname: nickname},
+						success:  function (data) {
+							check1 = "true";
+						}
+					})
+				} else{
+					check1 = "false";
+					alert("입력 정보를 확인하세요");
+				}
+				
+			}
+			
+			
+			// 비밀번호 변경 버튼을 눌렀을 경우 동작
+			if(pwbutton == "비밀번호 변경 중"){
+				
+				if(cpw == currentpw && pwcheckmessage == "위의 비밀번호와 동일합니다."){
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "/user/update-pw",
+						data: {pw: pw},
+						success:  function (data) {
+							check2 = "true";
+						}
+					})
+				} else{
+					check2 = "false";
+					alert("입력 정보를 확인하세요");
+				}
+				
+			}
+			
+			if(check1 == "true" && check2 == "true"){
+				alert("정보가 변경되었습니다.");
+				location.replace('/post/main');
+			}
 			
 		});
 

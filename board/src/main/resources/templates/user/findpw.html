@@ -42,6 +42,19 @@
     <th:block layout:fragment="script">
 		<script th:inline="javascript">
 		
+		// 로그인 되어있을 때 접근하지 못하게
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/login-check",
+			success:  function (data) {
+				if(data == true){
+					alert("잘못된 접근입니다.");
+					location.replace('/post/main');
+				}
+			}
+		})
+		
 		$("#checkEmail").click(function(){
 			
 			const email = $("#email").val();
