@@ -12,5 +12,7 @@ public class MainResponse {
 	private String newsTitle;
 	private String newsDetail;
 	private String newsLink;
+	private String newsinfo;
+	
 	
 }

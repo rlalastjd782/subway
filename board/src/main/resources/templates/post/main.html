@@ -71,7 +71,7 @@
 				<tr th:each = "news : ${mainResponse}">
 					<td th:text = "${news.newsPress}"></td>
 					<td th:text = "${news.newsTitle}" th:onclick="'location.href=\''+ @{${news.newsLink}} + '\''"   style="cursor:pointer;"></td>
-					<td th:text = "${news.newsDetail}"></td>
+					<td th:text = "${news.newsinfo}"></td>
 
 
 				</tr>

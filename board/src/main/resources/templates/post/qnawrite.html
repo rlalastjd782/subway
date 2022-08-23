@@ -29,10 +29,12 @@
                         <input type="text" id="title" name="title" class="form-control" maxlength="50" placeholder="제목을 입력해 주세요." />
                     </div>
                 </div>
-                     <div class="form-group">
+                <div class="form-group">
                     <label for="headTitle" class="col-sm-2 control-label">말머리</label>
                     <div class="col-sm-10">
-                        <input type="text" id="headTitle" name="headTitle" class="form-control" maxlength="50" placeholder="제목을 입력해 주세요." />
+                        <button type ="button" id="headTitle" name="headTitle" onclick = "question(this.value);" value="문제">문제</button>
+                        <button type ="button" id="headTitle" name="headTitle" onclick = "answer(this.value);" value="해결">해결</button>
+                        <!-- <input type="text" id="headTitle" name="headTitle" class="form-control" maxlength="50" placeholder="제목을 입력해 주세요." /> -->
                     </div>
                 </div>
 
@@ -98,6 +100,17 @@
                 form.action = [[ ${post == null} ]] ? '/post/qnasave' : '/post/qnaupdate';
                 form.submit();
             }
+            
+            
+        function question(value){
+        	const form = document.getElementById('saveForm');
+        	console.log(value)
+        }
+        
+        function answer(value){
+        	console.log(value)
+        }
+
 
         /*]]>*/
         </script>

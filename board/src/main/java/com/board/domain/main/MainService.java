@@ -81,6 +81,7 @@ public class MainService {
     			.newsTitle(content.select(".news_tit").text())
     			.newsDetail(content.select(".news_dsc").text())
     			.newsLink(content.select(".news_dsc a").attr("href"))
+    			.newsinfo(content.select("span").text())
     			.build();
     			
     	mainResponseList.add(mainResponse);
