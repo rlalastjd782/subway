@@ -31,23 +31,24 @@
 	
 		<label class="control-label col-sm-3" for="id" id="id">이름</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
+        	<div class="input-group" id="namenemu">
            		<input type="text" class="form-control" name="name" id="name" value="" readonly>
         	</div>
         </div>
          
-        <label class="control-label col-sm-3" for="id">성별</label>
+        <label class="control-label col-sm-3" for="id" id="gender_1">성별</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
+        	<div class="input-group" id="gendermenu">
         	   	<input type="text" class="form-control" name="gender" id="gender" value="" readonly>
             </div>
         </div>
         
         <!-- 닉네임 변경 -->
-        <label class="control-label col-sm-3" for="id">닉네임</label>
+        <label class="control-label col-sm-3" for="id" id="nicknames" >닉네임</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
-        	   	<input type="text" class="form-control" name="nickname" id="nickname" value="" placeholder="닉네임 입력" disabled>
+        	
+        	<div class="input-group" id="nickmenu">
+        	   	<input type="text" class="form-control" name="nickname" id="nickname" value="" placeholder="닉네임 입력" readonly>
         	   	<button id = "changeNickname" type = "button" style="width:300px; border-radius:4px; left: 20px">닉네임 변경</button>
             </div>
             <span id="nicknamemessage" >닉네임길이 제한은 4~12글자이고, 한글과 영문, 숫자만 입력가능합니다. </span>
@@ -55,25 +56,25 @@
         
         
         <!-- 비밀번호 변경 -->
-        <label class="control-label col-sm-3" for="id">현재 비밀번호</label>
+        <label class="control-label col-sm-3" for="id" id="pwnow">현재 비밀번호</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
+        	<div class="input-group" id="nowpw">
         	   	<input type="password" class="form-control" name="pw" id="pw" value="" placeholder="현재 비밀번호 입력" disabled>
         	   	<button id = "changePw" type = "button" style="width:300px; border-radius:4px; left: 20px">비밀번호 변경</button>
             </div>
         </div>
         
-        <label class="control-label col-sm-3" for="id">새 비밀번호</label>
+        <label class="control-label col-sm-3" for="id" id="pwnew">새 비밀번호</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
+        	<div class="input-group" id="newpw">
         	   	<input type="password" class="form-control" name="newPw" id="newPw" value="" placeholder="새 비밀번호 입력" disabled>
             </div>
             <span id="pwmessage">패스워드 길이 제한은 8~16글자, 영문과 숫자, 특수만자가 입력되어야합니다 </span>
         </div>
         
-        <label class="control-label col-sm-3" for="id">새 비밀번호 확인</label>
+        <label class="control-label col-sm-3" for="id" id="confrimnewpw">새 비밀번호 확인</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
+        	<div class="input-group" id="newpwconfirm">
         	   	<input type="password" class="form-control" name="newPwCheck" id="newPwCheck" value="" placeholder="새 비밀번호 확인" disabled>
             </div>
             <span id="pwCheckmessage">위의 비밀번호와 동일하게 입력하세요 </span>
@@ -81,10 +82,10 @@
         
         
         <!-- 회원탈퇴 -->
-        <label class="control-label col-sm-3" for="id">회원탈퇴</label>
+        <label class="control-label col-sm-3" for="id" >회원탈퇴</label>
         <div class="col-md-8 col-sm-9">
-        	<div class="input-group">
-        	   	<button id = "withdrawal" type = "button" style="width:300px; border-radius:4px; left: 20px" onclick="location.href = 'withdrawal'">회원탈퇴</button>
+        	<div class="input-group" id="resigpout">
+        	   	<button id = "withdrawal" type = "button" style="width:300px; border-radius:4px; left: 20px; border:1px solid #ccc;" onclick="location.href = 'withdrawal'">회원탈퇴</button>
             </div>
         </div>
 		
@@ -97,7 +98,7 @@
 		</span>
 		</div>
 		</form>
-		</form>
+		
 		</section>
 		</div>
     
