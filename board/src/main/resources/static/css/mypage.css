@@ -1,0 +1,68 @@
+@import
+	url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
+
+@import
+	url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700)
+	;
+
+body {
+	background: #fff;
+	font-family: 'Roboto', sans-serif;
+	color: #333;
+	line-height: 22px;
+}
+
+
+
+
+#signuplogo{
+	display:flex;
+}
+
+#brandlogo{
+	height : 38px;
+	width : 40px;
+}
+#login-text {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 1px;
+	margin-bottom: 5px;
+	margin-left: 15px;
+	color: #2ecc71;
+	
+}
+h1, h2, h3 {
+	text-transform: uppercase;
+}
+
+
+/* 밑에 버튼 */
+#submit {
+	float: left;
+}
+.btn-primary2{
+	background: #696969;
+	text-align:center;
+	margin-top: 2px;
+	width: 180px;
+	
+}
+#cancle{
+	background: #696969;
+	text-align:center;
+	margin-top: 2px;
+	width: 180px;
+	margin-left: 30px;
+}
+
+.btn-primary2:hover,
+.btn-primary2:active,
+.btn-primary2:focus {
+  background: #2ecc71 !important;
+}
+
+#id{
+	
+}

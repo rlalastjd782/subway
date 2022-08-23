@@ -5,19 +5,31 @@
 
 	<title>마이페이지</title>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="../css/mypage.css">
 
 </head>
 <body>
 
 <th:block layout:fragment="content">
-	<div id = mypage>
-	<img src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="../css/mypage.css">
+	
+<div class="container">
+	<div class="row">
+    <div class="col-md-8">
+    <section>
+	<div id = "signuplogo">
+	<img id="brandlogo" src="https://mblogthumb-phinf.pstatic.net/MjAyMjA4MTFfOSAg/MDAxNjYwMjA2NjgxMTUw.OvYgCu6iFMqZKr2pPpQtmTrZo6OxL1L4TX_EMcttUJUg.NG1Zg6-rI8dqHq67Nbz8TuWVThGb_-bsVuoQ9551az8g.JPEG.sjkor1005/BATRO_LOGO1.jpg?type=w800">
 	<h1 id = "login-text" class="h3 mb-3 font-weight-normal">MyPage</h1>
 	</div>
-	<form class="form-mypage" th:action="@{/user/mypage}" th:object="${user}" method="post" >
-    
-
-		<label class="control-label col-sm-3" for="id">이름</label>
+	<hr>
+	<form class="form-mypage" th:action="@{/user/mypage}" th:object="${user}" method="post">
+	</form>
+	 <form class="form-horizontal" method="post" name="inmypage" id="inmypage" enctype="multipart/form-data" > 
+		
+    	
+	
+		<label class="control-label col-sm-3" for="id" id="id">이름</label>
         <div class="col-md-8 col-sm-9">
         	<div class="input-group">
            		<input type="text" class="form-control" name="name" id="name" value="" readonly>
@@ -78,16 +90,19 @@
 		
 		
 		
-		<div>
-			<button id = "submit" class="btn btn-lg btn-primary btn-block" type="button">확인</button>
+		<div class="form-group">
+		 <span class="col-xs-offset-3 col-xs-10" id="endbutton">
+			<button id = "submit" name="submit" class="btn btn-primary2" type="button">확인</button>
+			<button id = "cancle" class="btn btn-primary2" type="button" onclick="location.href = '../post/main'">취소</button>
+		</span>
 		</div>
-		
-		<div>
-			<button id = "cancle" class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href = '../post/main'">취소</button>
+		</form>
+		</form>
+		</section>
 		</div>
-		
-    </form>
     
+    </div>
+    </div>
  </th:block> 
  
  <th:block layout:fragment="script">
