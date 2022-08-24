@@ -12,7 +12,10 @@ body {
 	line-height: 22px;
 }
 
-
+.form-inline .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
 
 
 #signuplogo{
@@ -31,6 +34,7 @@ body {
 	margin-bottom: 5px;
 	margin-left: 15px;
 	color: #2ecc71;
+	font-size: 35px;
 	
 }
 h1, h2, h3 {
@@ -39,6 +43,9 @@ h1, h2, h3 {
 
 
 /* 밑에 버튼 */
+#endbutton{
+	margin-top: 20px;	
+}
 #submit {
 	float: left;
 }
@@ -64,10 +71,9 @@ h1, h2, h3 {
   background: #2ecc71 !important;
 }
 
-#namenemu,#nickmenu,#nowpw,#newpw,#newpwconfirm,#resigout,#newPwCheck,#gendermenu{
+#namenemu,#nickmenu,#nowpw,#newpw,#newpwconfirm,#resigout,#gendermenu{
 	display:flex;
-	margin : 5px;
-	margin-top : 10px;
+	margin : 3px;
 	padding : 10px;
 	
 }	
@@ -85,9 +91,12 @@ h1, h2, h3 {
 }
 
 #nicknamemessage,#pwmessage,#pwCheckmessage{
-	font-size: 12px;
-	margin-left:10px;
+	font-size: 13px;
+	margin-left:12px;
+	margin-bottom:10px;
 }
+
+
 
 #gender_1{
 	top:35px;
