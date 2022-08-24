@@ -1625,7 +1625,7 @@ textarea.form-control {
 }
 
 /* 로그인/사인업 상단 버튼 */
-.loginbtn{
+.loginbtn1{
   color: #fff;
   background: #2ecc71;
   outline: none !important;
@@ -1638,25 +1638,25 @@ textarea.form-control {
   -moz-box-shadow: none!important;
   -webkit-box-shadow: none!important;
 }
-.loginbtn>a{
+.loginbtn1{
 	color: #fff;
 	cursor: pointer;
 }
-.loginbtn:hover,
-.loginbtn:active,
-.loginbtn:focus {
+.loginbtn1:hover,
+.loginbtn1:active,
+.loginbtn1:focus {
   text-decoration: none !important;
   outline: none;
   background: #fff;
  }
-.loginbtn>a:hover,
-.loginbtn>a:active,
-.loginbtn>a:focus {
+.loginbtn1:hover,
+.loginbtn1:active,
+.loginbtn1:focus {
 	color: #2ecc71;
 }
 
 
-.signupbtn{
+.signupbtn1{
   background: #2ecc71;
   outline: none !important;
   font-size: 16px;
@@ -1668,19 +1668,19 @@ textarea.form-control {
   -moz-box-shadow: none!important;
   -webkit-box-shadow: none!important;
 }
-.signupbtn>a{
+.signupbtn1{
 	color:#fff;
 	cursor: pointer;
 }
-.signupbtn:hover,
-.signupbtn:active,
-.signupbtn:focus {
+.signupbtn1:hover,
+.signupbtn1:active,
+.signupbtn1:focus {
   text-decoration: none !important;
   outline: none;
   background: #fff;
  }
-.signupbtn>a:hover,
-.signupbtn>a:active,
-.signupbtn>a:focus{
+.signupbtn1:hover,
+.signupbtn1:active,
+.signupbtn1:focus{
 	color:#2ecc71;
 }
