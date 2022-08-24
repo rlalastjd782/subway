@@ -231,12 +231,23 @@ public class UserController {
 	}
 	
 	
-	// gender 세션 값 리턴
+	// nickname 세션 값 리턴
 	@ResponseBody
 	@PostMapping(value = "/get/nickname")
 	public String GetNickname(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
 			
 		String result = (String) session.getAttribute("nickname");
+		
+		return result;
+	}
+	
+	
+	// admin_yn 세션 값 리턴
+	@ResponseBody
+	@PostMapping(value = "/get/admin")
+	public boolean GetAdmin(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, UserRequestDTO params) {
+			
+		boolean result = (boolean) session.getAttribute("admin_yn");
 		
 		return result;
 	}

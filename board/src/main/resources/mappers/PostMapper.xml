@@ -6,6 +6,7 @@
     <!-- free_board 테이블 전체 컬럼 -->
     <sql id="postColumns">
           idx
+        , id
         , title
         , content
         , writer
@@ -23,6 +24,7 @@
             <include refid="postColumns" />
         ) VALUES (
               #{idx}
+            , #{id}
             , #{title}
             , #{content}
             , #{writer}
