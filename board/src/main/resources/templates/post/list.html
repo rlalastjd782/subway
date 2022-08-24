@@ -55,7 +55,7 @@
             </table>
 
             <div class="btn_wrap text-right">
-                <a th:href="@{/post/write}" class="btn btn-primary waves-effect waves-light">등록</a>
+                <a th:href="@{/post/write}" id = "write" class="btn btn-primary waves-effect waves-light">등록</a>
             </div>
 
             <th:block layout:fragment="paging">
@@ -68,9 +68,11 @@
         </div>
     </th:block>
     
+    <script th:src="@{/scripts/commonlogincheck.js}"></script>
     <th:block layout:fragment="script">
         <script th:inline="javascript">
-            /*<![CDATA[*/
+        
+        	/*<![CDATA[*/
 
             window.onload = () => {
             	setQueryStringParams();
@@ -195,6 +197,7 @@
         location.href = '/post/view' + queryString;
     } 
    	   /*]]>*/
+			
         </script>
     </th:block>
 </html>

@@ -11,6 +11,7 @@ $.ajax({
 			logincheck = true;
 		} else{
 			logincheck = false;
+			$("#write").hide();
 		}
 	}
 });
