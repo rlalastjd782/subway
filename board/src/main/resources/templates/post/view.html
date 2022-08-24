@@ -93,16 +93,16 @@
 		
 		<div class="form-group" style="display:none;">
 			<div class="col-sm-10">
-				<p class="form-control" id="id" th:text="${post.id}"></p>
+				<p class="form-control" id="id" th:text="${post.writerid}"></p>
 			</div>
 		</div>
 
 		<div class="btn_wrap text-center">
 			<a href="javascript: void(0);" onclick="goListPage();"
 				class="btn btn-default waves-effect waves-light">뒤로가기</a> <a
-				href="javascript: void(0);" onclick="goWritePage();"
+				href="javascript: void(0);" onclick="goWritePage();" id = "amendbtn"
 				class="btn btn-primary waves-effect waves-light">수정하기</a>
-			<button type="button" class="btn btn-danger waves-effect waves-light"
+			<button type="button" class="btn btn-danger waves-effect waves-light" id = "deletebtn"
 				onclick="deletePost()">삭제하기</button>
 		</div>
 	</div>
@@ -135,8 +135,35 @@
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
-	
-	console.log($("#id").text());
+		
+		let id = "";
+		let admin = "";
+		
+		var amendbtn = document.getElementById("amendbtn");
+		var deletebtn = document.getElementById("deletebtn");
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/id",
+			success:  function (data) {
+				id = data;
+			}
+		})
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/admin",
+			success:  function (data) {
+				admin = data;
+			}
+		})
+		
+		if(id != $("#id").text() && admin == false){
+			amendbtn.style.display = 'none';
+			deletebtn.style.display = 'none';
+		}
 	
         /*<![CDATA[*/
 

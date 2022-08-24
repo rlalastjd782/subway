@@ -50,4 +50,6 @@ public interface PostMapper {
     
     int updatereviewcnt(Long idx);
 
+	String getWriterId(PostRequest params);
+
 }

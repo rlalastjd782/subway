@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.common.dto.MessageDto;
 import com.board.common.dto.SearchDto;
 import com.board.paging.PagingResponse;
+import com.board.users.dto.UserRequestDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -83,6 +85,16 @@ public class PostController {
         MessageDto message = new MessageDto("게시글 삭제가 완료되었습니다.", "/post/list", RequestMethod.GET, queryParams);
         return showMessageAndRedirect(message, model);
     }
+    
+    // 닉네임 중복 검사
+ 	@ResponseBody
+ 	@PostMapping(value = "/get/postidxid")
+ 	public String getidxid(PostRequest params) {
+ 		
+ 		String result = postService.getWriterId(params);
+ 		
+ 		return result;
+ 	}
     
  // 사용자에게 메시지를 전달하고, 페이지를 리다이렉트 한다.
     private String showMessageAndRedirect(final MessageDto params, Model model) {

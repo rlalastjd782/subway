@@ -36,7 +36,7 @@
                 
                 <div class="form-group" style="display:none;">
                     <div class="col-sm-10">
-                        <input type="text" id="id" name="id" class="form-control" />
+                        <input type="text" id="writerid" name="writerid" />
                     </div>
                 </div>
 
@@ -58,17 +58,26 @@
     <th:block layout:fragment="script">
         <script th:inline="javascript">
         
-        let id = "";
+        let writerid = "";
         let nickname = "";
         let admin = "";
+        let existpost = "";
+        let idxid = "";
+        let idx = $("#id").val();
         var notice = document.getElementById("notice");
+        
+        if($("#id").val() == undefined){
+        	existpost = false;
+        } else{
+        	existpost = true;
+        }
         
         $.ajax({
 			type: "post",
 			async: false,
 			url: "/get/id",
 			success:  function (data) {
-				id = data;
+				writerid = data;
 			}
 		})
 		
@@ -91,9 +100,29 @@
 			}
 		})
 		
+		if(idx != undefined){
+        	$.ajax({
+    			type: "post",
+    			async: false,
+    			url: "/get/postidxid",
+    			data: {idx: idx},
+    			success:  function (data) {
+    				idxid = data;
+    			}
+    		})
+        }
+		
+		if((existpost == true && admin == false) && (existpost == true && writerid != idxid)){
+			alert("잘못된 접근입니다.");
+			location.replace('/post/main');
+		}
+		
 		
 		$("#writer").val(nickname);
-        $("#id").val(id);
+        $("#writerid").val(writerid);
+        
+        
+        console.log(idxid);
         
 		if(!admin){
         	notice.style.display = 'none';
@@ -116,10 +145,10 @@
 		        }
 		
 		        const form = document.getElementById('saveForm');
-		        const fields = ['idx', 'id', 'title', 'content', 'writer', 'noticeYn'];
+		        const fields = ['idx', 'writerid', 'title', 'content', 'writer', 'noticeYn'];
 		        form.isNotice.checked = post.noticeYn;
 		        form[writer].value = nickname;
-		        form[id].value = id;
+		        form[writerid].value = writerid;
 		        
 		
 		        fields.forEach(field => {
@@ -129,7 +158,7 @@
             function savePost() {
                 const form = document.getElementById('saveForm');
                 const fields = [form.title, form.writer, form.content];
-                const fieldNames = ['제목', '내용'];
+                const fieldNames = ['제목', '이름', '내용'];
 
                 for (let i = 0, len = fields.length; i < len; i++) {
                     if ( !isValid(fields[i], fieldNames[i]) ) {

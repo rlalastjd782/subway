@@ -77,6 +77,14 @@ public class PostService {
     //조회수 증가
     public int updatereviewcnt(Long idx) throws Exception {
     	return postMapper.updatereviewcnt(idx);
-    };
+    }
+
+	public String getWriterId(PostRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = postMapper.getWriterId(params);
+		
+		return result;
+	};
 
 }

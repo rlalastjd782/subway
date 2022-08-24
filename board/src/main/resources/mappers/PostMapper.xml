@@ -6,7 +6,7 @@
     <!-- free_board 테이블 전체 컬럼 -->
     <sql id="postColumns">
           idx
-        , id
+        , writerid
         , title
         , content
         , writer
@@ -24,7 +24,7 @@
             <include refid="postColumns" />
         ) VALUES (
               #{idx}
-            , #{id}
+            , #{writerid}
             , #{title}
             , #{content}
             , #{writer}
@@ -98,6 +98,14 @@
             del_yn = 0
              <include refid="search" />
     </select>
+    
+    
+    <!-- DB에 입력받은 아이디가 있는지 확인 -->
+	<select id="getWriterId" parameterType="com.board.domain.post.PostRequest" resultType= "String">
+		select writerid  
+		from free_board
+		where idx = #{idx}
+	</select>
     
     <!-- 조회수 올리기 -->
 	<update id="updatereviewcnt">
