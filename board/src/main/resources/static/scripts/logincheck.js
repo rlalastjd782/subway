@@ -28,8 +28,6 @@ if(logincheck){
 
 $("#loginbtn").click(function(){
 	
-	console.log()
-	
 	if($("#loginbtn").text() == "Login"){
 		location.replace('/user/login');
 	} else{
@@ -40,7 +38,7 @@ $("#loginbtn").click(function(){
 
 $("#signupbtn").click(function(){
 	
-	if($("#loginbtn").text() == "Sign-up"){
+	if($("#signupbtn").text() == "Sign-up"){
 		location.replace('/user/signup');
 	} else{
 		$.ajax({
