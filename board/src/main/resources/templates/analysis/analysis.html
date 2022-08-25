@@ -1,43 +1,48 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/basic">
 
 <head>
-<meta charset="UTF-8">
+	
 
 
 <title>분석페이지</title>
 
-
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+	<py-env>
+	  - pandas
+	  - numpy
+	  - tensorflow
+	  - matplotlib
+	  - rich
+	</py-env>	
 
 
 </head>
 <th:block layout:fragment="content">
-      <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> 
-      <script defer src="https://pyscript.net/alpha/pyscript.js"></script> 
-      <py-env> 
-        - numpy 
-        - matplotlib
-
-      </py-env> 
-<body>
-	<div> 분석페이지</div>
+	<meta charset="UTF-8">
+	
+	<body>
+		<div>분석페이지</div>
+		
 
 
+			
+		<py-script src = "../subwayanalysis/main.py"> 
+		
+		
 
- 			
-    <div id="plot"></div> 
-    <py-script output="plot"> 
-        import numpy as np 
-        def make_x_and_y(n): 
-            x = np.random.randn(n) 
-            y = np.random.randn(n) 
-            return x, y
-        import matplotlib.pyplot as plt 
-        x, y = make_x_and_y(n=1000) 
-        fig, ax = plt.subplots() 
-        ax.scatter(x, y) 
-        fig 
-    </py-script> 
+
+		 </py-script>
+		<main class="container">
+			<h1 id="output_text"></h1>
+			<div>
+				<input id="input_text" type="text" placeholder="텍스트를 입력하세요">
+				<button id="add_text" pys-onClick="function_add_text">Click</button>
+			</div>
+		</main>
 
 
 
@@ -46,6 +51,6 @@
 
 
 
-</body>
+	</body>
 </th:block>
 </html>
