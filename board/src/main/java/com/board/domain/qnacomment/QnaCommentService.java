@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.board.domain.comment.CommentRequest;
+
 import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
@@ -50,6 +52,15 @@ public class QnaCommentService {
 		}
 
 		return commentList;
+	}
+
+
+	public String getWriterId(CommentRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = qnaCommentMapper.getWriterId(params);
+		
+		return result;
 	}
 	
 	

@@ -6,6 +6,7 @@
 		  c_idx
 		, c_content
 		, c_writer
+		, c_writerid
 		, c_date
 		, del_yn
 		, b_idx
@@ -20,6 +21,7 @@
 			  #{cIdx}
 			, #{cContent}
 			, #{cWriter} 
+			, #{cWriterId}
 			, NOW()
 			, 0
 			, #{bIdx}
@@ -70,6 +72,14 @@
 		ORDER BY
 			c_idx DESC,
 			c_modidate DESC
+	</select>
+	
+	
+	<!-- 인덱스에 해당하는 작성자Id 가져오기 -->
+	<select id="getWriterId" parameterType="com.board.domain.qnacomment.QnaCommentRequest" resultType= "String">
+		select c_writerid  
+		from psb_comment
+		where c_idx = #{cIdx}
 	</select>
 
 	<select id="selectCommentTotalCount" parameterType="com.board.domain.qnacomment.QnaCommentResponse" resultType="int">

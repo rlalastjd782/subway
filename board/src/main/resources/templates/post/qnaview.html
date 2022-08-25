@@ -17,7 +17,12 @@
 				</div>
 				<div class="modal-body">
 					<form>
-						<div class="form-group">
+						<div class="form-group" style="display:none;">
+							<label for="modalWriter" class="col-form-label">작성자 아이디</label> <input
+								type="text" id="modalWriterId" class="form-control"/>
+						</div>
+					
+						<div class="form-group" style="display:none;">
 							<label for="modalWriter" class="col-form-label">작성자</label> <input
 								type="text" id="modalWriter" class="form-control"
 								placeholder="작성자를 입력해 주세요." />
@@ -69,13 +74,6 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">내용</label>
-                <div class="col-sm-10">
-                    <p class="form-control" id="content" th:text="${post.content}"></p>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label class="col-sm-2 control-label">등록일</label>
                 <div class="col-sm-10">
                     <p class="form-control" th:text="*{#temporals.format( post.writeDate, 'yyyy-MM-dd HH:mm:ss' )}"></p>
@@ -88,11 +86,24 @@
                     <p class="form-control" id="viewCnt" th:text="${post.viewCnt}"></p>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">내용</label>
+                <div class="col-sm-10">
+                    <p class="form-control" id="content" th:text="${post.content}"></p>
+                </div>
+            </div>
+            
+            <div class="form-group" style="display:none;">
+				<div class="col-sm-10">
+					<p class="form-control" id="id" th:text="${post.writerid}"></p>
+				</div>
+			</div>
 
             <div class="btn_wrap text-center">
                 <a href="javascript: void(0);" onclick="goListPage();" class="btn btn-default waves-effect waves-light">뒤로가기</a>
-                <a href="javascript: void(0);" onclick="goWritePage();" class="btn btn-primary waves-effect waves-light">수정하기</a>
-                <button type="button" class="btn btn-danger waves-effect waves-light" onclick="deletePost()">삭제하기</button>
+                <a href="javascript: void(0);" id = "amendbtn" onclick="goWritePage();" class="btn btn-primary waves-effect waves-light">수정하기</a>
+                <button type="button" id = "deletebtn" class="btn btn-danger waves-effect waves-light" onclick="deletePost()">삭제하기</button>
             </div>
         </div>
     </th:block>
@@ -105,7 +116,7 @@
                 </div>
 
 		<form class="form-horizontal form-view">
-				<div class="input-group margin-bottom-20">
+				<div id = "commentform" class="input-group margin-bottom-20">
 					<input type="text" id="contents" class="form-control"></input>
 					<div class="input-group-btn">
 						<button type="button" class="btn waves-effect waves-light"
@@ -122,6 +133,71 @@
 
     <th:block layout:fragment="script">
         <script th:inline="javascript">
+        
+        let id = "";
+		let admin = "";
+		let login = "";
+		let nickname = "";
+		let cid = "";
+		let pid = $("#id").text();
+		
+		var amendbtn = document.getElementById("amendbtn");
+		var deletebtn = document.getElementById("deletebtn");
+		
+		var btnCommentUpdate = document.getElementById("btnCommentUpdate");
+		var btnCommentDelete = document.getElementById("btnCommentDelete");
+		
+		// 로그인 상태 확인
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/login-check",
+			success:  function (data) {
+				login = data;
+				$("#login").val(data);
+			}
+		})
+		
+		if(login == false){
+			document.getElementById('commentform').style.display = 'none';
+		} else{
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/id",
+				success:  function (data) {
+					id = data;
+				}
+			})
+			
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/admin",
+				success:  function (data) {
+					admin = data;
+				}
+			})
+			
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/nickname",
+				success:  function (data) {
+					nickname = data;
+				}
+			})
+			
+			$("#modalWriter").val(nickname);
+		}
+		
+		if(id != $("#id").text() && admin == false){
+			amendbtn.style.display = 'none';
+			deletebtn.style.display = 'none';
+		} else if(id != $("#id").text() && admin == true){
+			amendbtn.style.display = 'none';
+		}
+        
         /*<![CDATA[*/
 
         	
@@ -133,6 +209,31 @@
 			document.getElementById("modalContent").value = cContent;
 			document.getElementById("btnCommentUpdate").setAttribute("onclick", "updateComment("+ cIdx +")");
 			document.getElementById("btnCommentDelete").setAttribute("onclick", "deleteComment("+ cIdx +")");
+			
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/qnacommentidxcontent",
+				data: {cIdx: cIdx},
+				success:  function (data) {
+					cid = data;
+					$("#modalWriterId").val(data);
+				}
+			})
+			
+			if(cid != id && admin == false && pid != id){
+				btnCommentUpdate.style.display = 'none';
+				btnCommentDelete.style.display = 'none';
+				document.getElementById("modalContent").disabled = true;
+			} else if(cid != id && (pid == id || admin == true)){
+				btnCommentUpdate.style.display = 'none';
+				document.getElementById("modalContent").disabled = true;
+			} else if(cid == id){
+				btnCommentUpdate.style.display = 'inline';
+				btnCommentDelete.style.display = 'inline';
+				document.getElementById("modalContent").disabled = false;
+			}
+			
 		}
         	
         	
@@ -181,7 +282,7 @@
 					
 					var uri = /*[[ @{/qnacomments} ]]*/;
 					var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-					var params = {"bIdx": bIdx, "cContent": content.value, "cWriter": "관리자"};
+					var params = {"bIdx": bIdx, "cContent": content.value, "cWriter": nickname, "cWriterId" : id};
 					$.ajax({
 						url: uri,
 						type: "POST",
@@ -211,7 +312,7 @@
 				console.log(content);
         		var uri = [[ @{/qnacomments/} ]] + cIdx;
         		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
-        		var params = {"cIdx": cIdx, "cWriter": writer.value, "cContent": content.value};
+        		var params = {"cIdx": cIdx, "cWriter": nickname, "cContent": content.value};
 
         		$.ajax({
         			url: uri,

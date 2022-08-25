@@ -11,6 +11,7 @@ public class CommentRequest {
     private Long bIdx;  
     private String cContent;      // 내용
     private String cWriter;
+    private String cWriterId; // 작성자ID
    
 	
 }

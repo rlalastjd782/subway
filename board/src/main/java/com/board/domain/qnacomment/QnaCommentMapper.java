@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.board.domain.comment.CommentRequest;
+
 @Mapper
 public interface QnaCommentMapper {
 
@@ -20,4 +22,6 @@ public interface QnaCommentMapper {
 	public List<QnaCommentRequest> selectCommentList(QnaCommentRequest params);
 
 	public int selectCommentTotalCount(QnaCommentRequest params);
+
+	public String getWriterId(CommentRequest params);
 }

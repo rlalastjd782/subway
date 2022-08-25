@@ -100,6 +100,7 @@
 			}
 		})
 		
+		// 기존에 존재하는 게시물이라면 작성자 id값을 가져옴
 		if(idx != undefined){
         	$.ajax({
     			type: "post",
@@ -112,17 +113,39 @@
     		})
         }
 		
-		if((existpost == true && admin == false) && (existpost == true && writerid != idxid)){
+        // 작성자가 아닌 사람은 수정페이지에 접근하지 못하게 함
+		if(existpost == true && writerid != idxid){
 			alert("잘못된 접근입니다.");
 			location.replace('/post/main');
+		}
+		
+        // 존재하는 게시물이라면 제목과 내용을 가져옴
+		if(existpost == true){
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/postidxtitle",
+				data: {idx: idx},
+				success:  function (data) {
+					$("#title").val(data);
+				}
+			})
+			
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/postidxcontent",
+				data: {idx: idx},
+				success:  function (data) {
+					$("#content").val(data);
+				}
+			})
 		}
 		
 		
 		$("#writer").val(nickname);
         $("#writerid").val(writerid);
         
-        
-        console.log(idxid);
         
 		if(!admin){
         	notice.style.display = 'none';

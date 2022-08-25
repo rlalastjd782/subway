@@ -86,7 +86,8 @@ public class PostController {
         return showMessageAndRedirect(message, model);
     }
     
-    // 닉네임 중복 검사
+    
+    // 게시물 idx값에 해당되는 작성자 id 가져오기
  	@ResponseBody
  	@PostMapping(value = "/get/postidxid")
  	public String getidxid(PostRequest params) {
@@ -95,6 +96,28 @@ public class PostController {
  		
  		return result;
  	}
+ 	
+ 	
+ 	// 게시물 idx값에 해당되는 작성자 title 가져오기
+  	@ResponseBody
+  	@PostMapping(value = "/get/postidxtitle")
+  	public String getidxtitle(PostRequest params) {
+  		
+  		String result = postService.getTitle(params);
+  		
+  		return result;
+  	}
+  	
+  	
+  	// 게시물 idx값에 해당되는 작성자 title 가져오기
+   	@ResponseBody
+   	@PostMapping(value = "/get/postidxcontent")
+   	public String getidxcontent(PostRequest params) {
+   		
+   		String result = postService.getContent(params);
+   		
+   		return result;
+   	}
     
  // 사용자에게 메시지를 전달하고, 페이지를 리다이렉트 한다.
     private String showMessageAndRedirect(final MessageDto params, Model model) {

@@ -11,6 +11,7 @@ public class QnaCommentRequest {
     private Long bIdx;  
     private String cContent;      // 내용
     private String cWriter;
+    private String cWriterId; // 댓글작성자ID
 	
 	
 }

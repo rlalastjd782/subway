@@ -52,4 +52,13 @@ public class CommentService {
 
 		return commentList;
 	}
+
+
+	public String getWriterId(CommentRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = commentMapper.getWriterId(params);
+		
+		return result;
+	}
 }

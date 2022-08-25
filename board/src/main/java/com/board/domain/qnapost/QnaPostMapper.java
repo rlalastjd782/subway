@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.board.common.dto.SearchDto;
+import com.board.domain.post.PostRequest;
 
 @Mapper
 public interface QnaPostMapper {
@@ -49,4 +50,10 @@ public interface QnaPostMapper {
     int count(SearchDto params);
     
     int updatereviewcnt(Long idx);
+
+	String getWriterId(PostRequest params);
+	
+	String getTitle(PostRequest params);
+
+	String getContent(PostRequest params);
 }
