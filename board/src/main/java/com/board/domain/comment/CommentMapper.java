@@ -19,6 +19,8 @@ public interface CommentMapper {
 
 	public int selectCommentTotalCount(CommentRequest params);
 
+	public String getWriterId(CommentRequest params);
+
 	
 
 	

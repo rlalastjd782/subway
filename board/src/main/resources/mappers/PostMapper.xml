@@ -106,6 +106,22 @@
 		from free_board
 		where idx = #{idx}
 	</select>
+	
+	
+	<!-- 인덱스에 해당하는 제목 가져오기 -->
+	<select id="getTitle" parameterType="com.board.domain.post.PostRequest" resultType= "String">
+		select title  
+		from free_board
+		where idx = #{idx}
+	</select>
+	
+	
+	<!-- 인덱스에 해당하는 내용 가져오기 -->
+	<select id="getContent" parameterType="com.board.domain.post.PostRequest" resultType= "String">
+		select content  
+		from free_board
+		where idx = #{idx}
+	</select>
     
     <!-- 조회수 올리기 -->
 	<update id="updatereviewcnt">

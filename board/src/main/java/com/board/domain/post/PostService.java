@@ -85,6 +85,22 @@ public class PostService {
 		String result = postMapper.getWriterId(params);
 		
 		return result;
+	}
+
+	public String getTitle(PostRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = postMapper.getTitle(params);
+		
+		return result;
+	}
+
+	public String getContent(PostRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = postMapper.getContent(params);
+		
+		return result;
 	};
 
 }

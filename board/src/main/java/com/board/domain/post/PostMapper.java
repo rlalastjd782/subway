@@ -52,4 +52,8 @@ public interface PostMapper {
 
 	String getWriterId(PostRequest params);
 
+	String getTitle(PostRequest params);
+
+	String getContent(PostRequest params);
+
 }
