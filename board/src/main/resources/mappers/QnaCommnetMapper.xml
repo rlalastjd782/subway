@@ -75,7 +75,7 @@
 	</select>
 	
 	
-	<!-- 인덱스에 해당하는 작성자Id 가져오기 -->
+	<!-- 인덱스에 해당하는 작성자ID 가져오기 -->
 	<select id="getWriterId" parameterType="com.board.domain.qnacomment.QnaCommentRequest" resultType= "String">
 		select c_writerid  
 		from psb_comment

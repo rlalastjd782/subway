@@ -51,9 +51,12 @@ public interface QnaPostMapper {
     
     int updatereviewcnt(Long idx);
 
+    // 인덱스에 해당하는 아이디 가져오기
 	String getWriterId(PostRequest params);
 	
+	// 인덱스에 해당하는 제목 가져오기
 	String getTitle(PostRequest params);
 
+	// 인덱스에 해당하는 글 내용 가져오기
 	String getContent(PostRequest params);
 }

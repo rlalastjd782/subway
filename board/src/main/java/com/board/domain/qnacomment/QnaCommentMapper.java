@@ -23,5 +23,6 @@ public interface QnaCommentMapper {
 
 	public int selectCommentTotalCount(QnaCommentRequest params);
 
+	// 인덱스에 해당하는 작성자ID 가져오기
 	public String getWriterId(CommentRequest params);
 }

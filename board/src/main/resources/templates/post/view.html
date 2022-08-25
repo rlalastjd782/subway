@@ -165,9 +165,12 @@
 			}
 		})
 		
+		// 로그인 상태가 아니라면 댓글을 쓰지 못하게
 		if(login == false){
 			document.getElementById('commentform').style.display = 'none';
+		// 로그인 상태라면
 		} else{
+			// 세션에서 id를 가져옴
 			$.ajax({
 				type: "post",
 				async: false,
@@ -177,6 +180,7 @@
 				}
 			})
 			
+			// 세션에서 admin을 가져옴
 			$.ajax({
 				type: "post",
 				async: false,
@@ -186,6 +190,7 @@
 				}
 			})
 			
+			// 세션에서 닉네임을 가져옴
 			$.ajax({
 				type: "post",
 				async: false,
@@ -198,9 +203,11 @@
 			$("#modalWriter").val(nickname);
 		}
 		
+		//글 작성자에게만 글 수정/삭제 버튼 노출
 		if(id != $("#id").text() && admin == false){
 			amendbtn.style.display = 'none';
 			deletebtn.style.display = 'none';
+		// 관리자에게는 삭제 버튼만 노출
 		} else if(id != $("#id").text() && admin == true){
 			amendbtn.style.display = 'none';
 		}
@@ -219,6 +226,7 @@
 			document.getElementById("btnCommentUpdate").setAttribute("onclick", "updateComment("+ cIdx +")");
 			document.getElementById("btnCommentDelete").setAttribute("onclick", "deleteComment("+ cIdx +")");
 			
+			// 댓글 작성자의 id를 가져옴
 			$.ajax({
 				type: "post",
 				async: false,
@@ -230,13 +238,16 @@
 				}
 			})
 			
+			// 댓글 작성자도 아니고, 글 작성자도 아니고, 관리자도 아니면 글 수정/삭제 불가능
 			if(cid != id && admin == false && pid != id){
 				btnCommentUpdate.style.display = 'none';
 				btnCommentDelete.style.display = 'none';
 				document.getElementById("modalContent").disabled = true;
+			// 댓글 작성자가 아니고, 글 작성자 또는 관리자인 경우 글 삭제만 가능
 			} else if(cid != id && (pid == id || admin == true)){
 				btnCommentUpdate.style.display = 'none';
 				document.getElementById("modalContent").disabled = true;
+			// 댓글 작성자만 댓글 수정/삭제 가능
 			} else if(cid == id){
 				btnCommentUpdate.style.display = 'inline';
 				btnCommentDelete.style.display = 'inline';

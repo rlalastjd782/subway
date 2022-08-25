@@ -53,7 +53,8 @@ public class CommentService {
 		return commentList;
 	}
 
-
+	
+	// 댓글 작성자 ID 가져오기
 	public String getWriterId(CommentRequest params) {
 		// TODO Auto-generated method stub
 		
