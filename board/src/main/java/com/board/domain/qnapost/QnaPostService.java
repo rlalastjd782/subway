@@ -26,6 +26,7 @@ public class QnaPostService {
      */
     @Transactional
     public Long savePost(final QnaPostRequest params) {
+    	System.out.println(params.getHeadTitle());
     	qnaPostMapper.save(params);
         return params.getIdx();
     }

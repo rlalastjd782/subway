@@ -32,9 +32,17 @@
                 <div class="form-group">
                     <label for="headTitle" class="col-sm-2 control-label">말머리</label>
                     <div class="col-sm-10">
-                        <button type ="button" id="headTitle" name="headTitle" onclick = "question(this.value);" value="문제">문제</button>
-                        <button type ="button" id="headTitle" name="headTitle" onclick = "answer(this.value);" value="해결">해결</button>
+                    	
+                        <!-- <button type ="button" id="headTitle" name="headTitle" onclick = "question(this.value);" value="문제">문제</button>
+                        <button type ="button" id="headTitle" name="headTitle" onclick = "answer(this.value);" value="해결">해결</button> -->
                         <!-- <input type="text" id="headTitle" name="headTitle" class="form-control" maxlength="50" placeholder="제목을 입력해 주세요." /> -->
+                        
+                        <input type="radio" id="headTitle" name="headTitle" value="문제" checked>
+                    	<label for="question">문제</label>
+
+	                    <input type="radio" id="headTitle" name="headTitle" value="해결">
+	                    <label for="answer">해결</label>
+	                    
                     </div>
                 </div>
 
@@ -62,6 +70,9 @@
 
     <th:block layout:fragment="script">
         <script th:inline="javascript">
+        
+        let headtitle = $('input[name="headTitle"]:checked').val();
+        
         /*<![CDATA[*/
 
             // 게시글 저장(수정)
@@ -80,14 +91,17 @@
 		        const form = document.getElementById('saveForm');
 		        const fields = ['idx','headTitle', 'title', 'content', 'writer', 'noticeYn'];
 		        form.isNotice.checked = post.noticeYn;
-		
+
+		        form[headTitle].value = headtitle;
+		        
 		        fields.forEach(field => {
 		            form[field].value = post[field];
 		        })
+
 		    }
             function savePost() {
                 const form = document.getElementById('saveForm');
-                const fields = [form.title, form.writer, form.content];
+                const fields = [form.title, form.headTitle, form.writer, form.content];
                 const fieldNames = ['제목','말머리', '이름', '내용'];
 
                 for (let i = 0, len = fields.length; i < len; i++) {
