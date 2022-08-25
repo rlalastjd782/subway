@@ -26,7 +26,6 @@ public class QnaPostService {
      */
     @Transactional
     public Long savePost(final QnaPostRequest params) {
-    	System.out.println(params.getHeadTitle());
     	qnaPostMapper.save(params);
         return params.getIdx();
     }
@@ -79,5 +78,32 @@ public class QnaPostService {
     public int updatereviewcnt(Long idx) throws Exception {
     	return qnaPostMapper.updatereviewcnt(idx);
     
-}
+    }
+
+    // 인덱스에 해당하는 작성자ID 가져오기
+	public String getWriterId(PostRequest params) {
+		// TODO Auto-generated method stub
+
+		String result = qnaPostMapper.getWriterId(params);
+		
+		return result;
+	}
+
+	// 인덱스에 해당하는 글제목 가져오기
+	public String getTitle(PostRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = qnaPostMapper.getTitle(params);
+		
+		return result;
+	}
+
+	// 인덱스에 해당하는 글내용 가져오기
+	public String getContent(PostRequest params) {
+		// TODO Auto-generated method stub
+		
+		String result = qnaPostMapper.getContent(params);
+		
+		return result;
+	};
 }

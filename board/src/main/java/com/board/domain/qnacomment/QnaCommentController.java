@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.board.domain.comment.CommentRequest;
 import com.board.domain.comment.GsonLocalDateTime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,6 +68,18 @@ private QnaCommentService qnaCommentService;
 
 			return jsonObj;
 	}
+	
+	
+	// 댓글 idx값에 해당되는 작성자 id 가져오기
+   	@ResponseBody
+   	@PostMapping(value = "/get/qnacommentidxcontent")
+   	public String getqnaidxId(CommentRequest params) {
+   		
+   		String result = qnaCommentService.getWriterId(params);
+   		
+   		return result;
+   	}
+   	
 	
 	@DeleteMapping(value = "/qnacomments/{cIdx}")
 	public JsonObject deleteComment(@PathVariable("cIdx")  Long cIdx) {

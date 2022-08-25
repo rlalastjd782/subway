@@ -4,6 +4,7 @@
 
     <sql id="postColumns">
           idx
+        , writerid
         , title
         , head_title
         , content
@@ -24,6 +25,7 @@
             <include refid="postColumns" />
         ) VALUES (
               #{idx}
+            , #{writerid}
             , #{title}
             , #{headTitle}
             , #{content}
@@ -68,6 +70,28 @@
         WHERE
             idx = #{idx}
     </delete>
+    
+    <!-- DB에 입력받은 아이디가 있는지 확인 -->
+	<select id="getWriterId" parameterType="com.board.domain.qnapost.QnaPostRequest" resultType= "String">
+		select writerid  
+		from pro_sol_board
+		where idx = #{idx}
+	</select>
+	
+	<!-- 인덱스에 해당하는 제목 가져오기 -->
+	<select id="getTitle" parameterType="com.board.domain.qnapost.QnaPostRequest" resultType= "String">
+		select title  
+		from pro_sol_board
+		where idx = #{idx}
+	</select>
+	
+	
+	<!-- 인덱스에 해당하는 내용 가져오기 -->
+	<select id="getContent" parameterType="com.board.domain.qnapost.QnaPostRequest" resultType= "String">
+		select content  
+		from pro_sol_board
+		where idx = #{idx}
+	</select>
 
 	    <!-- 게시글 리스트 조회 -->
     <select id="findAll" parameterType="com.board.common.dto.SearchDto" resultType="com.board.domain.qnapost.QnaPostResponse">

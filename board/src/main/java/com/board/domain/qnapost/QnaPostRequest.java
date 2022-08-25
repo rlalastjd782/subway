@@ -10,6 +10,7 @@ import lombok.Setter;
 public class QnaPostRequest {
 
     private Long idx;             // PK
+    private String writerid; // 작성자 ID
     private String title;        // 제목
     private String headTitle;			//말머리
     private String content;      // 내용

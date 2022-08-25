@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.common.dto.MessageDto;
 import com.board.common.dto.SearchDto;
@@ -85,6 +86,40 @@ public class QnaPostController {
         MessageDto message = new MessageDto("게시글 삭제가 완료되었습니다.", "/post/qnalist", RequestMethod.GET, queryParams);
         return showMessageAndRedirect(message, model);
     }
+    
+    
+    // 게시물 idx값에 해당되는 작성자 id 가져오기
+  	@ResponseBody
+  	@PostMapping(value = "/get/qnapostidxid")
+  	public String getidxid(PostRequest params) {
+  		
+  		String result = qnaPostService.getWriterId(params);
+  		
+  		return result;
+  	}
+  	
+  	
+  	// 게시물 idx값에 해당되는 작성자 title 가져오기
+   	@ResponseBody
+   	@PostMapping(value = "/get/qnapostidxtitle")
+   	public String getidxtitle(PostRequest params) {
+   		
+   		String result = qnaPostService.getTitle(params);
+   		
+   		return result;
+   	}
+   	
+   	
+   	// 게시물 idx값에 해당되는 작성자 title 가져오기
+	@ResponseBody
+	@PostMapping(value = "/get/qnapostidxcontent")
+	public String getidxcontent(PostRequest params) {
+		
+		String result = qnaPostService.getContent(params);
+		
+		return result;
+	}
+  	
     
  // 사용자에게 메시지를 전달하고, 페이지를 리다이렉트 한다.
     private String showMessageAndRedirect(final MessageDto params, Model model) {

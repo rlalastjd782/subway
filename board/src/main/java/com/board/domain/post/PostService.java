@@ -79,6 +79,7 @@ public class PostService {
     	return postMapper.updatereviewcnt(idx);
     }
 
+    // 인덱스에 해당하는 작성자ID 가져오기
 	public String getWriterId(PostRequest params) {
 		// TODO Auto-generated method stub
 		
@@ -87,6 +88,7 @@ public class PostService {
 		return result;
 	}
 
+	// 인덱스에 해당하는 글제목 가져오기
 	public String getTitle(PostRequest params) {
 		// TODO Auto-generated method stub
 		
@@ -95,6 +97,7 @@ public class PostService {
 		return result;
 	}
 
+	// 인덱스에 해당하는 글내용 가져오기
 	public String getContent(PostRequest params) {
 		// TODO Auto-generated method stub
 		

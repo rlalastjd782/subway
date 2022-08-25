@@ -13,7 +13,7 @@
                 <!--/* 서버로 전달할 공지 여부 */-->
                 <input type="hidden" id="noticeYn" name="noticeYn" />
 
-                <div class="form-group">
+                <div id="notice" class="form-group">
                     <label for="isNotice" class="col-sm-2 control-label">공지글 설정</label>
                     <div class="col-sm-10" style="margin-top: 10px;">
                         <input type="checkbox" id="isNotice" name="isNotice" />
@@ -46,10 +46,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label for="writer" class="col-sm-2 control-label">이름</label>
                     <div class="col-sm-10">
                         <input type="text" id="writer" name="writer" class="form-control" maxlength="10" placeholder="이름을 입력해 주세요." />
+                    </div>
+                </div>
+                
+                <div class="form-group" style="display:none;">
+                    <div class="col-sm-10">
+                        <input type="text" id="writerid" name="writerid" />
                     </div>
                 </div>
 
@@ -62,7 +68,7 @@
             </form>
 
             <div class="btn_wrap text-center">
-                <a th:href="@{/post/qnalist.do}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
+                <a th:href="@{/post/qnalist}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
                 <button type="button" class="btn btn-primary waves-effect waves-light" onclick="savePost();">저장하기</button>
             </div>
         </div>
@@ -72,6 +78,98 @@
         <script th:inline="javascript">
         
         let headtitle = $('input[name="headTitle"]:checked').val();
+        
+        let writerid = "";
+        let nickname = "";
+        let admin = "";
+        let existpost = "";
+        let idxid = "";
+        let idx = $("#id").val();
+        var notice = document.getElementById("notice");
+        
+        if($("#id").val() == undefined){
+        	existpost = false;
+        } else{
+        	existpost = true;
+        }
+        
+        $.ajax({
+			type: "post",
+			async: false,
+			url: "/get/id",
+			success:  function (data) {
+				writerid = data;
+			}
+		})
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/nickname",
+			success:  function (data) {
+				nickname = data;
+			}
+		})
+		
+		
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "/get/admin",
+			success:  function (data) {
+				admin = data;
+			}
+		})
+		
+		$("#writer").val(nickname);
+        $("#writerid").val(writerid);
+        
+        if(!admin){
+        	notice.style.display = 'none';
+		}
+		
+		// 기존에 존재하는 게시물이라면 작성자 id값을 가져옴
+		if(idx != undefined){
+        	$.ajax({
+    			type: "post",
+    			async: false,
+    			url: "/get/qnapostidxid",
+    			data: {idx: idx},
+    			success:  function (data) {
+    				idxid = data;
+    			}
+    		})
+        }
+		
+		// 존재하는 게시물이라면 제목과 내용을 가져옴
+		if(existpost == true){
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/qnapostidxtitle",
+				data: {idx: idx},
+				success:  function (data) {
+					$("#title").val(data);
+				}
+			})
+			
+			$.ajax({
+				type: "post",
+				async: false,
+				url: "/get/qnapostidxcontent",
+				data: {idx: idx},
+				success:  function (data) {
+					$("#content").val(data);
+				}
+			})
+		}
+		
+        // 작성자가 아닌 사람은 수정페이지에 접근하지 못하게 함
+		if(existpost == true && writerid != idxid){
+			alert("잘못된 접근입니다.");
+			location.replace('/post/main');
+		}
+        
         
         /*<![CDATA[*/
 
@@ -89,10 +187,13 @@
 		        }
 		
 		        const form = document.getElementById('saveForm');
-		        const fields = ['idx','headTitle', 'title', 'content', 'writer', 'noticeYn'];
+		        const fields = ['idx', 'writerid', 'headTitle', 'title', 'content', 'writer', 'noticeYn'];
 		        form.isNotice.checked = post.noticeYn;
 
 		        form[headTitle].value = headtitle;
+		        
+		        form[writer].value = nickname;
+		        form[writerid].value = writerid;
 		        
 		        fields.forEach(field => {
 		            form[field].value = post[field];
@@ -101,8 +202,8 @@
 		    }
             function savePost() {
                 const form = document.getElementById('saveForm');
-                const fields = [form.title, form.headTitle, form.writer, form.content];
-                const fieldNames = ['제목','말머리', '이름', '내용'];
+                const fields = [form.title, form.writerid, form.headTitle, form.writer, form.content];
+                const fieldNames = ['제목', '이름', '말머리', '이름', '내용'];
 
                 for (let i = 0, len = fields.length; i < len; i++) {
                     if ( !isValid(fields[i], fieldNames[i]) ) {
