@@ -53,6 +53,7 @@
 		
 		let currentpw = "";
 		
+		// 세션에서 pw값을 가져옴
 		$.ajax({
 			type: "post",
 			async: false,
@@ -61,9 +62,9 @@
 				currentpw = data;
 			}
 		})
-		
+
 		$("#checkPw").click(function(){
-			
+
 			const pw = $("#pw").val();
 			
 			if(pw == currentpw){

@@ -109,7 +109,7 @@ public class PostController {
   	}
   	
   	
-  	// 게시물 idx값에 해당되는 작성자 title 가져오기
+  	// 게시물 idx값에 해당되는 작성자 content 가져오기
    	@ResponseBody
    	@PostMapping(value = "/get/postidxcontent")
    	public String getidxcontent(PostRequest params) {

@@ -66,12 +66,15 @@
         let idx = $("#id").val();
         var notice = document.getElementById("notice");
         
+        // 이미 존재하는 게시물인지 새로 작성하는건지 구분
+        // 이미 존재하는 게시물이라면 글 수정, 새로 작성하는 것이라면 글 쓰기
         if($("#id").val() == undefined){
         	existpost = false;
         } else{
         	existpost = true;
         }
         
+        // 세션에서 id 가져오기
         $.ajax({
 			type: "post",
 			async: false,
@@ -81,6 +84,7 @@
 			}
 		})
 		
+		// 세션에서 닉네임 가져오기
 		$.ajax({
 			type: "post",
 			async: false,
@@ -90,7 +94,7 @@
 			}
 		})
 		
-		
+		// 세션에서 admin 가져오기
 		$.ajax({
 			type: "post",
 			async: false,
@@ -147,6 +151,7 @@
         $("#writerid").val(writerid);
         
         
+        // 관리자가 아니라면 공지글을 쓸 수 없도록
 		if(!admin){
         	notice.style.display = 'none';
 		}

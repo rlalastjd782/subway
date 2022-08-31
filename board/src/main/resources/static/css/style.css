@@ -1682,3 +1682,24 @@ textarea.form-control {
 .signupbtn1:focus{
 	color:#2ecc71;
 }
+.analimg{
+	display:flex;
+	
+	justify-content:center;
+	
+}
+#freeimg_anal{
+  position:relative;
+  object-fit: cover;
+  justify-content:center;
+  width: 900px;
+  margin-left: 100px;
+  
+}
+
+#analy_id{
+	font-size:20px;
+	font-weight: bold;
+	text-align:center;
+	margin-bottom: 50px;
+}

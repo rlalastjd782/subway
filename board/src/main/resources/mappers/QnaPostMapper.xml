@@ -71,7 +71,7 @@
             idx = #{idx}
     </delete>
     
-    <!-- DB에 입력받은 아이디가 있는지 확인 -->
+    <!-- 인덱스에 해당하는 아이디 가져오기 -->
 	<select id="getWriterId" parameterType="com.board.domain.qnapost.QnaPostRequest" resultType= "String">
 		select writerid  
 		from pro_sol_board

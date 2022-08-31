@@ -109,6 +109,7 @@
  <th:block layout:fragment="script">
 	<script th:inline="javascript">
 
+		// 로그인 상태인지 확인
 		$.ajax({
 			type: "post",
 			async: false,
@@ -121,6 +122,7 @@
 			}
 		})
 	
+		// 세션에서 이름을 가져옴
 		$.ajax({
 			type: "post",
 			async: false,
@@ -130,6 +132,7 @@
 			}
 		})
 		
+		// 세션에서 성별을 가져옴
 		$.ajax({
 			type: "post",
 			async: false,
@@ -139,6 +142,7 @@
 			}
 		})
 		
+		// 세션에서 닉네임을 가져옴
 		$.ajax({
 			type: "post",
 			async: false,
@@ -150,6 +154,7 @@
 		
 		let currentpw = "";
 		
+		// 세션에서 pw를 가져옴
 		$.ajax({
 			type: "post",
 			async: false,
@@ -174,9 +179,11 @@
 			// 맞다면 true 틀리면 false 반환
 			var checkRegType = regType.test(document.getElementById('nickname').value)
 			
+			// 닉네임 변경 버튼을 누르면 닉네임 중복확인으로 바뀌고 input 속성 변경
 			if($("#changeNickname").text() == "닉네임 변경"){
 				$("#changeNickname").text("닉네임 중복확인");
 				nicknameDisabled.disabled = false;
+			// 닉네임 중복확인 버튼을 누르면 중복확인
 			} else if($("#changeNickname").text() == "닉네임 중복확인"){
 				$.ajax({
 					type: "post",
