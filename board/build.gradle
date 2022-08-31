@@ -30,6 +30,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	// jsoup HTML parser library @ https://jsoup.org/
 	implementation 'org.jsoup:jsoup:1.15.2'
+	implementation group: 'org.python', name: 'jython', version: '2.7.0'
+	
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

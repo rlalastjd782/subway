@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko">
+<!-- <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="layout/basic">
 
-<head>
-	
-
-
-<title>분석페이지</title>
-
-<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<th:block layout:fragment="title">분석페이지</th:block>
+<th:block layout:fragment="add-css">
+	<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+</th:block>
+<th:block layout:fragment="script">
+	<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 	<py-env>
 	  - pandas
 	  - numpy
@@ -19,38 +18,46 @@
 	  - rich
 	</py-env>	
 
+</th:block> -->
+
+<head>
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<py-env>
+- pandas
+- numpy
+- tensorflow
+</py-env>	
 
 </head>
-<th:block layout:fragment="content">
-	<meta charset="UTF-8">
+<body>
+
+<!-- <th:block layout:fragment="content"> -->
+	<div>분석페이지</div>
+	<div>수정확인3</div>
 	
-	<body>
-		<div>분석페이지</div>
-		
+	
+	<main class="container">
+		<div>
+			<input id="input_text" type="text" placeholder="역이름을 입력하세요">
+			<button id="runPythonBtn" >Click</button>
+			<!-- pys-onClick ="runPython" -->
+		</div>
+	</main>
+<!-- </th:block> -->
 
+<!-- <th:block layout:fragment="add-content"> -->
+	<py-script>print('hello world', 2+5)</py-script>
+	<py-script>
+	import pandas as pd
+	dates = pd.date_range('20130101', periods=6)
+	print(dates)
+	</py-script>
+	<!-- <py-script src = "myModel.py"></py-script> -->
+	
+	<div id="output_text"></div>
+	<div id="output_graph"></div>
+<!-- </th:block> -->
+</body>
 
-			
-		<py-script src = "../subwayanalysis/main.py"> 
-		
-		
-
-
-		 </py-script>
-		<main class="container">
-			<h1 id="output_text"></h1>
-			<div>
-				<input id="input_text" type="text" placeholder="텍스트를 입력하세요">
-				<button id="add_text" pys-onClick="function_add_text">Click</button>
-			</div>
-		</main>
-
-
-
-
-
-
-
-
-	</body>
-</th:block>
 </html>
